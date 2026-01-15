@@ -1,97 +1,206 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fundacja Powrót Do Tworzenia</title>
-  <meta name="description" content="Zrzeszamy grafików komputerowych i artystów po udarze. Rozmowa, plan powrotu, społeczność. Prosto i godnie." />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Stroke Creators Foundation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-blue: #1a3668; /* Nawiązanie do koloru napisu Post-Stroke */
+            --brand-green: #2d7a42; /* Nawiązanie do koloru napisu Creators */
+            --light-gray: #fcfcfc;
+            --text-dark: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-gray);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: #1a1a1a; }
+        p { margin-bottom: 1.5rem; color: #444; font-weight: 300; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 5rem 0; border-bottom: 1px solid #eee; }
+
+        /* Nawigacja */
+        nav {
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #eee;
+            backdrop-filter: blur(5px);
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.9rem; color: var(--brand-blue); text-decoration: none; }
+        .nav-logo img { height: 40px; width: auto; }
+        nav a { text-decoration: none; color: #666; font-size: 0.85rem; margin-left: 1.5rem; transition: color 0.3s; text-transform: uppercase; letter-spacing: 0.5px; }
+        nav a:hover { color: var(--brand-green); }
+
+        /* Sekcja Hero */
+        .hero {
+            background-color: #fff;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        .hero-logo { width: 180px; margin-bottom: 2rem; }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; color: var(--brand-blue); }
+        .hero h1 span { color: var(--brand-green); }
+        .hero p { color: #666; font-size: 1.2rem; max-width: 650px; margin: 0 auto 2rem; }
+        .values { display: flex; justify-content: center; gap: 2rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #999; }
+
+        /* Karty i siatka */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .card { padding: 2rem; background: #fff; border: 1px solid #eee; border-radius: 2px; transition: border 0.3s; }
+        .card:hover { border-color: var(--brand-green); }
+        .card h3 { margin-bottom: 1rem; font-size: 1.2rem; color: var(--brand-blue); }
+
+        /* Wsparcie */
+        .support-pillars { list-style: none; }
+        .support-pillars li { margin-bottom: 2rem; padding-left: 2.5rem; position: relative; }
+        .support-pillars li::before { content: ""; position: absolute; left: 0; top: 10px; width: 20px; height: 2px; background: var(--brand-green); }
+
+        .disclaimer {
+            background: #f4f4f4;
+            padding: 2rem;
+            border-left: 4px solid var(--brand-blue);
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            color: #666;
+        }
+
+        /* Kontakt */
+        .contact-box { background: var(--brand-blue); color: #fff; padding: 4rem; border-radius: 4px; text-align: center; }
+        .contact-box h2 { color: #fff; margin-bottom: 1.5rem; }
+        .contact-box p { color: #ccd5e6; }
+        .email-link { color: #fff; font-weight: 600; text-decoration: none; font-size: 1.5rem; border-bottom: 2px solid var(--brand-green); padding-bottom: 5px; }
+
+        footer { padding: 4rem 0; text-align: center; font-size: 0.8rem; color: #aaa; }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+            nav .links { display: none; }
+        }
+    </style>
 </head>
-
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#top">
-        <span class="brand-mark" aria-hidden="true">◎</span>
-        <span class="brand-text">
-          <strong>Fundacja</strong>
-          <span>Powrót Do Tworzenia</span>
-        </span>
-      </a>
 
-      <nav class="nav" id="nav">
-        <a href="#misja">Misja</a>
-        <a href="#dla-kogo">Dla kogo</a>
-        <a href="#wsparcie">Wsparcie</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-
-      <button class="nav-toggle" type="button" aria-controls="nav" aria-expanded="false">☰</button>
-    </div>
-  </header>
-
-  <main id="main">
-    <section class="hero" id="top">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Dla grafików komputerowych i artystów po udarze</p>
-          <h1>Zrzeszamy twórców, którym udar zaburzył możliwość pracy.</h1>
-          <p class="lead">
-            Jeśli żyłeś z pracy dłoni, oka i koncentracji, a po udarze musisz budować swój warsztat od nowa,
-            to jest miejsce dla Ciebie. Bez presji. Z konkretem.
-          </p>
-
-          <div class="cta-row">
-            <a class="btn" href="#kontakt">Napisz do nas</a>
-            <a class="btn btn-ghost" href="#wsparcie">Jak wspieramy</a>
-          </div>
-
-          <dl class="hero-stats">
-            <div class="stat"><dt>Rozmowa</dt><dd>bez oceniania</dd></div>
-            <div class="stat"><dt>Plan</dt><dd>małe kroki</dd></div>
-            <div class="stat"><dt>Społeczność</dt><dd>żeby nie być samemu</dd></div>
-          </dl>
+    <nav>
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <img src="logo.png" alt="Post-Stroke Creators Logo">
+                <span>POST-STROKE CREATORS</span>
+            </a>
+            <div class="links">
+                <a href="#o-nas">O nas</a>
+                <a href="#misja">Misja</a>
+                <a href="#dla-kogo">Dla kogo</a>
+                <a href="#wsparcie">Wsparcie</a>
+                <a href="#kontakt">Kontakt</a>
+            </div>
         </div>
+    </nav>
 
-        <aside class="card hero-card">
-          <h2>Prosto, ale godnie</h2>
-          <p>Nie obiecujemy cudów ani „powrotu do starej wersji”. Pomagamy wracać do tworzenia w realnym tempie.</p>
-          <div class="divider"></div>
-          <a class="btn btn-wide btn-ghost" href="#kontakt">Kontakt</a>
-        </aside>
-      </div>
+    <header class="hero">
+        <div class="container">
+            <img src="logo.png" alt="Post-Stroke Creators Foundation" class="hero-logo">
+            <h1>Post-Stroke <span>Creators</span></h1>
+            <p>Budowanie nowej wersji warsztatu twórczego po udarze. W realnym tempie, z uwzględnieniem aktualnych możliwości.</p>
+            <div class="values">
+                <span>Brak presji</span>
+                <span>Konkret</span>
+                <span>Wspólnota</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="o-nas">
+        <div class="container">
+            <h2>O fundacji</h2>
+            <p>Post-Stroke Creators powstało z osobistego doświadczenia. Wiemy, że udar dla grafika czy artysty to nie tylko problem zdrowotny, ale przede wszystkim nagła bariera w komunikacji ze światem poprzez obraz i precyzję dłoni.</p>
+            <p>Nie oferujemy terapii w klasycznym rozumieniu. Oferujemy zrozumienie specyfiki pracy twórczej i praktyczne podejście do powrotu przed ekran komputera lub do sztalugi. Bez motywacyjnych haseł, za to z planem działania.</p>
+        </div>
     </section>
 
-    <section class="section" id="misja">
-      <div class="container">
-        <div class="section-head">
-          <h2>Misja</h2>
-          <p class="subhead">Prosto i uczciwie.</p>
+    <section id="misja" style="background-color: #fff;">
+        <div class="container">
+            <h2>Misja</h2>
+            <p>Naszą misją jest stworzenie bezpiecznej przestrzeni dla twórców, w której proces powrotu do aktywności zawodowej odbywa się w sposób godny i realistyczny. Zamiast obiecywać powrót do „dawnej formy”, skupiamy się na adaptacji i budowaniu nowego warsztatu.</p>
+            <p>Zapewniamy wsparcie poprzez rozmowę osób o podobnych doświadczeniach oraz planowanie małych, mierzalnych kroków w pracy z narzędziami graficznymi i artystycznymi.</p>
         </div>
-
-        <div class="card">
-          <p class="mission">
-            <strong>Misją fundacji jest wspieranie grafików komputerowych i artystów, którym udar zaburzył możliwość pracy twórczej.</strong>
-            Zrzeszamy osoby, które żyły z pracy dłoni, oka i koncentracji, a po udarze muszą budować swój warsztat od nowa.
-            Oferujemy rozmowę, praktyczne prowadzenie i plan powrotu do tworzenia, bez presji i bez obietnic „szybkiej formy”.
-          </p>
-        </div>
-      </div>
     </section>
 
-    <section class="section" id="dla-kogo">
-      <div class="container">
-        <div class="section-head">
-          <h2>Dla kogo</h2>
-          <p class="subhead">Myszka, pędzel, tablet, precyzja. To wspólna ziemia.</p>
+    <section id="dla-kogo">
+        <div class="container">
+            <h2>Grupa docelowa</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Grafika Komputerowa</h3>
+                    <p>UI/UX, DTP, ilustracja cyfrowa, 3D, motion design i szeroko pojęty digital content.</p>
+                </div>
+                <div class="card">
+                    <h3>Sztuki Wizualne</h3>
+                    <p>Malarstwo, rysunek i wszystkie formy twórczości opierające się na precyzyjnej pracy dłoni i oka.</p>
+                </div>
+                <div class="card">
+                    <h3>Powrót Zawodowy</h3>
+                    <p>Osoby, które chcą na nowo zdefiniować swoją obecność na rynku pracy po incydencie mózgowym.</p>
+                </div>
+            </div>
         </div>
-
-        <div class="grid-3">
-          <div class="card"><h3>Graficy komputerowi</h3><p>UI/UX, DTP, ilustracja cyfrowa, 3D, motion, retusz, content.</p></div>
-          <div class="card"><h3>Artyści</h3><p>Malarze, ilustratorzy, rzeźbiarze i wszyscy pracujący precyzyjnie dłonią.</p></div>
-          <div class="card"><h3>Powrót do pracy</h3><p>Dla tych, którzy chcą zacząć od nowa mądrze i bez wstydu.</p></div>
-        </div>
-      </div>
     </section>
 
-    <section class="section" id="wsparcie">
+    <section id="wsparcie">
+        <div class="container">
+            <h2>Jak wspieramy</h2>
+            <ul class="support-pillars">
+                <li>
+                    <strong>Rozmowa bez oceniania</strong><br>
+                    Wymiana doświadczeń między twórcami, którzy rozumieją specyficzny lęk przed „pustym płótnem” lub „nieposłuszną myszką”.
+                </li>
+                <li>
+                    <strong>Plan małych kroków</strong><br>
+                    Indywidualne podejście do nauki narzędzi na nowo – bez presji czasu, z szacunkiem do poziomu koncentracji.
+                </li>
+                <li>
+                    <strong>Budowanie społeczności</strong><br>
+                    Świadomość, że nie jesteś jedynym twórcą, który musi na nowo zaprzyjaźnić się ze swoim warsztatem.
+                </li>
+            </ul>
+
+            <div class="disclaimer">
+                <strong>Ważna informacja:</strong><br>
+                Post-Stroke Creators Foundation nie zastępuje rehabilitacji medycznej ani opieki specjalistycznej. Nie jesteśmy placówką medyczną i nie obiecujemy efektów zdrowotnych. Skupiamy się wyłącznie na płaszczyźnie twórczej i zawodowej.
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt">
+        <div class="container">
+            <div class="contact-box">
+                <h2>Napisz do nas</h2>
+                <p>Jeśli chcesz porozmawiać o swoim powrocie do tworzenia, czekamy na Twój e-mail.</p>
+                <p style="font-size: 0.9rem; margin-top: 10px; margin-bottom: 30px;">Daj nam znać, czym się zajmujesz i na jakim etapie drogi jesteś.</p>
+                <a href="mailto:kontakt@poststrokecreators.pl" class="email-link">kontakt@poststrokecreators.pl</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Post-Stroke Creators Foundation. Wszystkie prawa zastrzeżone.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
