@@ -10,10 +10,8 @@
     
     <style>
         :root {
-            --text-main: #0a0a0b; /* Głęboka czerń z Twojego przykładu */
-            --text-muted: #64748b; /* Szarość dla mniejszych napisów */
-            --brand-blue: #1a3668;
-            --brand-green: #2d7a42;
+            --text-main: #0a0a0b;
+            --text-muted: #64748b;
             --border-color: #e2e8f0;
             --bg-light: #ffffff;
         }
@@ -30,191 +28,103 @@
 
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* Styl etykiet nad nagłówkami (jak "CAMPAIGN PERFORMANCE") */
+        /* SEKCJA LOGO - Proporcje z Twojego projektu */
+        .logo-header {
+            text-align: center;
+            padding: 4rem 0 3rem 0; /* Dużo przestrzeni nad i pod logo */
+        }
+
+        .logo-header img {
+            width: 100%;
+            max-width: 450px; /* Rozmiar dopasowany do proporcji z obrazka */
+            height: auto;
+            display: inline-block;
+        }
+
+        /* TYPOGRAFIA - Styl "Swiss / Aura" */
         .label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             color: var(--text-muted);
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             display: block;
         }
 
-        /* Główny nagłówek (jak "Social stories...") */
         h1 {
-            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            font-size: clamp(2.2rem, 6vw, 3rem);
             font-weight: 800;
             line-height: 1.1;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.04em;
             margin-bottom: 1.5rem;
             color: var(--text-main);
         }
 
-        h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-        }
-
         p.lead {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             color: var(--text-muted);
             font-weight: 400;
-            margin-bottom: 3rem;
-        }
-
-        /* Nawigacja */
-        nav {
-            padding: 2rem 0;
-            background: #fff;
-            border-bottom: 1px solid var(--border-color);
             margin-bottom: 4rem;
+            max-width: 650px;
         }
-        nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; color: var(--text-main); font-size: 0.9rem; }
-        .nav-logo img { height: 35px; }
 
-        /* Sekcje */
-        section { padding: 4rem 0; border-bottom: 1px solid var(--border-color); }
+        section { padding: 3rem 0; border-top: 1px solid var(--border-color); }
 
-        /* Styl Kart (inspirowany sekcją statystyk) */
-        .feature-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            padding: 2rem 0;
-            border-bottom: 1px solid #f1f5f9;
-        }
-        .feature-row:last-child { border-bottom: none; }
+        .content-block { margin-bottom: 2rem; }
+        .content-block p { font-size: 1rem; color: var(--text-main); margin-bottom: 1rem; }
 
-        .icon-box {
-            width: 48px;
-            height: 48px;
+        /* KONTAKT */
+        .contact-box {
+            background-color: #f8fafc;
+            padding: 3rem;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            margin: 4rem 0;
         }
 
-        /* Kolory ikon nawiązujące do logo */
-        .bg-blue { background-color: #eef2ff; color: #4f46e5; }
-        .bg-green { background-color: #f0fdf4; color: #16a34a; }
-        .bg-yellow { background-color: #fefce8; color: #ca8a04; }
-
-        .feature-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-        .feature-content .sub-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 600;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-        .feature-content p { color: var(--text-muted); font-size: 1rem; }
-
-        /* Kontakt */
-        .contact-section { background-color: #fafafa; border-radius: 12px; padding: 3rem; margin: 4rem 0; }
         .contact-link {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--text-main);
             text-decoration: none;
-            border-bottom: 2px solid var(--brand-green);
+            display: inline-block;
+            margin-top: 1rem;
+            border-bottom: 2px solid #2d7a42; /* Zielony z Twojego logo */
         }
 
-        footer { padding: 4rem 0; text-align: left; color: var(--text-muted); font-size: 0.85rem; }
+        footer { padding: 4rem 0; color: var(--text-muted); font-size: 0.8rem; }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .feature-row { flex-direction: column; gap: 1rem; }
-        }
     </style>
 </head>
 <body>
 
-    <nav>
+    <header class="logo-header">
         <div class="container">
-            <a href="#" class="nav-logo">
-                <img src="Post-Stroke Creators.png" alt="Logo">
-                <span>POST-STROKE CREATORS</span>
-            </a>
+            <img src="Post-Stroke Creators.png" alt="Post-Stroke Creators Foundation Logo">
         </div>
-    </nav>
-
-    <header class="container">
-        <span class="label">MISJA I KONTEKST</span>
-        <h1>Nowy warsztat twórczy po udarze.</h1>
-        <p class="lead">Wspieramy grafików i artystów w powrocie do pracy kreatywnej poprzez budowanie nowych możliwości, bez presji czasu i obietnic bez pokrycia.</p>
     </header>
 
-    <section id="o-nas">
-        <div class="container">
+    <main class="container">
+        <header>
+            <span class="label">MISJA I KONTEKST</span>
+            <h1>Nowy warsztat twórczy po udarze.</h1>
+            <p class="lead">Wspieramy grafików i artystów w powrocie do pracy kreatywnej poprzez budowanie nowych możliwości, bez presji czasu i obietnic bez pokrycia.</p>
+        </header>
+
+        <section id="o-nas">
             <span class="label">O FUNDACJI</span>
-            <p>Fundacja powstała z osobistego doświadczenia twórcy po udarze. Rezygnujemy z narracji motywacyjnej na rzecz praktycznego wsparcia w odzyskiwaniu sprawności warsztatowej.</p>
-        </div>
-    </section>
-
-    <section id="dla-kogo">
-        <div class="container">
-            <span class="label">GRUPA DOCELOWA</span>
-            
-            <div class="feature-row">
-                <div class="icon-box bg-blue">💻</div>
-                <div class="feature-content">
-                    <span class="sub-label">Sektor Digital</span>
-                    <h3>Graficy komputerowi</h3>
-                    <p>UI/UX, DTP, ilustracja cyfrowa, 3D i motion design.</p>
-                </div>
+            <div class="content-block">
+                <p>Fundacja powstała z osobistego doświadczenia twórcy po udarze. Rezygnujemy z narracji motywacyjnej na rzecz praktycznego wsparcia w odzyskiwaniu sprawności warsztatowej.</p>
             </div>
+        </section>
 
-            <div class="feature-row">
-                <div class="icon-box bg-green">🎨</div>
-                <div class="feature-content">
-                    <span class="sub-label">Sektor Analogowy</span>
-                    <h3>Artyści tradycyjni</h3>
-                    <p>Malarze, rysownicy i twórcy pracujący manualnie.</p>
-                </div>
-            </div>
-
-            <div class="feature-row">
-                <div class="icon-box bg-yellow">📈</div>
-                <div class="feature-content">
-                    <span class="sub-label">Sektor Rozwoju</span>
-                    <h3>Powrót zawodowy</h3>
-                    <p>Osoby szukające nowej drogi w aktywności zawodowej po udarze.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="wsparcie">
-        <div class="container">
-            <span class="label">FORMY POMOCY</span>
-            <h2>Jak działamy?</h2>
-            <p>Nasz model opiera się na trzech filarach: rozmowie bez oceniania, planowaniu małych, realnych kroków oraz budowaniu wspólnoty osób o podobnych doświadczeniach.</p>
-            
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2rem; padding: 1.5rem; border-left: 2px solid var(--border-color);">
-                <strong>Ważne:</strong> Fundacja nie jest placówką medyczną. Nie zastępujemy rehabilitacji ani opieki specjalistycznej. Skupiamy się wyłącznie na aspekcie twórczym i zawodowym.
-            </p>
-        </div>
-    </section>
-
-    <div class="container">
-        <div class="contact-section">
+        <div class="contact-box">
             <span class="label">KONTAKT</span>
-            <h2>Chcesz do nas dołączyć?</h2>
-            <p style="margin-bottom: 2rem;">Napisz do nas e-mail. Daj znać czym się zajmujesz i na jakim etapie jesteś.</p>
+            <h2>Chcesz porozmawiać?</h2>
+            <p>Napisz do nas. Daj znać, czym się zajmujesz i na jakim etapie drogi jesteś.</p>
             <a href="mailto:kontakt@poststrokecreators.pl" class="contact-link">kontakt@poststrokecreators.pl</a>
         </div>
-    </div>
+    </main>
 
     <footer class="container">
         <p>&copy; 2026 Post-Stroke Creators Foundation. Wszystkie prawa zastrzeżone.</p>
