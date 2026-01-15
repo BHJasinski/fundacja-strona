@@ -6,90 +6,135 @@
     <title>Post-Stroke Creators Foundation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --brand-blue: #1a3668; /* Nawiązanie do koloru napisu Post-Stroke */
-            --brand-green: #2d7a42; /* Nawiązanie do koloru napisu Creators */
-            --light-gray: #fcfcfc;
-            --text-dark: #333;
+            --text-main: #0a0a0b; /* Głęboka czerń z Twojego przykładu */
+            --text-muted: #64748b; /* Szarość dla mniejszych napisów */
+            --brand-blue: #1a3668;
+            --brand-green: #2d7a42;
+            --border-color: #e2e8f0;
+            --bg-light: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--light-gray);
-            scroll-behavior: smooth;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3 { font-family: 'Playfair Display', serif; color: #1a1a1a; }
-        p { margin-bottom: 1.5rem; color: #444; font-weight: 300; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
-        section { padding: 5rem 0; border-bottom: 1px solid #eee; }
+        /* Styl etykiet nad nagłówkami (jak "CAMPAIGN PERFORMANCE") */
+        .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        /* Główny nagłówek (jak "Social stories...") */
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        p.lead {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 3rem;
+        }
 
         /* Nawigacja */
         nav {
-            padding: 1rem 0;
-            background: rgba(255, 255, 255, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid #eee;
-            backdrop-filter: blur(5px);
+            padding: 2rem 0;
+            background: #fff;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 4rem;
         }
         nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.9rem; color: var(--brand-blue); text-decoration: none; }
-        .nav-logo img { height: 40px; width: auto; }
-        nav a { text-decoration: none; color: #666; font-size: 0.85rem; margin-left: 1.5rem; transition: color 0.3s; text-transform: uppercase; letter-spacing: 0.5px; }
-        nav a:hover { color: var(--brand-green); }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; color: var(--text-main); font-size: 0.9rem; }
+        .nav-logo img { height: 35px; }
 
-        /* Sekcja Hero */
-        .hero {
-            background-color: #fff;
-            padding: 6rem 0;
-            text-align: center;
+        /* Sekcje */
+        section { padding: 4rem 0; border-bottom: 1px solid var(--border-color); }
+
+        /* Styl Kart (inspirowany sekcją statystyk) */
+        .feature-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid #f1f5f9;
         }
-        .hero-logo { width: 180px; margin-bottom: 2rem; }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; color: var(--brand-blue); }
-        .hero h1 span { color: var(--brand-green); }
-        .hero p { color: #666; font-size: 1.2rem; max-width: 650px; margin: 0 auto 2rem; }
-        .values { display: flex; justify-content: center; gap: 2rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #999; }
+        .feature-row:last-child { border-bottom: none; }
 
-        /* Karty i siatka */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
-        .card { padding: 2rem; background: #fff; border: 1px solid #eee; border-radius: 2px; transition: border 0.3s; }
-        .card:hover { border-color: var(--brand-green); }
-        .card h3 { margin-bottom: 1rem; font-size: 1.2rem; color: var(--brand-blue); }
-
-        /* Wsparcie */
-        .support-pillars { list-style: none; }
-        .support-pillars li { margin-bottom: 2rem; padding-left: 2.5rem; position: relative; }
-        .support-pillars li::before { content: ""; position: absolute; left: 0; top: 10px; width: 20px; height: 2px; background: var(--brand-green); }
-
-        .disclaimer {
-            background: #f4f4f4;
-            padding: 2rem;
-            border-left: 4px solid var(--brand-blue);
-            font-size: 0.9rem;
-            margin-top: 3rem;
-            color: #666;
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
+
+        /* Kolory ikon nawiązujące do logo */
+        .bg-blue { background-color: #eef2ff; color: #4f46e5; }
+        .bg-green { background-color: #f0fdf4; color: #16a34a; }
+        .bg-yellow { background-color: #fefce8; color: #ca8a04; }
+
+        .feature-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .feature-content .sub-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .feature-content p { color: var(--text-muted); font-size: 1rem; }
 
         /* Kontakt */
-        .contact-box { background: var(--brand-blue); color: #fff; padding: 4rem; border-radius: 4px; text-align: center; }
-        .contact-box h2 { color: #fff; margin-bottom: 1.5rem; }
-        .contact-box p { color: #ccd5e6; }
-        .email-link { color: #fff; font-weight: 600; text-decoration: none; font-size: 1.5rem; border-bottom: 2px solid var(--brand-green); padding-bottom: 5px; }
+        .contact-section { background-color: #fafafa; border-radius: 12px; padding: 3rem; margin: 4rem 0; }
+        .contact-link {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            border-bottom: 2px solid var(--brand-green);
+        }
 
-        footer { padding: 4rem 0; text-align: center; font-size: 0.8rem; color: #aaa; }
+        footer { padding: 4rem 0; text-align: left; color: var(--text-muted); font-size: 0.85rem; }
 
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2rem; }
-            nav .links { display: none; }
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .feature-row { flex-direction: column; gap: 1rem; }
         }
     </style>
 </head>
@@ -98,63 +143,53 @@
     <nav>
         <div class="container">
             <a href="#" class="nav-logo">
-                <img src="logo.png" alt="Post-Stroke Creators Logo">
+                <img src="Post-Stroke Creators.png" alt="Logo">
                 <span>POST-STROKE CREATORS</span>
             </a>
-            <div class="links">
-                <a href="#o-nas">O nas</a>
-                <a href="#misja">Misja</a>
-                <a href="#dla-kogo">Dla kogo</a>
-                <a href="#wsparcie">Wsparcie</a>
-                <a href="#kontakt">Kontakt</a>
-            </div>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="container">
-            <img src="logo.png" alt="Post-Stroke Creators Foundation" class="hero-logo">
-            <h1>Post-Stroke <span>Creators</span></h1>
-            <p>Budowanie nowej wersji warsztatu twórczego po udarze. W realnym tempie, z uwzględnieniem aktualnych możliwości.</p>
-            <div class="values">
-                <span>Brak presji</span>
-                <span>Konkret</span>
-                <span>Wspólnota</span>
-            </div>
-        </div>
+    <header class="container">
+        <span class="label">MISJA I KONTEKST</span>
+        <h1>Nowy warsztat twórczy po udarze.</h1>
+        <p class="lead">Wspieramy grafików i artystów w powrocie do pracy kreatywnej poprzez budowanie nowych możliwości, bez presji czasu i obietnic bez pokrycia.</p>
     </header>
 
     <section id="o-nas">
         <div class="container">
-            <h2>O fundacji</h2>
-            <p>Post-Stroke Creators powstało z osobistego doświadczenia. Wiemy, że udar dla grafika czy artysty to nie tylko problem zdrowotny, ale przede wszystkim nagła bariera w komunikacji ze światem poprzez obraz i precyzję dłoni.</p>
-            <p>Nie oferujemy terapii w klasycznym rozumieniu. Oferujemy zrozumienie specyfiki pracy twórczej i praktyczne podejście do powrotu przed ekran komputera lub do sztalugi. Bez motywacyjnych haseł, za to z planem działania.</p>
-        </div>
-    </section>
-
-    <section id="misja" style="background-color: #fff;">
-        <div class="container">
-            <h2>Misja</h2>
-            <p>Naszą misją jest stworzenie bezpiecznej przestrzeni dla twórców, w której proces powrotu do aktywności zawodowej odbywa się w sposób godny i realistyczny. Zamiast obiecywać powrót do „dawnej formy”, skupiamy się na adaptacji i budowaniu nowego warsztatu.</p>
-            <p>Zapewniamy wsparcie poprzez rozmowę osób o podobnych doświadczeniach oraz planowanie małych, mierzalnych kroków w pracy z narzędziami graficznymi i artystycznymi.</p>
+            <span class="label">O FUNDACJI</span>
+            <p>Fundacja powstała z osobistego doświadczenia twórcy po udarze. Rezygnujemy z narracji motywacyjnej na rzecz praktycznego wsparcia w odzyskiwaniu sprawności warsztatowej.</p>
         </div>
     </section>
 
     <section id="dla-kogo">
         <div class="container">
-            <h2>Grupa docelowa</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Grafika Komputerowa</h3>
-                    <p>UI/UX, DTP, ilustracja cyfrowa, 3D, motion design i szeroko pojęty digital content.</p>
+            <span class="label">GRUPA DOCELOWA</span>
+            
+            <div class="feature-row">
+                <div class="icon-box bg-blue">💻</div>
+                <div class="feature-content">
+                    <span class="sub-label">Sektor Digital</span>
+                    <h3>Graficy komputerowi</h3>
+                    <p>UI/UX, DTP, ilustracja cyfrowa, 3D i motion design.</p>
                 </div>
-                <div class="card">
-                    <h3>Sztuki Wizualne</h3>
-                    <p>Malarstwo, rysunek i wszystkie formy twórczości opierające się na precyzyjnej pracy dłoni i oka.</p>
+            </div>
+
+            <div class="feature-row">
+                <div class="icon-box bg-green">🎨</div>
+                <div class="feature-content">
+                    <span class="sub-label">Sektor Analogowy</span>
+                    <h3>Artyści tradycyjni</h3>
+                    <p>Malarze, rysownicy i twórcy pracujący manualnie.</p>
                 </div>
-                <div class="card">
-                    <h3>Powrót Zawodowy</h3>
-                    <p>Osoby, które chcą na nowo zdefiniować swoją obecność na rynku pracy po incydencie mózgowym.</p>
+            </div>
+
+            <div class="feature-row">
+                <div class="icon-box bg-yellow">📈</div>
+                <div class="feature-content">
+                    <span class="sub-label">Sektor Rozwoju</span>
+                    <h3>Powrót zawodowy</h3>
+                    <p>Osoby szukające nowej drogi w aktywności zawodowej po udarze.</p>
                 </div>
             </div>
         </div>
@@ -162,44 +197,27 @@
 
     <section id="wsparcie">
         <div class="container">
-            <h2>Jak wspieramy</h2>
-            <ul class="support-pillars">
-                <li>
-                    <strong>Rozmowa bez oceniania</strong><br>
-                    Wymiana doświadczeń między twórcami, którzy rozumieją specyficzny lęk przed „pustym płótnem” lub „nieposłuszną myszką”.
-                </li>
-                <li>
-                    <strong>Plan małych kroków</strong><br>
-                    Indywidualne podejście do nauki narzędzi na nowo – bez presji czasu, z szacunkiem do poziomu koncentracji.
-                </li>
-                <li>
-                    <strong>Budowanie społeczności</strong><br>
-                    Świadomość, że nie jesteś jedynym twórcą, który musi na nowo zaprzyjaźnić się ze swoim warsztatem.
-                </li>
-            </ul>
-
-            <div class="disclaimer">
-                <strong>Ważna informacja:</strong><br>
-                Post-Stroke Creators Foundation nie zastępuje rehabilitacji medycznej ani opieki specjalistycznej. Nie jesteśmy placówką medyczną i nie obiecujemy efektów zdrowotnych. Skupiamy się wyłącznie na płaszczyźnie twórczej i zawodowej.
-            </div>
+            <span class="label">FORMY POMOCY</span>
+            <h2>Jak działamy?</h2>
+            <p>Nasz model opiera się na trzech filarach: rozmowie bez oceniania, planowaniu małych, realnych kroków oraz budowaniu wspólnoty osób o podobnych doświadczeniach.</p>
+            
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2rem; padding: 1.5rem; border-left: 2px solid var(--border-color);">
+                <strong>Ważne:</strong> Fundacja nie jest placówką medyczną. Nie zastępujemy rehabilitacji ani opieki specjalistycznej. Skupiamy się wyłącznie na aspekcie twórczym i zawodowym.
+            </p>
         </div>
     </section>
 
-    <section id="kontakt">
-        <div class="container">
-            <div class="contact-box">
-                <h2>Napisz do nas</h2>
-                <p>Jeśli chcesz porozmawiać o swoim powrocie do tworzenia, czekamy na Twój e-mail.</p>
-                <p style="font-size: 0.9rem; margin-top: 10px; margin-bottom: 30px;">Daj nam znać, czym się zajmujesz i na jakim etapie drogi jesteś.</p>
-                <a href="mailto:kontakt@poststrokecreators.pl" class="email-link">kontakt@poststrokecreators.pl</a>
-            </div>
+    <div class="container">
+        <div class="contact-section">
+            <span class="label">KONTAKT</span>
+            <h2>Chcesz do nas dołączyć?</h2>
+            <p style="margin-bottom: 2rem;">Napisz do nas e-mail. Daj znać czym się zajmujesz i na jakim etapie jesteś.</p>
+            <a href="mailto:kontakt@poststrokecreators.pl" class="contact-link">kontakt@poststrokecreators.pl</a>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Post-Stroke Creators Foundation. Wszystkie prawa zastrzeżone.</p>
-        </div>
+    <footer class="container">
+        <p>&copy; 2026 Post-Stroke Creators Foundation. Wszystkie prawa zastrzeżone.</p>
     </footer>
 
 </body>
