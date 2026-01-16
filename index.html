@@ -3,272 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fundacja Post-Stroke Creators | Interface v2.0</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Helvetica+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <title>Post-Stroke Creators | Brain Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* NOWA PALETA "GEEK / CYBERPUNK" */
             --neon-pink: #ff007a;
             --neon-cyan: #00f2ff;
-            --bg-dark: #0a0a12; /* Bardzo ciemny granat/czerń */
-            --panel-bg: rgba(16, 20, 35, 0.75); /* Półprzezroczyste tło panelu */
-            --text-light: #e0e6ed; /* Złamana biel dla lepszej czytelności */
-            --text-dim: #9ca6b8;
+            --bg-dark: #050508;
+            --panel-bg: rgba(10, 12, 20, 0.8);
+            --text-main: #e0e6ed;
+            --text-dim: #94a3b8;
         }
 
         body, html {
             margin: 0;
             padding: 0;
-            font-family: 'Helvetica Neue', sans-serif; /* Główna czcionka */
-            color: var(--text-light);
-            background-color: var(--bg-dark); /* Ciemne tło strony */
-            line-height: 1.7;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* --- TŁO I EFEKTY --- */
-        #canvas-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100vh;
-            z-index: -2;
-            /* Ciemne tło pod animacją 3D */
-            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
-        }
-
-        /* Dodatkowy efekt "linii skanujących" (scanlines) dla retro-tech klimatu */
-        .scanlines-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100vh;
-            z-index: -1;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent 0px,
-                transparent 2px,
-                rgba(0, 0, 0, 0.3) 3px
-            );
-            pointer-events: none;
-        }
-
-        /* --- GŁÓWNY KONTENER TREŚCI (HUD) --- */
-        .content-wrapper {
-            max-width: 840px;
-            margin: 60px auto;
-            padding: 60px 40px;
+        /* --- NAGŁÓWEK HERO Z MÓZGIEM --- */
+        #hero-canvas-wrapper {
             position: relative;
-            
-            /* EFEKT GLASSMORPHISM + NEON GLOW */
-            background: var(--panel-bg);
-            backdrop-filter: blur(15px); /* Rozmycie tła pod tekstem */
-            -webkit-backdrop-filter: blur(15px);
-            
-            border: 1px solid rgba(255, 0, 122, 0.3); /* Subtelna różowa ramka */
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(255, 0, 122, 0.15), inset 0 0 2px rgba(255, 255, 255, 0.1);
+            width: 100%;
+            height: 80vh; /* Mózg zajmuje 80% wysokości ekranu na start */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(0, 242, 255, 0.2);
         }
 
-        /* --- TYPOGRAFIA I AKCENTY --- */
-        h1, h2, h3 {
+        #brain-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            pointer-events: none; /* Mysz przechodzi przez tekst do mózgu */
+        }
+
+        .hero-text h1 {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--neon-cyan);
             text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 700;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+        }
+
+        /* --- LAYOUT TREŚCI --- */
+        .main-container {
+            max-width: 900px;
+            margin: -100px auto 100px;
+            position: relative;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 60px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--neon-pink);
+            font-size: 1.8rem;
+            margin-top: 40px;
+            border-left: 4px solid var(--neon-pink);
+            padding-left: 20px;
+        }
+
+        .lead {
+            font-size: 1.4rem;
+            line-height: 1.4;
+            color: var(--text-main);
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 20px; }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card h3 {
+            color: var(--neon-cyan);
+            font-family: 'Roboto Mono', monospace;
             margin-top: 0;
         }
 
-        h1 {
-            margin-bottom: 40px;
-            /* Efekt tekstowy przypominający terminal */
-            font-family: 'Roboto Mono', monospace; 
+        .mission-quote {
             font-size: 1.5rem;
-            color: var(--neon-cyan);
-            border-bottom: 2px solid var(--neon-cyan);
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-        
-        h1::before { content: "> SYSTEM.INIT: "; color: var(--text-dim); }
-
-        h2 {
-            font-size: 1.8rem;
-            color: var(--neon-pink);
-            margin-bottom: 25px;
-            text-shadow: 0 0 10px rgba(255, 0, 122, 0.4);
-        }
-        
-        /* Klasa pomocnicza dla "technicznych" etykiet */
-        .tech-label {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--neon-cyan);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 10px;
-            opacity: 0.8;
-        }
-
-        .hero-title {
-            font-size: 2.8rem;
-            line-height: 1.2;
-            margin-bottom: 30px;
-            font-weight: 300;
-            /* Delikatny gradient na tekście */
-            background: linear-gradient(45deg, var(--text-light), var(--neon-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p { color: var(--text-dim); margin-bottom: 20px; }
-        strong { color: var(--text-light); font-weight: 700; }
-
-        .section-margin { margin-top: 80px; }
-
-        /* --- SPECJALNE BOXY (MISJA) --- */
-        .mission-box {
-            /* Wygląd futurystycznego panelu danych */
-            background: rgba(0, 242, 255, 0.05);
-            border-left: 4px solid var(--neon-cyan);
-            padding: 30px;
-            font-size: 1.3rem;
-            margin: 50px 0;
-            color: var(--text-light);
-            position: relative;
-            border-radius: 0 12px 12px 0;
-        }
-        
-        .mission-box::before {
-            content: "[ MISSION_DATA_LOG ]";
-            position: absolute;
-            top: -12px;
-            left: 10px;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.7rem;
-            background: var(--bg-dark);
-            padding: 2px 10px;
-            color: var(--neon-cyan);
-            border: 1px solid var(--neon-cyan);
-        }
-
-        /* --- LISTY --- */
-        ul { list-style: none; padding: 0; }
-        ul li {
-            margin-bottom: 18px;
-            padding-left: 30px;
-            position: relative;
-            color: var(--text-dim);
-        }
-        /* Zmiana punktorów na "techniczne" strzałki */
-        ul li::before {
-            content: "[>]";
-            font-family: 'Roboto Mono', monospace;
-            position: absolute;
-            left: 0;
-            color: var(--neon-pink);
-            font-size: 0.9rem;
-        }
-
-        /* --- SEKCJA CTA (WEZWANIE DO DZIAŁANIA) --- */
-        .cta-section {
-            /* Bardziej wyróżniony panel */
-            background: linear-gradient(135deg, rgba(255, 0, 122, 0.1) 0%, rgba(10, 10, 18, 0.8) 100%);
-            padding: 50px;
-            border-radius: 12px;
-            margin-top: 100px;
-            border: 1px solid var(--neon-pink);
-            box-shadow: 0 0 30px rgba(255, 0, 122, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Ozdobny element "obwodu drukowanego" w tle CTA */
-        .cta-section::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255, 0, 122, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 0, 122, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-            z-index: -1;
-            opacity: 0.3;
+            color: var(--text-main);
+            border-top: 1px solid var(--neon-pink);
+            border-bottom: 1px solid var(--neon-pink);
+            padding: 30px 0;
+            margin: 60px 0;
+            text-align: center;
+            font-style: italic;
         }
 
         footer {
             text-align: center;
-            padding: 60px 0 20px;
-            font-size: 0.8rem;
-            color: var(--text-dim);
+            padding: 40px;
             font-family: 'Roboto Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.8rem;
         }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 2rem; }
-            .content-wrapper { padding: 40px 20px; margin: 20px auto; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .glass-panel { padding: 30px; }
+            .hero-text h1 { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <div id="canvas-container"></div>
-    <div class="scanlines-overlay"></div>
+    <section id="hero-canvas-wrapper">
+        <canvas id="brain-canvas"></canvas>
+        <div class="hero-text">
+            <h1>Post-Stroke Creators</h1>
+        </div>
+    </section>
 
-    <div class="content-wrapper">
-        <section class="hero-section">
-            <h1>Fundacja Post-Stroke Creators</h1>
+    <div class="main-container">
+        <div class="glass-panel">
+            <p class="lead">Udar potrafi zaburzyć rzeczy, które wcześniej były codziennością. Ruch dłoni. Precyzję. Skupienie. Rytm pracy.</p>
             
-            <p class="hero-title">Udar potrafi zaburzyć rzeczy, które wcześniej były codziennością.</p>
-            <p>Ruch dłoni. Precyzję. Skupienie. Rytm pracy. Pewność, że „umiem”.</p>
-            <p>Ta strona jest miejscem dla grafików komputerowych i artystów, którzy po udarze próbują odnaleźć się w nowej rzeczywistości twórczej.</p>
-        </section>
+            <p>Ta strona jest miejscem dla grafików komputerowych i artystów, którzy po udarze próbują odnaleźć się w nowej rzeczywistości twórczej. Dla osób, które żyły z pracy dłoni, oka i koncentracji, a teraz muszą budować swój warsztat od nowa.</p>
 
-        <section class="section-margin">
-            <span class="tech-label">// STATUS RAPORT</span>
-            <h2>Dlaczego ta fundacja powstała</h2>
-            <p>Fundacja powstała z doświadczenia osoby, która sama przeszła udary i wracała do pracy twórczej od zera. Nie w teorii, tylko w codziennym zmaganiu z pytaniem: <strong>„czy ja jeszcze w ogóle potrafię pracować?”</strong>.</p>
+            <h2>Dlaczego ta fundacja powstała?</h2>
+            <p>Z doświadczenia osoby, która sama przeszła udary. Nie z podręczników, ale z codziennego zmagania z pytaniem: <strong>„Czy ja jeszcze potrafię?”</strong>.</p>
             
-            <div class="mission-box">
-                Po udarze największym problemem twórców nie jest brak talentu, tylko brak drogowskazów.
+            <div class="mission-quote">
+                "Po udarze największym problemem twórców nie jest brak talentu, tylko brak drogowskazów."
             </div>
-            <p>Rehabilitacja medyczna skupia się na zdrowiu. Rynek pracy na wynikach. My działamy w tym miejscu „pomiędzy”.</p>
-        </section>
 
-        <section class="section-margin">
-             <span class="tech-label">// GŁÓWNY PROTOKÓŁ</span>
-            <h2>Misja Fundacji</h2>
-            <p>Wspieramy grafików i artystów, którym udar zaburzył możliwość pracy. Pomagamy wracać do tworzenia poprzez rozmowę, praktyczne prowadzenie oraz planowanie realnych kroków.</p>
-            <ul>
-                <li>Nie obiecujemy „szybkiej formy”.</li>
-                <li>Nie mierzymy postępów cudzymi standardami.</li>
-                <li>Wierzymy, że tworzenie to godność i jakość życia.</li>
-            </ul>
-        </section>
+            <h2>Kim jesteśmy?</h2>
+            <p>Jesteśmy fundacją tworzoną przez twórców i dla twórców. Nie jesteśmy kliniką ani firmą szkoleniową. Jesteśmy miejscem, które rozumie specyfikę pracy twórczej i łączy ją z realiami życia po udarze.</p>
 
-        <section class="section-margin">
-            <span class="tech-label">// METODOLOGIA WSPARCIA</span>
-            <h2>Jak wspieramy</h2>
-            
-            <h3><span style="color: var(--neon-cyan); font-family: 'Roboto Mono'">01.</span> Rozmowa</h3>
-            <p>Zaczynamy od zrozumienia lęków i realnych ograniczeń. Czasem sama rozmowa z kimś, kto rozumie ten świat, przynosi pierwszą ulgę.</p>
-            
-            <h3><span style="color: var(--neon-cyan); font-family: 'Roboto Mono'">02.</span> Plan powrotu twórcy</h3>
-            <p>Układamy mapę małych kroków, które nie przeciążają i nie niszczą motywacji.</p>
-            
-            <h3><span style="color: var(--neon-cyan); font-family: 'Roboto Mono'">03.</span> Społeczność</h3>
-            <p>Łączymy osoby na podobnej drodze. Po udarze samotność jest najtrudniejsza – my jesteśmy odpowiedzią na tę samotność.</p>
-        </section>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>01. Rozmowa</h3>
+                    <p>Bez oceniania i presji. O tym, co zostało zaburzone, a co nadal działa.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>02. Plan</h3>
+                    <p>Realna mapa małych kroków, które nie niszczą motywacji.</p>
+                </div>
+            </div>
 
-        <section class="cta-section">
-            <h2>Jak możesz skorzystać</h2>
-            <p>Jeśli chcesz się odezwać, napisz do nas kilka zdań. Nie musi być „ładnie”.</p>
-            <ul>
-                <li>Napisz, kim jesteś i czym się zajmowałeś.</li>
-                <li>Opisz, co udar zmienił w Twojej pracy.</li>
-                <li>Napisz, czego teraz najbardziej potrzebujesz.</li>
-            </ul>
-        </section>
+            <h2>Jak możesz skorzystać?</h2>
+            <p>Napisz do nas kilka zdań. Nie musi być ładnie. Napisz kim jesteś, co udar zmienił w Twojej pracy i czego teraz najbardziej potrzebujesz.</p>
+        </div>
 
         <footer>
-            <p>END OF LINE. <br> © 2026 Fundacja Post-Stroke Creators. Tu zaczynamy od rozmowy.</p>
+            // SYSTEM STATUS: OPERATIONAL <br>
+            © 2026 Fundacja Post-Stroke Creators. Tu zaczynamy od rozmowy.
         </footer>
     </div>
 
@@ -283,71 +204,79 @@
     <script type="module">
         import * as THREE from 'three';
 
-        const container = document.getElementById('canvas-container');
+        const canvas = document.getElementById('brain-canvas');
         const scene = new THREE.Scene();
-        // WAŻNE: Usunąłem białe tło, teraz jest przezroczyste i widać gradient z CSS
-        // scene.background = new THREE.Color(0xffffff); 
-
-        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / (window.innerHeight * 0.8), 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight * 0.8);
         renderer.setPixelRatio(window.devicePixelRatio);
-        container.appendChild(renderer.domElement);
 
         const particles = [];
         const particleGroup = new THREE.Group();
         scene.add(particleGroup);
 
-        const particleCount = 3800;
-        const pSize = 0.07;
         const colors = [0x00f2ff, 0xff007a, 0xffd700, 0x00ff95, 0x4e4eff];
-
-        function getBrainPosition() {
+        
+        // --- FUNKCJA GENERUJĄCA ANATOMICZNY KSZTAŁT MÓZGU ---
+        function getAnatomicalBrainPoint() {
             let x, y, z;
-            const angle = Math.random() * Math.PI * 2;
-            const radius = Math.sqrt(Math.random());
-            
-            // Kształt profilu bocznego mózgu
-            x = 5 * Math.cos(angle) * radius;
-            y = 3.8 * Math.sin(angle) * radius;
+            const select = Math.random();
 
-            if (x < -1) y *= 0.85; 
-            if (y < -1.8) { x *= 0.4; y *= 1.1; }
-            if (x > 2 && y < 0) y *= 0.7;
+            if (select < 0.85) {
+                // Kora mózgowa (Główna bryła)
+                x = (Math.random() - 0.5) * 10;
+                y = (Math.random() - 0.5) * 7;
+                // Formowanie profilu (Lateral view)
+                const mask = Math.pow(x / 5, 2) + Math.pow(y / 3.5, 2);
+                if (mask > 1) return getAnatomicalBrainPoint();
+                
+                // Wycięcie na dole (Sylvian fissure / Temporal area)
+                if (x > -1 && x < 2 && y < -1) return getAnatomicalBrainPoint();
+            } else if (select < 0.95) {
+                // Móżdżek (Cerebellum - mała bryła z tyłu na dole)
+                x = -2.5 + (Math.random() - 0.5) * 2.5;
+                y = -2.5 + (Math.random() - 0.5) * 1.5;
+            } else {
+                // Pień mózgu (Brainstem)
+                x = 0.5 + (Math.random() - 0.5) * 1;
+                y = -3.5 + (Math.random() - 0.5) * 2;
+            }
 
-            z = (Math.random() - 0.5) * 1.0;
+            z = (Math.random() - 0.5) * 1.5;
             return new THREE.Vector3(x, y, z);
         }
 
-        const geometry = new THREE.BoxGeometry(pSize, pSize, pSize);
+        const geometry = new THREE.BoxGeometry(0.08, 0.08, 0.08);
 
-        for (let i = 0; i < particleCount; i++) {
-            const targetPos = getBrainPosition();
+        for (let i = 0; i < 4500; i++) {
+            const pos = getAnatomicalBrainPoint();
             const color = colors[Math.floor(Math.random() * colors.length)];
-            // Zmiana materiału na BasicMaterial dla lepszego efektu neonu na ciemnym tle
-            const material = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.9 });
+            const material = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.8 });
             const mesh = new THREE.Mesh(geometry, material);
 
-            mesh.position.copy(targetPos);
-            
+            mesh.position.copy(pos);
             mesh.userData = {
-                origin: targetPos.clone(),
+                origin: pos.clone(),
                 velocity: new THREE.Vector3(),
-                friction: 0.85 + Math.random() * 0.1, 
-                spring: 0.008 + Math.random() * 0.01,
-                jitter: Math.random() * 0.05
+                friction: 0.88 + Math.random() * 0.05,
+                spring: 0.01 + Math.random() * 0.01,
+                jitter: Math.random() * 0.08
             };
 
             particleGroup.add(mesh);
             particles.push(mesh);
         }
 
-        camera.position.z = 12;
+        camera.position.z = 15;
 
-        const mouse = new THREE.Vector3(-100, -100, 0);
-        window.addEventListener('mousemove', (event) => {
-            const x = (event.clientX / window.innerWidth) * 2 - 1;
-            const y = -(event.clientY / window.innerHeight) * 2 + 1;
+        // Mysz
+        const mouse = new THREE.Vector3(-1000, -1000, 0);
+        window.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+            const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+            
             const vector = new THREE.Vector3(x, y, 0.5);
             vector.unproject(camera);
             const dir = vector.sub(camera.position).normalize();
@@ -360,27 +289,26 @@
 
             particles.forEach(p => {
                 const data = p.userData;
-                const distMouse = p.position.distanceTo(mouse);
-                
-                if (distMouse < 1.8) {
-                    const dir = new THREE.Vector3().subVectors(p.position, mouse).normalize();
-                    
-                    dir.x += (Math.random() - 0.5) * 0.5;
-                    dir.y += (Math.random() - 0.5) * 0.5;
-                    dir.z += (Math.random() - 0.5) * 0.5;
+                const dist = p.position.distanceTo(mouse);
 
-                    const push = (1.8 - distMouse) * (0.05 + data.jitter);
+                // Reakcja - Chaos
+                if (dist < 2.0) {
+                    const dir = new THREE.Vector3().subVectors(p.position, mouse).normalize();
+                    // Dodanie chaosu / zderzeń
+                    dir.x += (Math.random() - 0.5) * 0.6;
+                    dir.y += (Math.random() - 0.5) * 0.6;
+                    
+                    const push = (2.0 - dist) * (0.06 + data.jitter);
                     data.velocity.add(dir.multiplyScalar(push));
                 }
 
-                const homeForce = new THREE.Vector3().subVectors(data.origin, p.position).multiplyScalar(data.spring);
-                data.velocity.add(homeForce);
-                
+                // Powrót do ułożenia mózgu
+                const home = new THREE.Vector3().subVectors(data.origin, p.position).multiplyScalar(data.spring);
+                data.velocity.add(home);
                 data.velocity.multiplyScalar(data.friction);
+                
                 p.position.add(data.velocity);
-
-                p.rotation.x += data.velocity.length() * 0.5;
-                p.rotation.y += data.velocity.length() * 0.5;
+                p.rotation.x += data.velocity.length() * 0.2;
             });
 
             renderer.render(scene, camera);
@@ -389,9 +317,9 @@
         animate();
 
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.aspect = window.innerWidth / (window.innerHeight * 0.8);
             camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(window.innerWidth, window.innerHeight * 0.8);
         });
     </script>
 </body>
