@@ -14,6 +14,7 @@
             --text-muted: #64748b;
             --border-color: #e2e8f0;
             --bg-light: #ffffff;
+            --brand-green: #2d7a42; /* Kolor z Twojego logo */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,20 +29,21 @@
 
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* SEKCJA LOGO - Proporcje z Twojego projektu */
-        .logo-header {
-            text-align: center;
-            padding: 4rem 0 3rem 0; /* Dużo przestrzeni nad i pod logo */
-        }
-
-        .logo-header img {
+        /* KONTENER DLA ANIMOWANEGO MÓZGU */
+        #canvas-container {
             width: 100%;
-            max-width: 450px; /* Rozmiar dopasowany do proporcji z obrazka */
-            height: auto;
-            display: inline-block;
+            height: 450px; /* Wysokość dopasowana do proporcji logo */
+            position: relative;
+            cursor: crosshair;
+            margin-top: 2rem;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
         }
 
-        /* TYPOGRAFIA - Styl "Swiss / Aura" */
+        /* TYPOGRAFIA SZWAJCARSKA */
         .label {
             font-size: 0.7rem;
             font-weight: 600;
@@ -69,17 +71,24 @@
             max-width: 650px;
         }
 
-        section { padding: 3rem 0; border-top: 1px solid var(--border-color); }
+        section { padding: 4rem 0; border-top: 1px solid var(--border-color); }
 
         .content-block { margin-bottom: 2rem; }
-        .content-block p { font-size: 1rem; color: var(--text-main); margin-bottom: 1rem; }
+        .content-block p { font-size: 1.05rem; margin-bottom: 1.5rem; }
+
+        /* LISTY I FILARY */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .pillar { padding: 1.5rem; border-left: 1px solid var(--border-color); }
+        .pillar h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .pillar p { font-size: 0.95rem; color: var(--text-muted); }
 
         /* KONTAKT */
         .contact-box {
             background-color: #f8fafc;
-            padding: 3rem;
-            border-radius: 8px;
+            padding: 3.5rem;
+            border-radius: 12px;
             margin: 4rem 0;
+            text-align: center;
         }
 
         .contact-link {
@@ -88,24 +97,28 @@
             color: var(--text-main);
             text-decoration: none;
             display: inline-block;
-            margin-top: 1rem;
-            border-bottom: 2px solid #2d7a42; /* Zielony z Twojego logo */
+            margin-top: 1.5rem;
+            border-bottom: 2px solid var(--brand-green);
+            padding-bottom: 4px;
         }
 
-        footer { padding: 4rem 0; color: var(--text-muted); font-size: 0.8rem; }
+        footer { padding: 4rem 0; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--border-color); }
 
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .contact-box { padding: 2rem; }
+            #canvas-container { height: 300px; }
+        }
     </style>
 </head>
 <body>
 
-    <header class="logo-header">
-        <div class="container">
-            <img src="Post-Stroke Creators.png" alt="Post-Stroke Creators Foundation Logo">
-        </div>
-    </header>
+    <div id="canvas-container">
+        <canvas id="brainCanvas"></canvas>
+    </div>
 
     <main class="container">
-        <header>
+        <header style="margin-top: 2rem;">
             <span class="label">MISJA I KONTEKST</span>
             <h1>Nowy warsztat twórczy po udarze.</h1>
             <p class="lead">Wspieramy grafików i artystów w powrocie do pracy kreatywnej poprzez budowanie nowych możliwości, bez presji czasu i obietnic bez pokrycia.</p>
@@ -114,14 +127,33 @@
         <section id="o-nas">
             <span class="label">O FUNDACJI</span>
             <div class="content-block">
-                <p>Fundacja powstała z osobistego doświadczenia twórcy po udarze. Rezygnujemy z narracji motywacyjnej na rzecz praktycznego wsparcia w odzyskiwaniu sprawności warsztatowej.</p>
+                <p>Post-Stroke Creators powstało z osobistego doświadczenia twórcy. Wiemy, że udar to nagła bariera w precyzji dłoni i oka, która jest fundamentem naszej pracy.</p>
+                <p>Rezygnujemy z typowej narracji motywacyjnej. Oferujemy praktyczne podejście do adaptacji warsztatu grafika i artysty do aktualnych możliwości.</p>
             </div>
+        </section>
+
+        <section id="wsparcie">
+            <span class="label">JAK WSPIERAMY</span>
+            <div class="grid">
+                <div class="pillar">
+                    <h3>Rozmowa</h3>
+                    <p>Wymiana doświadczeń bez oceniania, w gronie osób o podobnej ścieżce zawodowej.</p>
+                </div>
+                <div class="pillar">
+                    <h3>Realny Plan</h3>
+                    <p>Budowanie powrotu do narzędzi (UI/UX, DTP, 3D, malarstwo) małymi krokami.</p>
+                </div>
+            </div>
+            
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 3rem; font-style: italic;">
+                Ważne: Fundacja nie zastępuje profesjonalnej rehabilitacji ani opieki medycznej.
+            </p>
         </section>
 
         <div class="contact-box">
             <span class="label">KONTAKT</span>
-            <h2>Chcesz porozmawiać?</h2>
-            <p>Napisz do nas. Daj znać, czym się zajmujesz i na jakim etapie drogi jesteś.</p>
+            <h2>Chcesz do nas dołączyć?</h2>
+            <p>Napisz e-mail. Daj znać czym się zajmujesz i na jakim etapie drogi jesteś.</p>
             <a href="mailto:kontakt@poststrokecreators.pl" class="contact-link">kontakt@poststrokecreators.pl</a>
         </div>
     </main>
@@ -130,5 +162,102 @@
         <p>&copy; 2026 Post-Stroke Creators Foundation. Wszystkie prawa zastrzeżone.</p>
     </footer>
 
+    <script>
+    const canvas = document.getElementById('brainCanvas');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('canvas-container');
+
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 100 };
+
+    const logoImage = new Image();
+    logoImage.src = 'Post-Stroke Creators.png'; // Upewnij się, że plik jest w tym samym folderze
+
+    logoImage.onload = function() {
+        init();
+        animate();
+    };
+
+    window.addEventListener('mousemove', function(event) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = event.clientX - rect.left;
+        mouse.y = event.clientY - rect.top;
+    });
+
+    class Particle {
+        constructor(x, y, color) {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.originX = x;
+            this.originY = y;
+            this.color = color;
+            this.size = 1.8; 
+            this.friction = 0.92;
+            this.ease = 0.06;
+            this.dx = 0;
+            this.dy = 0;
+            this.force = 0;
+            this.angle = 0;
+            this.distance = 0;
+        }
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        update() {
+            this.distance = Math.hypot(mouse.x - this.x, mouse.y - this.y);
+            if (this.distance < mouse.radius) {
+                this.force = (mouse.radius - this.distance) / mouse.radius;
+                this.angle = Math.atan2(this.y - mouse.y, this.x - mouse.x);
+                this.dx += Math.cos(this.angle) * this.force * 6;
+                this.dy += Math.sin(this.angle) * this.force * 6;
+            }
+            this.dx *= this.friction;
+            this.dy *= this.friction;
+            this.x += this.dx + (this.originX - this.x) * this.ease;
+            this.y += this.dy + (this.originY - this.y) * this.ease;
+        }
+    }
+
+    function init() {
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+        
+        // Obliczanie proporcji dla wyśrodkowanego logo
+        const scale = Math.min(canvas.width / logoImage.width * 0.7, 0.5);
+        const tempWidth = logoImage.width * scale;
+        const tempHeight = logoImage.height * scale;
+        const startX = (canvas.width - tempWidth) / 2;
+        const startY = (canvas.height - tempHeight) / 2;
+        
+        ctx.drawImage(logoImage, startX, startY, tempWidth, tempHeight);
+        const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles = [];
+        for (let y = 0; y < canvas.height; y += 3) {
+            for (let x = 0; x < canvas.width; x += 3) {
+                const index = (y * canvas.width + x) * 4;
+                if (data[index + 3] > 128) {
+                    const color = `rgb(${data[index]}, ${data[index+1]}, ${data[index+2]})`;
+                    particles.push(new Particle(x, y, color));
+                }
+            }
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+        }
+        requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', init);
+    </script>
 </body>
 </html>
