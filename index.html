@@ -3,126 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fundacja Post-Stroke Creators</title>
+    <title>Fundacja Post-Stroke Creators | Interface v2.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Helvetica+Neue:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-color: #ff007a;
-            --text-color: #1a1a1a;
-            --bg-color: #ffffff;
+            /* NOWA PALETA "GEEK / CYBERPUNK" */
+            --neon-pink: #ff007a;
+            --neon-cyan: #00f2ff;
+            --bg-dark: #0a0a12; /* Bardzo ciemny granat/czerń */
+            --panel-bg: rgba(16, 20, 35, 0.75); /* Półprzezroczyste tło panelu */
+            --text-light: #e0e6ed; /* Złamana biel dla lepszej czytelności */
+            --text-dim: #9ca6b8;
         }
 
         body, html {
             margin: 0;
             padding: 0;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            line-height: 1.6;
+            font-family: 'Helvetica Neue', sans-serif; /* Główna czcionka */
+            color: var(--text-light);
+            background-color: var(--bg-dark); /* Ciemne tło strony */
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* Kontener na animację 3D */
+        /* --- TŁO I EFEKTY --- */
         #canvas-container {
             position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: -1; /* Animacja pod tekstem */
-            opacity: 0.6; /* Delikatne tło */
+            top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: -2;
+            /* Ciemne tło pod animacją 3D */
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
         }
 
+        /* Dodatkowy efekt "linii skanujących" (scanlines) dla retro-tech klimatu */
+        .scanlines-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: -1;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 2px,
+                rgba(0, 0, 0, 0.3) 3px
+            );
+            pointer-events: none;
+        }
+
+        /* --- GŁÓWNY KONTENER TREŚCI (HUD) --- */
         .content-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 100px 20px;
+            max-width: 840px;
+            margin: 60px auto;
+            padding: 60px 40px;
             position: relative;
-            background: rgba(255, 255, 255, 0.8); /* Lekka przezroczystość tekstu */
+            
+            /* EFEKT GLASSMORPHISM + NEON GLOW */
+            background: var(--panel-bg);
+            backdrop-filter: blur(15px); /* Rozmycie tła pod tekstem */
+            -webkit-backdrop-filter: blur(15px);
+            
+            border: 1px solid rgba(255, 0, 122, 0.3); /* Subtelna różowa ramka */
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(255, 0, 122, 0.15), inset 0 0 2px rgba(255, 255, 255, 0.1);
         }
 
-        h1, h2 {
+        /* --- TYPOGRAFIA I AKCENTY --- */
+        h1, h2, h3 {
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-color);
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-top: 0;
         }
 
-        .hero-section {
-            margin-bottom: 80px;
+        h1 {
+            margin-bottom: 40px;
+            /* Efekt tekstowy przypominający terminal */
+            font-family: 'Roboto Mono', monospace; 
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            border-bottom: 2px solid var(--neon-cyan);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        h1::before { content: "> SYSTEM.INIT: "; color: var(--text-dim); }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--neon-pink);
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(255, 0, 122, 0.4);
+        }
+        
+        /* Klasa pomocnicza dla "technicznych" etykiet */
+        .tech-label {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--neon-cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+            opacity: 0.8;
         }
 
         .hero-title {
-            font-size: 3rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            color: var(--primary-color);
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            font-weight: 300;
+            /* Delikatny gradient na tekście */
+            background: linear-gradient(45deg, var(--text-light), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .section-margin {
-            margin-top: 60px;
-            margin-bottom: 40px;
-        }
+        p { color: var(--text-dim); margin-bottom: 20px; }
+        strong { color: var(--text-light); font-weight: 700; }
 
+        .section-margin { margin-top: 80px; }
+
+        /* --- SPECJALNE BOXY (MISJA) --- */
         .mission-box {
-            border-left: 4px solid var(--primary-color);
-            padding-left: 20px;
-            font-style: italic;
-            font-size: 1.2rem;
-            margin: 40px 0;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        ul li {
-            margin-bottom: 15px;
-            padding-left: 25px;
+            /* Wygląd futurystycznego panelu danych */
+            background: rgba(0, 242, 255, 0.05);
+            border-left: 4px solid var(--neon-cyan);
+            padding: 30px;
+            font-size: 1.3rem;
+            margin: 50px 0;
+            color: var(--text-light);
             position: relative;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .mission-box::before {
+            content: "[ MISSION_DATA_LOG ]";
+            position: absolute;
+            top: -12px;
+            left: 10px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.7rem;
+            background: var(--bg-dark);
+            padding: 2px 10px;
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
         }
 
+        /* --- LISTY --- */
+        ul { list-style: none; padding: 0; }
+        ul li {
+            margin-bottom: 18px;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-dim);
+        }
+        /* Zmiana punktorów na "techniczne" strzałki */
         ul li::before {
-            content: "—";
+            content: "[>]";
+            font-family: 'Roboto Mono', monospace;
             position: absolute;
             left: 0;
-            color: var(--primary-color);
+            color: var(--neon-pink);
+            font-size: 0.9rem;
         }
 
+        /* --- SEKCJA CTA (WEZWANIE DO DZIAŁANIA) --- */
         .cta-section {
-            background: #f9f9f9;
-            padding: 40px;
-            border-radius: 8px;
-            margin-top: 80px;
+            /* Bardziej wyróżniony panel */
+            background: linear-gradient(135deg, rgba(255, 0, 122, 0.1) 0%, rgba(10, 10, 18, 0.8) 100%);
+            padding: 50px;
+            border-radius: 12px;
+            margin-top: 100px;
+            border: 1px solid var(--neon-pink);
+            box-shadow: 0 0 30px rgba(255, 0, 122, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Ozdobny element "obwodu drukowanego" w tle CTA */
+        .cta-section::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 0, 122, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 122, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+            opacity: 0.3;
         }
 
         footer {
             text-align: center;
-            padding: 40px;
-            font-size: 0.9rem;
-            color: #666;
+            padding: 60px 0 20px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            font-family: 'Roboto Mono', monospace;
         }
 
         @media (max-width: 768px) {
             .hero-title { font-size: 2rem; }
-            .content-wrapper { padding: 40px 20px; }
+            .content-wrapper { padding: 40px 20px; margin: 20px auto; }
         }
     </style>
 </head>
 <body>
 
     <div id="canvas-container"></div>
+    <div class="scanlines-overlay"></div>
 
     <div class="content-wrapper">
         <section class="hero-section">
             <h1>Fundacja Post-Stroke Creators</h1>
+            
             <p class="hero-title">Udar potrafi zaburzyć rzeczy, które wcześniej były codziennością.</p>
             <p>Ruch dłoni. Precyzję. Skupienie. Rytm pracy. Pewność, że „umiem”.</p>
             <p>Ta strona jest miejscem dla grafików komputerowych i artystów, którzy po udarze próbują odnaleźć się w nowej rzeczywistości twórczej.</p>
         </section>
 
         <section class="section-margin">
+            <span class="tech-label">// STATUS RAPORT</span>
             <h2>Dlaczego ta fundacja powstała</h2>
             <p>Fundacja powstała z doświadczenia osoby, która sama przeszła udary i wracała do pracy twórczej od zera. Nie w teorii, tylko w codziennym zmaganiu z pytaniem: <strong>„czy ja jeszcze w ogóle potrafię pracować?”</strong>.</p>
+            
             <div class="mission-box">
                 Po udarze największym problemem twórców nie jest brak talentu, tylko brak drogowskazów.
             </div>
@@ -130,6 +233,7 @@
         </section>
 
         <section class="section-margin">
+             <span class="tech-label">// GŁÓWNY PROTOKÓŁ</span>
             <h2>Misja Fundacji</h2>
             <p>Wspieramy grafików i artystów, którym udar zaburzył możliwość pracy. Pomagamy wracać do tworzenia poprzez rozmowę, praktyczne prowadzenie oraz planowanie realnych kroków.</p>
             <ul>
@@ -140,14 +244,16 @@
         </section>
 
         <section class="section-margin">
+            <span class="tech-label">// METODOLOGIA WSPARCIA</span>
             <h2>Jak wspieramy</h2>
-            <h3>01. Rozmowa</h3>
+            
+            <h3><span style="color: var(--neon-cyan); font-family: 'Roboto Mono'">01.</span> Rozmowa</h3>
             <p>Zaczynamy od zrozumienia lęków i realnych ograniczeń. Czasem sama rozmowa z kimś, kto rozumie ten świat, przynosi pierwszą ulgę.</p>
             
-            <h3>02. Plan powrotu twórcy</h3>
+            <h3><span style="color: var(--neon-cyan); font-family: 'Roboto Mono'">02.</span> Plan powrotu twórcy</h3>
             <p>Układamy mapę małych kroków, które nie przeciążają i nie niszczą motywacji.</p>
             
-            <h3>03. Społeczność</h3>
+            <h3><span style="color: var(--neon-cyan); font-family: 'Roboto Mono'">03.</span> Społeczność</h3>
             <p>Łączymy osoby na podobnej drodze. Po udarze samotność jest najtrudniejsza – my jesteśmy odpowiedzią na tę samotność.</p>
         </section>
 
@@ -162,7 +268,7 @@
         </section>
 
         <footer>
-            <p>© 2026 Fundacja Post-Stroke Creators. Tu zaczynamy od rozmowy.</p>
+            <p>END OF LINE. <br> © 2026 Fundacja Post-Stroke Creators. Tu zaczynamy od rozmowy.</p>
         </footer>
     </div>
 
@@ -179,7 +285,8 @@
 
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xffffff);
+        // WAŻNE: Usunąłem białe tło, teraz jest przezroczyste i widać gradient z CSS
+        // scene.background = new THREE.Color(0xffffff); 
 
         const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -217,7 +324,8 @@
         for (let i = 0; i < particleCount; i++) {
             const targetPos = getBrainPosition();
             const color = colors[Math.floor(Math.random() * colors.length)];
-            const material = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.8 });
+            // Zmiana materiału na BasicMaterial dla lepszego efektu neonu na ciemnym tle
+            const material = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.9 });
             const mesh = new THREE.Mesh(geometry, material);
 
             mesh.position.copy(targetPos);
@@ -225,7 +333,6 @@
             mesh.userData = {
                 origin: targetPos.clone(),
                 velocity: new THREE.Vector3(),
-                // Unikalne parametry dla każdej cząsteczki (chaos)
                 friction: 0.85 + Math.random() * 0.1, 
                 spring: 0.008 + Math.random() * 0.01,
                 jitter: Math.random() * 0.05
@@ -255,11 +362,9 @@
                 const data = p.userData;
                 const distMouse = p.position.distanceTo(mouse);
                 
-                // KOSMICZNY CHAOS (Efekt zderzenia i odpychania)
                 if (distMouse < 1.8) {
                     const dir = new THREE.Vector3().subVectors(p.position, mouse).normalize();
                     
-                    // Dodajemy losowy "szum" do kierunku ucieczki (chaos)
                     dir.x += (Math.random() - 0.5) * 0.5;
                     dir.y += (Math.random() - 0.5) * 0.5;
                     dir.z += (Math.random() - 0.5) * 0.5;
@@ -268,14 +373,12 @@
                     data.velocity.add(dir.multiplyScalar(push));
                 }
 
-                // Powolny, niejednostajny powrót
                 const homeForce = new THREE.Vector3().subVectors(data.origin, p.position).multiplyScalar(data.spring);
                 data.velocity.add(homeForce);
                 
                 data.velocity.multiplyScalar(data.friction);
                 p.position.add(data.velocity);
 
-                // Rotacja kostek w chaosie
                 p.rotation.x += data.velocity.length() * 0.5;
                 p.rotation.y += data.velocity.length() * 0.5;
             });
