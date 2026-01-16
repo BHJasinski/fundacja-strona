@@ -6,22 +6,22 @@
     <title>Post-Stroke Creators Foundation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --text-main: #0a0a0b;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
-            --bg-light: #ffffff;
-            --brand-green: #2d7a42; /* Kolor z Twojego logo */
+            --brand-blue: #1a3668;
+            --brand-green: #2d7a42;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-light);
+            background-color: #ffffff;
             color: var(--text-main);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
@@ -29,19 +29,33 @@
 
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* KONTENER DLA ANIMOWANEGO MÓZGU */
+        /* NAGŁÓWEK Z NAZWĄ */
+        .foundation-name-header {
+            text-align: center;
+            padding: 4rem 0 1rem 0;
+        }
+
+        .foundation-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--brand-blue);
+        }
+
+        .foundation-title span {
+            color: var(--brand-green);
+        }
+
+        /* KONTENER ANIMACJI (SAM OBRAZEK) */
         #canvas-container {
             width: 100%;
-            height: 450px; /* Wysokość dopasowana do proporcji logo */
+            height: 400px;
             position: relative;
             cursor: crosshair;
-            margin-top: 2rem;
+            margin-bottom: 3rem;
         }
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
+        canvas { display: block; width: 100%; height: 100%; }
 
         /* TYPOGRAFIA SZWAJCARSKA */
         .label {
@@ -60,32 +74,19 @@
             line-height: 1.1;
             letter-spacing: -0.04em;
             margin-bottom: 1.5rem;
-            color: var(--text-main);
         }
 
         p.lead {
             font-size: 1.15rem;
             color: var(--text-muted);
-            font-weight: 400;
             margin-bottom: 4rem;
-            max-width: 650px;
         }
 
         section { padding: 4rem 0; border-top: 1px solid var(--border-color); }
 
-        .content-block { margin-bottom: 2rem; }
-        .content-block p { font-size: 1.05rem; margin-bottom: 1.5rem; }
-
-        /* LISTY I FILARY */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
-        .pillar { padding: 1.5rem; border-left: 1px solid var(--border-color); }
-        .pillar h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
-        .pillar p { font-size: 0.95rem; color: var(--text-muted); }
-
-        /* KONTAKT */
         .contact-box {
             background-color: #f8fafc;
-            padding: 3.5rem;
+            padding: 3rem;
             border-radius: 12px;
             margin: 4rem 0;
             text-align: center;
@@ -96,29 +97,27 @@
             font-weight: 700;
             color: var(--text-main);
             text-decoration: none;
-            display: inline-block;
-            margin-top: 1.5rem;
             border-bottom: 2px solid var(--brand-green);
-            padding-bottom: 4px;
         }
 
         footer { padding: 4rem 0; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--border-color); }
-
-        @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; }
-            .contact-box { padding: 2rem; }
-            #canvas-container { height: 300px; }
-        }
     </style>
 </head>
 <body>
+
+    <header class="foundation-name-header">
+        <div class="container">
+            <div class="foundation-title">Post-Stroke <span>Creators</span></div>
+            <div style="font-size: 0.7rem; color: #94a3b8; margin-top: 5px; letter-spacing: 0.3em;">FOUNDATION</div>
+        </div>
+    </header>
 
     <div id="canvas-container">
         <canvas id="brainCanvas"></canvas>
     </div>
 
     <main class="container">
-        <header style="margin-top: 2rem;">
+        <header>
             <span class="label">MISJA I KONTEKST</span>
             <h1>Nowy warsztat twórczy po udarze.</h1>
             <p class="lead">Wspieramy grafików i artystów w powrocie do pracy kreatywnej poprzez budowanie nowych możliwości, bez presji czasu i obietnic bez pokrycia.</p>
@@ -126,33 +125,12 @@
 
         <section id="o-nas">
             <span class="label">O FUNDACJI</span>
-            <div class="content-block">
-                <p>Post-Stroke Creators powstało z osobistego doświadczenia twórcy. Wiemy, że udar to nagła bariera w precyzji dłoni i oka, która jest fundamentem naszej pracy.</p>
-                <p>Rezygnujemy z typowej narracji motywacyjnej. Oferujemy praktyczne podejście do adaptacji warsztatu grafika i artysty do aktualnych możliwości.</p>
-            </div>
-        </section>
-
-        <section id="wsparcie">
-            <span class="label">JAK WSPIERAMY</span>
-            <div class="grid">
-                <div class="pillar">
-                    <h3>Rozmowa</h3>
-                    <p>Wymiana doświadczeń bez oceniania, w gronie osób o podobnej ścieżce zawodowej.</p>
-                </div>
-                <div class="pillar">
-                    <h3>Realny Plan</h3>
-                    <p>Budowanie powrotu do narzędzi (UI/UX, DTP, 3D, malarstwo) małymi krokami.</p>
-                </div>
-            </div>
-            
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 3rem; font-style: italic;">
-                Ważne: Fundacja nie zastępuje profesjonalnej rehabilitacji ani opieki medycznej.
-            </p>
+            <p>Post-Stroke Creators powstało z osobistego doświadczenia twórcy. Wiemy, że udar to bariera w precyzji, która jest fundamentem naszej pracy. Rezygnujemy z narracji motywacyjnej na rzecz praktycznej adaptacji warsztatu.</p>
         </section>
 
         <div class="contact-box">
             <span class="label">KONTAKT</span>
-            <h2>Chcesz do nas dołączyć?</h2>
+            <h2>Chcesz porozmawiać?</h2>
             <p>Napisz e-mail. Daj znać czym się zajmujesz i na jakim etapie drogi jesteś.</p>
             <a href="mailto:kontakt@poststrokecreators.pl" class="contact-link">kontakt@poststrokecreators.pl</a>
         </div>
@@ -168,12 +146,12 @@
     const container = document.getElementById('canvas-container');
 
     let particles = [];
-    let mouse = { x: null, y: null, radius: 100 };
+    let mouse = { x: null, y: null, radius: 90 };
 
-    const logoImage = new Image();
-    logoImage.src = 'Post-Stroke Creators.png'; // Upewnij się, że plik jest w tym samym folderze
+    const brainImage = new Image();
+    brainImage.src = 'artbrain.jpg'; // Sam obrazek mózgu bez napisów
 
-    logoImage.onload = function() {
+    brainImage.onload = function() {
         init();
         animate();
     };
@@ -191,28 +169,23 @@
             this.originX = x;
             this.originY = y;
             this.color = color;
-            this.size = 1.8; 
-            this.friction = 0.92;
-            this.ease = 0.06;
+            this.size = 2; 
+            this.friction = 0.90;
+            this.ease = 0.05;
             this.dx = 0;
             this.dy = 0;
-            this.force = 0;
-            this.angle = 0;
-            this.distance = 0;
         }
         draw() {
             ctx.fillStyle = this.color;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.fillRect(this.x, this.y, this.size, this.size);
         }
         update() {
-            this.distance = Math.hypot(mouse.x - this.x, mouse.y - this.y);
-            if (this.distance < mouse.radius) {
-                this.force = (mouse.radius - this.distance) / mouse.radius;
-                this.angle = Math.atan2(this.y - mouse.y, this.x - mouse.x);
-                this.dx += Math.cos(this.angle) * this.force * 6;
-                this.dy += Math.sin(this.angle) * this.force * 6;
+            let distance = Math.hypot(mouse.x - this.x, mouse.y - this.y);
+            if (distance < mouse.radius) {
+                let force = (mouse.radius - distance) / mouse.radius;
+                let angle = Math.atan2(this.y - mouse.y, this.x - mouse.x);
+                this.dx += Math.cos(angle) * force * 7;
+                this.dy += Math.sin(angle) * force * 7;
             }
             this.dx *= this.friction;
             this.dy *= this.friction;
@@ -225,20 +198,19 @@
         canvas.width = container.offsetWidth;
         canvas.height = container.offsetHeight;
         
-        // Obliczanie proporcji dla wyśrodkowanego logo
-        const scale = Math.min(canvas.width / logoImage.width * 0.7, 0.5);
-        const tempWidth = logoImage.width * scale;
-        const tempHeight = logoImage.height * scale;
+        const scale = Math.min(canvas.width / brainImage.width * 0.6, 0.8);
+        const tempWidth = brainImage.width * scale;
+        const tempHeight = brainImage.height * scale;
         const startX = (canvas.width - tempWidth) / 2;
         const startY = (canvas.height - tempHeight) / 2;
         
-        ctx.drawImage(logoImage, startX, startY, tempWidth, tempHeight);
+        ctx.drawImage(brainImage, startX, startY, tempWidth, tempHeight);
         const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         particles = [];
-        for (let y = 0; y < canvas.height; y += 3) {
-            for (let x = 0; x < canvas.width; x += 3) {
+        for (let y = 0; y < canvas.height; y += 4) {
+            for (let x = 0; x < canvas.width; x += 4) {
                 const index = (y * canvas.width + x) * 4;
                 if (data[index + 3] > 128) {
                     const color = `rgb(${data[index]}, ${data[index+1]}, ${data[index+2]})`;
