@@ -3,140 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post-Stroke Creators - Interaktywny Mózg</title>
+    <title>Fundacja Post-Stroke Creators</title>
     <style>
-        body { 
-            margin: 0; 
-            background-color: #ffffff; /* Czyste białe tło */
-            overflow: hidden; 
+        :root {
+            --primary-color: #ff007a;
+            --text-color: #1a1a1a;
+            --bg-color: #ffffff;
         }
-        canvas { display: block; }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Kontener na animację 3D */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1; /* Animacja pod tekstem */
+            opacity: 0.6; /* Delikatne tło */
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.8); /* Lekka przezroczystość tekstu */
+        }
+
+        h1, h2 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-color);
+        }
+
+        .hero-section {
+            margin-bottom: 80px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .section-margin {
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .mission-box {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin: 40px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        .cta-section {
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            margin-top: 80px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .content-wrapper { padding: 40px 20px; }
+        }
     </style>
 </head>
 <body>
 
-<script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
-    }
-  }
-</script>
+    <div id="canvas-container"></div>
 
-<script type="module">
-    import * as THREE from 'three';
+    <div class="content-wrapper">
+        <section class="hero-section">
+            <h1>Fundacja Post-Stroke Creators</h1>
+            <p class="hero-title">Udar potrafi zaburzyć rzeczy, które wcześniej były codziennością.</p>
+            <p>Ruch dłoni. Precyzję. Skupienie. Rytm pracy. Pewność, że „umiem”.</p>
+            <p>Ta strona jest miejscem dla grafików komputerowych i artystów, którzy po udarze próbują odnaleźć się w nowej rzeczywistości twórczej.</p>
+        </section>
 
-    const scene = new THREE.Scene();
-    // Ustawienie tła sceny na białe
-    scene.background = new THREE.Color(0xffffff);
+        <section class="section-margin">
+            <h2>Dlaczego ta fundacja powstała</h2>
+            <p>Fundacja powstała z doświadczenia osoby, która sama przeszła udary i wracała do pracy twórczej od zera. Nie w teorii, tylko w codziennym zmaganiu z pytaniem: <strong>„czy ja jeszcze w ogóle potrafię pracować?”</strong>.</p>
+            <div class="mission-box">
+                Po udarze największym problemem twórców nie jest brak talentu, tylko brak drogowskazów.
+            </div>
+            <p>Rehabilitacja medyczna skupia się na zdrowiu. Rynek pracy na wynikach. My działamy w tym miejscu „pomiędzy”.</p>
+        </section>
 
-    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    document.body.appendChild(renderer.domElement);
+        <section class="section-margin">
+            <h2>Misja Fundacji</h2>
+            <p>Wspieramy grafików i artystów, którym udar zaburzył możliwość pracy. Pomagamy wracać do tworzenia poprzez rozmowę, praktyczne prowadzenie oraz planowanie realnych kroków.</p>
+            <ul>
+                <li>Nie obiecujemy „szybkiej formy”.</li>
+                <li>Nie mierzymy postępów cudzymi standardami.</li>
+                <li>Wierzymy, że tworzenie to godność i jakość życia.</li>
+            </ul>
+        </section>
 
-    const particles = [];
-    const particleGroup = new THREE.Group();
-    scene.add(particleGroup);
-
-    // Parametry cząsteczek
-    const particleCount = 3500; // Więcej cząsteczek dla lepszego detalu
-    const pSize = 0.06; 
-    const colors = [0x00f2ff, 0xff007a, 0xffd700, 0x00ff95, 0x4e4eff];
-
-    // Funkcja tworząca precyzyjny zarys mózgu z boku
-    function getBrainPosition() {
-        let x, y;
-        const angle = Math.random() * Math.PI * 2;
-        const radius = Math.sqrt(Math.random());
-        
-        // Podstawowa elipsa
-        x = 5 * Math.cos(angle) * radius;
-        y = 3.8 * Math.sin(angle) * radius;
-
-        // Formowanie sylwetki profilu (logo)
-        if (x < -1) y *= 0.85; // Zaokrąglony tył
-        if (y < -1.8) { // Dolna część/pień
-             x *= 0.4;
-             y *= 1.1;
-        }
-        if (x > 2 && y < 0) y *= 0.7; // Wyprofilowanie przodu
-
-        return new THREE.Vector3(x, y, (Math.random() - 0.5) * 0.5);
-    }
-
-    const geometry = new THREE.BoxGeometry(pSize, pSize, pSize);
-
-    for (let i = 0; i < particleCount; i++) {
-        const targetPos = getBrainPosition();
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const material = new THREE.MeshBasicMaterial({ color: color });
-        const mesh = new THREE.Mesh(geometry, material);
-
-        mesh.position.copy(targetPos);
-        
-        mesh.userData = {
-            origin: targetPos.clone(),
-            velocity: new THREE.Vector3(),
-            friction: 0.92,
-            spring: 0.02
-        };
-
-        particleGroup.add(mesh);
-        particles.push(mesh);
-    }
-
-    camera.position.z = 11;
-
-    // Interakcja myszki
-    const mouse = new THREE.Vector3(-100, -100, 0);
-    window.addEventListener('mousemove', (event) => {
-        const x = (event.clientX / window.innerWidth) * 2 - 1;
-        const y = -(event.clientY / window.innerHeight) * 2 + 1;
-        
-        const vector = new THREE.Vector3(x, y, 0.5);
-        vector.unproject(camera);
-        const dir = vector.sub(camera.position).normalize();
-        const distance = -camera.position.z / dir.z;
-        mouse.copy(camera.position).add(dir.multiplyScalar(distance));
-    });
-
-    function animate() {
-        requestAnimationFrame(animate);
-
-        particles.forEach(p => {
-            const data = p.userData;
-            const distMouse = p.position.distanceTo(mouse);
+        <section class="section-margin">
+            <h2>Jak wspieramy</h2>
+            <h3>01. Rozmowa</h3>
+            <p>Zaczynamy od zrozumienia lęków i realnych ograniczeń. Czasem sama rozmowa z kimś, kto rozumie ten świat, przynosi pierwszą ulgę.</p>
             
-            // Reakcja na kursor (odpychanie)
-            if (distMouse < 1.3) {
-                const dir = new THREE.Vector3().subVectors(p.position, mouse).normalize();
-                const push = (1.3 - distMouse) * 0.03;
-                data.velocity.add(dir.multiplyScalar(push));
+            <h3>02. Plan powrotu twórcy</h3>
+            <p>Układamy mapę małych kroków, które nie przeciążają i nie niszczą motywacji.</p>
+            
+            <h3>03. Społeczność</h3>
+            <p>Łączymy osoby na podobnej drodze. Po udarze samotność jest najtrudniejsza – my jesteśmy odpowiedzią na tę samotność.</p>
+        </section>
+
+        <section class="cta-section">
+            <h2>Jak możesz skorzystać</h2>
+            <p>Jeśli chcesz się odezwać, napisz do nas kilka zdań. Nie musi być „ładnie”.</p>
+            <ul>
+                <li>Napisz, kim jesteś i czym się zajmowałeś.</li>
+                <li>Opisz, co udar zmienił w Twojej pracy.</li>
+                <li>Napisz, czego teraz najbardziej potrzebujesz.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>© 2026 Fundacja Post-Stroke Creators. Tu zaczynamy od rozmowy.</p>
+        </footer>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
             }
+        }
+    </script>
 
-            // Powolny powrót do pierwotnego kształtu
-            const homeForce = new THREE.Vector3().subVectors(data.origin, p.position).multiplyScalar(data.spring);
-            data.velocity.add(homeForce);
+    <script type="module">
+        import * as THREE from 'three';
+
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xffffff);
+
+        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        const particles = [];
+        const particleGroup = new THREE.Group();
+        scene.add(particleGroup);
+
+        const particleCount = 3800;
+        const pSize = 0.07;
+        const colors = [0x00f2ff, 0xff007a, 0xffd700, 0x00ff95, 0x4e4eff];
+
+        function getBrainPosition() {
+            let x, y, z;
+            const angle = Math.random() * Math.PI * 2;
+            const radius = Math.sqrt(Math.random());
             
-            data.velocity.multiplyScalar(data.friction);
-            p.position.add(data.velocity);
+            // Kształt profilu bocznego mózgu
+            x = 5 * Math.cos(angle) * radius;
+            y = 3.8 * Math.sin(angle) * radius;
 
-            // Mikro-rotacja każdej kostki dla życia
-            p.rotation.x += 0.01;
+            if (x < -1) y *= 0.85; 
+            if (y < -1.8) { x *= 0.4; y *= 1.1; }
+            if (x > 2 && y < 0) y *= 0.7;
+
+            z = (Math.random() - 0.5) * 1.0;
+            return new THREE.Vector3(x, y, z);
+        }
+
+        const geometry = new THREE.BoxGeometry(pSize, pSize, pSize);
+
+        for (let i = 0; i < particleCount; i++) {
+            const targetPos = getBrainPosition();
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const material = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.8 });
+            const mesh = new THREE.Mesh(geometry, material);
+
+            mesh.position.copy(targetPos);
+            
+            mesh.userData = {
+                origin: targetPos.clone(),
+                velocity: new THREE.Vector3(),
+                // Unikalne parametry dla każdej cząsteczki (chaos)
+                friction: 0.85 + Math.random() * 0.1, 
+                spring: 0.008 + Math.random() * 0.01,
+                jitter: Math.random() * 0.05
+            };
+
+            particleGroup.add(mesh);
+            particles.push(mesh);
+        }
+
+        camera.position.z = 12;
+
+        const mouse = new THREE.Vector3(-100, -100, 0);
+        window.addEventListener('mousemove', (event) => {
+            const x = (event.clientX / window.innerWidth) * 2 - 1;
+            const y = -(event.clientY / window.innerHeight) * 2 + 1;
+            const vector = new THREE.Vector3(x, y, 0.5);
+            vector.unproject(camera);
+            const dir = vector.sub(camera.position).normalize();
+            const distance = -camera.position.z / dir.z;
+            mouse.copy(camera.position).add(dir.multiplyScalar(distance));
         });
 
-        renderer.render(scene, camera);
-    }
+        function animate() {
+            requestAnimationFrame(animate);
 
-    animate();
+            particles.forEach(p => {
+                const data = p.userData;
+                const distMouse = p.position.distanceTo(mouse);
+                
+                // KOSMICZNY CHAOS (Efekt zderzenia i odpychania)
+                if (distMouse < 1.8) {
+                    const dir = new THREE.Vector3().subVectors(p.position, mouse).normalize();
+                    
+                    // Dodajemy losowy "szum" do kierunku ucieczki (chaos)
+                    dir.x += (Math.random() - 0.5) * 0.5;
+                    dir.y += (Math.random() - 0.5) * 0.5;
+                    dir.z += (Math.random() - 0.5) * 0.5;
 
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-</script>
+                    const push = (1.8 - distMouse) * (0.05 + data.jitter);
+                    data.velocity.add(dir.multiplyScalar(push));
+                }
+
+                // Powolny, niejednostajny powrót
+                const homeForce = new THREE.Vector3().subVectors(data.origin, p.position).multiplyScalar(data.spring);
+                data.velocity.add(homeForce);
+                
+                data.velocity.multiplyScalar(data.friction);
+                p.position.add(data.velocity);
+
+                // Rotacja kostek w chaosie
+                p.rotation.x += data.velocity.length() * 0.5;
+                p.rotation.y += data.velocity.length() * 0.5;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>
