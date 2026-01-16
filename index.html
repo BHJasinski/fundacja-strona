@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Post-Stroke Creators | Mobile & Desktop Interface</title>
+    <title>Post-Stroke Creators | Geek Interface</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -23,7 +23,6 @@
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            /* Zapobiega "gumowaniu" strony na mobilkach przy dotyku canvasa */
             touch-action: pan-y; 
         }
 
@@ -31,7 +30,7 @@
         #hero-canvas-wrapper {
             position: relative;
             width: 100%;
-            height: 70vh;
+            height: 65vh; /* Nieco niższy, żeby tekst był szybciej widoczny */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -53,21 +52,22 @@
             z-index: 2;
             text-align: center;
             pointer-events: none;
+            margin-top: 150px; /* Przesunięcie napisu pod mózg */
         }
 
         .hero-text h1 {
             font-family: 'Roboto Mono', monospace;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--neon-cyan);
             text-transform: uppercase;
-            letter-spacing: 6px;
-            text-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+            letter-spacing: 4px;
+            opacity: 0.8;
         }
 
-        /* --- CONTENT --- */
+        /* --- CONTENT CONTAINER --- */
         .main-container {
             max-width: 800px;
-            margin: -60px auto 100px;
+            margin: -40px auto 80px;
             position: relative;
             z-index: 10;
             padding: 0 15px;
@@ -75,10 +75,10 @@
 
         .glass-panel {
             background: var(--panel-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 50px 40px;
             box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
@@ -86,16 +86,9 @@
         h2 {
             font-family: 'Roboto Mono', monospace;
             color: var(--neon-pink);
-            font-size: 1.6rem;
-            margin-top: 50px;
-            display: flex;
-            align-items: center;
-        }
-
-        h2::before {
-            content: ">> ";
-            color: var(--neon-cyan);
-            margin-right: 10px;
+            font-size: 1.5rem;
+            margin-top: 40px;
+            text-transform: uppercase;
         }
 
         .lead {
@@ -103,36 +96,32 @@
             line-height: 1.5;
             color: #fff;
             font-weight: 300;
-            margin-bottom: 30px;
         }
 
-        p { color: var(--text-dim); line-height: 1.8; margin-bottom: 20px; }
+        p { color: var(--text-dim); line-height: 1.8; margin-bottom: 20px; font-size: 1.05rem; }
 
         .mission-quote {
-            background: rgba(255, 0, 122, 0.05);
-            border: 1px dashed var(--neon-pink);
-            padding: 30px;
+            border-left: 2px solid var(--neon-cyan);
+            padding: 20px;
             margin: 40px 0;
-            border-radius: 10px;
-            text-align: center;
-            font-style: italic;
+            background: rgba(0, 242, 255, 0.03);
             color: var(--text-main);
+            font-style: italic;
         }
 
         footer {
             text-align: center;
             padding: 40px;
             font-family: 'Roboto Mono', monospace;
-            color: #444;
+            color: #333;
             font-size: 0.7rem;
-            letter-spacing: 1px;
         }
 
         @media (max-width: 768px) {
             #hero-canvas-wrapper { height: 50vh; }
             .glass-panel { padding: 30px 20px; }
-            .hero-text h1 { font-size: 0.9rem; }
-            .lead { font-size: 1.1rem; }
+            .hero-text { margin-top: 100px; }
+            h2 { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -141,7 +130,7 @@
     <section id="hero-canvas-wrapper">
         <canvas id="brain-canvas"></canvas>
         <div class="hero-text">
-            <h1>FUNDACJA_POST_STROKE_CREATORS</h1>
+            <h1>POST_STROKE_CREATORS.SYS</h1>
         </div>
     </section>
 
@@ -151,23 +140,22 @@
             
             <p>Ta strona jest miejscem dla grafików komputerowych i artystów, którzy po udarze próbują odnaleźć się w nowej rzeczywistości twórczej.</p>
 
-            <h2>Geneza</h2>
-            <p>Fundacja powstała z doświadczenia osoby, która sama przeszła udary i wracała do pracy twórczej od zera. Nie w teorii, tylko w codziennym zmaganiu z pytaniem: „Czy ja jeszcze w ogóle potrafię pracować?”.</p>
+            <h2>// Dlaczego powstaliśmy</h2>
+            <p>Fundacja powstała z doświadczenia osoby, która sama przeszła udary. Nie z teorii, tylko w codziennym zmaganiu z pytaniem: „Czy ja jeszcze w ogóle potrafię tworzyć?”.</p>
             
             <div class="mission-quote">
                 "Po udarze największym problemem twórców nie jest brak talentu, tylko brak drogowskazów."
             </div>
 
-            <h2>Nasza Misja</h2>
-            <p>Wspieramy grafików i artystów poprzez rozmowę, praktyczne prowadzenie oraz planowanie realnych kroków powrotu do twórczości. Działamy spokojnie, małymi krokami, z szacunkiem do ograniczeń.</p>
+            <h2>// Misja</h2>
+            <p>Pomagamy wracać do tworzenia poprzez rozmowę, praktyczne prowadzenie oraz planowanie realnych kroków. Działamy w tempie dopasowanym do Twoich możliwości.</p>
 
-            <h2>Kontakt</h2>
-            <p>Napisz do nas. Nie musisz pisać „ładnie”. Wystarczy kilka zdań o tym, kim jesteś i czego potrzebujesz: rozmowy, planu, czy po prostu kontaktu z ludźmi, którzy przeszli to samo.</p>
+            <h2>// Kontakt</h2>
+            <p>Napisz do nas. Wystarczy kilka zdań. Nie szukamy perfekcji, szukamy drogi powrotu do pasji.</p>
         </div>
 
         <footer>
-            TERMINAL_ID: PSC_WEB_CORE // 2026 <br>
-            Wszystkie systemy sprawne.
+            CORE_V: 2.1.0 // 2026 // FUNDACJA
         </footer>
     </div>
 
@@ -184,11 +172,13 @@
 
         const canvas = document.getElementById('brain-canvas');
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / (window.innerHeight * 0.7), 0.1, 1000);
+        
+        // Kamera z dynamicznym Z
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / (window.innerHeight * 0.65), 0.1, 1000);
         
         const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Optymalizacja pod iPhone/Retina
-        renderer.setSize(window.innerWidth, window.innerHeight * 0.7);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight * 0.65);
 
         const particles = [];
         const particleGroup = new THREE.Group();
@@ -196,7 +186,6 @@
 
         const colors = [0x00f2ff, 0xff007a, 0xffd700, 0x00ff95, 0x4e4eff];
         
-        // Anatomia mózgu w cząsteczkach
         function getBrainPoint() {
             let x, y, z;
             const select = Math.random();
@@ -234,9 +223,23 @@
             particles.push(mesh);
         }
 
-        camera.position.z = 16;
+        // --- FUNKCJA DOPASOWUJĄCA ODLEGŁOŚĆ KAMERY ---
+        function adjustCamera() {
+            const width = window.innerWidth;
+            if (width < 500) {
+                camera.position.z = 24; // Bardzo daleko dla małych telefonów
+            } else if (width < 768) {
+                camera.position.z = 20; // Średnio dla tabletów/dużych telefonów
+            } else {
+                camera.position.z = 15; // Blisko dla komputerów
+            }
+            camera.aspect = window.innerWidth / (window.innerHeight * 0.65);
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight * 0.65);
+        }
 
-        // --- OBSŁUGA MYSZY I DOTYKU ---
+        adjustCamera(); // Wywołaj na start
+
         const mouse = new THREE.Vector3(-1000, -1000, 0);
 
         function updateInput(clientX, clientY) {
@@ -251,17 +254,11 @@
         }
 
         window.addEventListener('mousemove', (e) => updateInput(e.clientX, e.clientY));
-        
-        // Wsparcie dla iPhone/Android
         window.addEventListener('touchmove', (e) => {
-            if (e.touches.length > 0) {
-                updateInput(e.touches[0].clientX, e.touches[0].clientY);
-            }
+            if (e.touches.length > 0) updateInput(e.touches[0].clientX, e.touches[0].clientY);
         }, { passive: true });
 
-        // Reset pozycji interakcji po zabraniu palca/myszki
         window.addEventListener('touchend', () => mouse.set(-1000, -1000, 0));
-        window.addEventListener('mouseleave', () => mouse.set(-1000, -1000, 0));
 
         function animate() {
             requestAnimationFrame(animate);
@@ -269,11 +266,11 @@
                 const data = p.userData;
                 const dist = p.position.distanceTo(mouse);
 
-                if (dist < 2.2) {
+                if (dist < 2.0) {
                     const dir = new THREE.Vector3().subVectors(p.position, mouse).normalize();
-                    dir.x += (Math.random() - 0.5) * 0.5; // Chaos
+                    dir.x += (Math.random() - 0.5) * 0.5;
                     dir.y += (Math.random() - 0.5) * 0.5;
-                    const push = (2.2 - dist) * 0.08;
+                    const push = (2.0 - dist) * 0.07;
                     data.velocity.add(dir.multiplyScalar(push));
                 }
 
@@ -281,18 +278,18 @@
                 data.velocity.add(home);
                 data.velocity.multiplyScalar(data.friction);
                 p.position.add(data.velocity);
-                p.rotation.x += data.velocity.length() * 0.2;
             });
             renderer.render(scene, camera);
         }
 
+            
+
+[Image of the lateral view of a human brain with cerebral cortex, cerebellum, and brainstem]
+
+
         animate();
 
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / (window.innerHeight * 0.7);
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight * 0.7);
-        });
+        window.addEventListener('resize', adjustCamera);
     </script>
 </body>
 </html>
