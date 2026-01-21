@@ -3,113 +3,96 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mini-gra: dopasuj elementy + obrót</title>
+  <title>Post-Stroke Creators - Mini-gra</title>
   <style>
-    body{
+    body {
       font-family: system-ui, sans-serif;
-      background:#0b0b10;
-      color:#eaeaf2;
-      display:flex;
-      justify-content:center;
-      padding:24px;
-      margin:0;
+      background: #0b0b10;
+      color: #eaeaf2;
+      display: flex;
+      justify-content: center;
+      padding: 24px;
+      margin: 0;
     }
-    .wrap{ width:min(960px, 96vw); }
-    .hud{ display:flex; gap:12px; align-items:center; margin-bottom:12px; flex-wrap:wrap; }
-    .btn{
-      background:#22233a; color:#fff;
-      border:1px solid #3a3b5b;
-      padding:8px 12px;
-      border-radius:10px;
-      cursor:pointer;
+    .wrap { width: min(960px, 96vw); }
+    .hud { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+    .btn {
+      background: #22233a; color: #fff;
+      border: 1px solid #3a3b5b;
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
     }
-    .hint{ opacity:.82; font-size:14px; line-height:1.25; }
-
-    .board{
-      position:relative;
-      width:100%;
+    .board {
+      position: relative;
+      width: 100%;
       aspect-ratio: 1 / 1; 
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid #2a2b44;
-      background:#111;
-      touch-action:none;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid #2a2b44;
+      background: #111;
+      touch-action: none;
     }
-    .board img.bg{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      object-fit:cover;
-      user-select:none;
-      pointer-events:none;
+    .board img.bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      user-select: none;
+      pointer-events: none;
     }
-
-    .piece{
-      position:absolute;
-      height:auto;
-      cursor:grab;
-      user-select:none;
-      touch-action:none;
-      transform-origin:center center;
+    .piece {
+      position: absolute;
+      height: auto;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      transform-origin: center center;
       will-change: transform, filter, left, top;
       filter: drop-shadow(0 10px 18px rgba(0,0,0,.5));
       transition: filter 120ms ease;
     }
-    .piece:active{ cursor:grabbing; }
-
-    .piece.active{
-      filter:
-        drop-shadow(0 0 18px rgba(140,160,255,.55))
-        drop-shadow(0 12px 22px rgba(0,0,0,.55));
+    .piece:active { cursor: grabbing; }
+    .piece.active {
+      filter: drop-shadow(0 0 18px rgba(140,160,255,.55));
     }
-
-    /* Cele (obramowania pomocnicze) - można ustawić opacity:0 jeśli chcesz ukryć podpowiedzi */
-    .target{
-      position:absolute;
-      border:2px dashed rgba(140,160,255,.55);
-      border-radius:16px;
+    /* Styl dla zablokowanego elementu */
+    .piece.ok { 
+      outline: 4px solid #7dffb3; 
+      border-radius: 10px; 
+      cursor: default !important; 
+      filter: drop-shadow(0 0 5px #7dffb3);
+    }
+    .target {
+      position: absolute;
+      border: 2px dashed rgba(140,160,255,.55);
+      border-radius: 16px;
       background: rgba(80,100,255,.10);
-      pointer-events:none;
-      opacity:.20;
+      pointer-events: none;
+      opacity: .20;
     }
-
-    .ok{ outline:3px solid rgba(80,255,160,.9); border-radius:14px; }
-    .msg{ margin-top:10px; font-size:14px; opacity:.92; }
-    .win{ color:#7dffb3; }
-    .warn{ color:#ffd37d; }
+    .msg { margin-top: 10px; font-size: 18px; font-weight: bold; min-height: 1.5em; }
+    .win { color: #7dffb3; }
+    .correct-text { color: #8ca0ff; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="hud">
-      <button class="btn" id="reset">Reset</button>
-      <div class="hint">
-        <strong>Jak grać?</strong><br>
-        1) Kliknij element, żeby go wybrać (podświetli się).<br>
-        2) Przeciągnij na planszę. 3) Obracaj kółkiem myszy, aby dopasować kąt. 🌀
-      </div>
+      <button class="btn" id="reset">Resetuj Grę</button>
+      <div style="font-size: 14px; opacity: 0.8;">Dopasuj części do mózgu. Użyj kółka myszy, by obracać aktywny element.</div>
     </div>
 
     <div class="board" id="board">
       <img class="bg" src="beckbrain1.png" alt="plansza" />
 
-      <div class="target" id="tChip"
-           data-target-rot="0"
-           style="left:44%; top:18%; width:12%; height:10%;"></div>
+      <div class="target" id="tChip" data-target-rot="0" style="left:44%; top:18%; width:12%; height:10%;"></div>
+      <div class="target" id="tLink" data-target-rot="90" style="left:47%; top:35%; width:6%; height:55%;"></div>
 
-      <div class="target" id="tLink"
-           data-target-rot="90"
-           style="left:47%; top:35%; width:6%; height:55%; border-radius:30px;"></div>
+      <img class="piece" id="chip" src="neuro-chip.png" alt="czip" data-rot="0"
+           style="left:6%; top:70%; width:70px;"> <img class="piece" id="link" src="blue-linker.png" alt="łącznik" data-rot="0"
+           style="left:75%; top:65%; width:250px;"> </div>
 
-      <img class="piece" id="chip" src="neuro-chip.png" alt="czip"
-           data-rot="0"
-           style="left:6%; top:70%; width:120px;">
-
-      <img class="piece" id="link" src="blue-linker.png" alt="łącznik"
-           data-rot="0"
-           style="left:78%; top:72%; width:70px;">
-    </div>
-
-    <div class="msg" id="msg">Status: 0/2 poprawnie.</div>
+    <div class="msg" id="msg">Status: Przeciągnij elementy na miejsce...</div>
   </div>
 
   <script>
@@ -117,170 +100,94 @@
     const msg = document.getElementById('msg');
     const resetBtn = document.getElementById('reset');
 
-    const ROT_STEP = 7;
-    const ROT_TOL  = 12;
-
-    const state = { placed: { chip:false, link:false } };
+    const state = { placed: { chip: false, link: false } };
     let activePiece = null;
 
-    function rect(el){ return el.getBoundingClientRect(); }
-
-    function normalizeDeg(d){
-      d = d % 360;
-      if(d < 0) d += 360;
-      return d;
+    function rect(el) { return el.getBoundingClientRect(); }
+    function normalizeDeg(d) { d = d % 360; return d < 0 ? d + 360 : d; }
+    function setRotation(el, deg) { 
+      const d = normalizeDeg(deg); 
+      el.dataset.rot = String(d); 
+      el.style.transform = `rotate(${d}deg)`; 
     }
+    function getRotation(el) { return Number(el.dataset.rot || 0); }
 
-    function smallestAngleDiff(a, b){
-      const diff = Math.abs(normalizeDeg(a) - normalizeDeg(b));
-      return Math.min(diff, 360 - diff);
-    }
-
-    function setRotation(el, deg){
-      const d = normalizeDeg(deg);
-      el.dataset.rot = String(d);
-      el.style.transform = `rotate(${d}deg)`;
-    }
-
-    function getRotation(el){
-      return Number(el.dataset.rot || 0);
-    }
-
-    function centerOf(el){
+    function centerOf(el) {
       const r = rect(el);
-      return { x: r.left + r.width/2, y: r.top + r.height/2 };
+      return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
     }
 
-    function isCenterInsideRect(point, r){
-      return (point.x >= r.left && point.x <= r.right && point.y >= r.top && point.y <= r.bottom);
-    }
-
-    function isPieceCenterInsideBoard(pieceEl){
-      const c = centerOf(pieceEl);
-      const b = rect(board);
-      return isCenterInsideRect(c, b);
-    }
-
-    function isCenterInsideTarget(pieceEl, targetEl){
+    function tryPlace(pieceEl, targetEl, key) {
       const c = centerOf(pieceEl);
       const t = rect(targetEl);
-      return isCenterInsideRect(c, t);
-    }
+      const posOk = (c.x >= t.left && c.x <= t.right && c.y >= t.top && c.y <= t.bottom);
+      
+      const diff = Math.abs(getRotation(pieceEl) - Number(targetEl.dataset.targetRot));
+      const rotOk = Math.min(diff, 360 - diff) <= 15;
 
-    function rotationMatches(pieceEl, targetEl){
-      const pieceRot = getRotation(pieceEl);
-      const targetRot = Number(targetEl.dataset.targetRot || 0);
-      return smallestAngleDiff(pieceRot, targetRot) <= ROT_TOL;
-    }
-
-    function snapToTarget(pieceEl, targetEl){
-      const b = rect(board);
-      const t = rect(targetEl);
-      const p = rect(pieceEl);
-
-      const targetCenterX = (t.left + t.width/2) - b.left;
-      const targetCenterY = (t.top  + t.height/2) - b.top;
-
-      pieceEl.style.left = `${targetCenterX - (p.width/2)}px`;
-      pieceEl.style.top  = `${targetCenterY - (p.height/2)}px`;
-    }
-
-    function setActive(el){
-      if(activePiece === el) return;
-      document.querySelectorAll('.piece.active').forEach(p => p.classList.remove('active'));
-      activePiece = el;
-      if(activePiece) activePiece.classList.add('active');
-    }
-
-    function clearActive(){
-      document.querySelectorAll('.piece.active').forEach(p => p.classList.remove('active'));
-      activePiece = null;
-    }
-
-    function updateMsg(){
-      const ok = (state.placed.chip?1:0) + (state.placed.link?1:0);
-      msg.classList.remove('win','warn');
-      msg.textContent = `Status: ${ok}/2 poprawnie.`;
-      if(ok === 2){
-        msg.textContent = "✅ Ukończone! 2/2 poprawnie.";
-        msg.classList.add('win');
-      }
-    }
-
-    function tryPlace(pieceEl, targetEl, key){
-      const posOk = isCenterInsideTarget(pieceEl, targetEl);
-      const rotOk = rotationMatches(pieceEl, targetEl);
-
-      if(posOk && rotOk){
-        snapToTarget(pieceEl, targetEl);
-        setRotation(pieceEl, Number(targetEl.dataset.targetRot || 0));
+      if (posOk && rotOk) {
         state.placed[key] = true;
         pieceEl.classList.add('ok');
-        pieceEl.style.cursor = 'default';
-        if(activePiece === pieceEl) clearActive();
-      } else if(posOk && !rotOk){
-        msg.textContent = "Prawie! Pozycja dobra, ale obróć element.";
-        msg.classList.add('warn');
+        pieceEl.classList.remove('active');
+        
+        // Snap to center
+        const b = rect(board);
+        pieceEl.style.left = `${(t.left + t.width/2) - b.left - (rect(pieceEl).width/2)}px`;
+        pieceEl.style.top = `${(t.top + t.height/2) - b.top - (rect(pieceEl).height/2)}px`;
+        setRotation(pieceEl, targetEl.dataset.targetRot);
+        
+        msg.innerHTML = '<span class="correct-text">Dobrze! Correct! Element zablokowany.</span>';
+        
+        if (state.placed.chip && state.placed.link) {
+          msg.innerHTML = '<span class="win">✅ EXCELLENT! Wszystkie elementy na miejscu!</span>';
+        }
+        activePiece = null;
       }
-      updateMsg();
     }
 
-    function makeDraggable(pieceEl, targetEl, key){
+    function makeDraggable(pieceEl, targetEl, key) {
       let dragging = false;
-      let offsetX = 0, offsetY = 0;
+      let offX = 0, offY = 0;
 
-      const onDown = (e) => {
-        if(state.placed[key]) return;
+      pieceEl.onpointerdown = (e) => {
+        if (state.placed[key]) return;
         dragging = true;
-        setActive(pieceEl);
+        activePiece = pieceEl;
+        document.querySelectorAll('.piece').forEach(p => p.classList.remove('active'));
+        pieceEl.classList.add('active');
+        
         const p = rect(pieceEl);
-        offsetX = e.clientX - p.left;
-        offsetY = e.clientY - p.top;
-        pieceEl.setPointerCapture?.(e.pointerId);
+        offX = e.clientX - p.left;
+        offY = e.clientY - p.top;
+        pieceEl.setPointerCapture(e.pointerId);
       };
 
-      const onMove = (e) => {
-        if(!dragging || state.placed[key]) return;
+      window.addEventListener('pointermove', (e) => {
+        if (!dragging || state.placed[key]) return;
         const b = rect(board);
-        pieceEl.style.left = `${(e.clientX - b.left - offsetX)}px`;
-        pieceEl.style.top  = `${(e.clientY - b.top  - offsetY)}px`;
-      };
+        pieceEl.style.left = `${(e.clientX - b.left - offX)}px`;
+        pieceEl.style.top = `${(e.clientY - b.top - offY)}px`;
+      });
 
-      const onUp = () => {
-        if(!dragging) return;
+      window.addEventListener('pointerup', () => {
+        if (!dragging) return;
         dragging = false;
         tryPlace(pieceEl, targetEl, key);
-      };
-
-      pieceEl.addEventListener('pointerdown', onDown);
-      window.addEventListener('pointermove', onMove);
-      window.addEventListener('pointerup', onUp);
+      });
     }
 
     board.addEventListener('wheel', (e) => {
-      if(!activePiece) return;
-      if(!isPieceCenterInsideBoard(activePiece)) return;
-      const id = activePiece.id;
-      if(state.placed[id]) return;
+      if (!activePiece || state.placed[activePiece.id]) return;
       e.preventDefault();
       const dir = Math.sign(e.deltaY);
-      setRotation(activePiece, getRotation(activePiece) + dir * ROT_STEP);
-      if(id === 'chip') tryPlace(activePiece, document.getElementById('tChip'), 'chip');
-      if(id === 'link') tryPlace(activePiece, document.getElementById('tLink'), 'link');
+      setRotation(activePiece, getRotation(activePiece) + dir * 10);
+      tryPlace(activePiece, document.getElementById(activePiece.id === 'chip' ? 'tChip' : 'tLink'), activePiece.id);
     }, { passive: false });
 
-    board.addEventListener('pointerdown', (e) => {
-      if(e.target.closest?.('.piece')) return;
-      clearActive();
-    });
-
-    document.querySelectorAll('.piece').forEach(p => setRotation(p, getRotation(p)));
     makeDraggable(document.getElementById('chip'), document.getElementById('tChip'), 'chip');
     makeDraggable(document.getElementById('link'), document.getElementById('tLink'), 'link');
 
-    resetBtn.addEventListener('click', () => {
-      location.reload(); // Najprostszy reset odświeżający stronę
-    });
+    resetBtn.onclick = () => location.reload();
   </script>
 </body>
 </html>
