@@ -28,7 +28,7 @@
     .board{
       position:relative;
       width:100%;
-      aspect-ratio: 1 / 1; /* dopasuj, jeśli tło ma inne proporcje */
+      aspect-ratio: 1 / 1; 
       border-radius:18px;
       overflow:hidden;
       border:1px solid #2a2b44;
@@ -62,7 +62,7 @@
         drop-shadow(0 12px 22px rgba(0,0,0,.55));
     }
 
-    /* cele (debug). Jak nie chcesz, ustaw opacity:0 */
+    /* Cele (obramowania pomocnicze) - można ustawić opacity:0 jeśli chcesz ukryć podpowiedzi */
     .target{
       position:absolute;
       border:2px dashed rgba(140,160,255,.55);
@@ -83,17 +83,15 @@
     <div class="hud">
       <button class="btn" id="reset">Reset</button>
       <div class="hint">
-        1) Kliknij lub złap element, żeby go wybrać (podświetli się).<br>
-        2) Przeciągnij na planszę. 3) Obracaj kółkiem myszy, gdy element jest aktywny i nad planszą. 🌀
+        <strong>Jak grać?</strong><br>
+        1) Kliknij element, żeby go wybrać (podświetli się).<br>
+        2) Przeciągnij na planszę. 3) Obracaj kółkiem myszy, aby dopasować kąt. 🌀
       </div>
     </div>
 
     <div class="board" id="board">
-      <!-- TŁO -->
-      <img class="bg" src="assets/brain-board.png" alt="plansza" />
+      <img class="bg" src="beckbrain1.png" alt="plansza" />
 
-      <!-- CELE: ustaw pozycje/wymiary oraz docelowy obrót w stopniach -->
-      <!-- Dopasuj te % pod swoją grafikę -->
       <div class="target" id="tChip"
            data-target-rot="0"
            style="left:44%; top:18%; width:12%; height:10%;"></div>
@@ -102,12 +100,11 @@
            data-target-rot="90"
            style="left:47%; top:35%; width:6%; height:55%; border-radius:30px;"></div>
 
-      <!-- ELEMENTY -->
-      <img class="piece" id="chip" src="assets/neuro-chip.png" alt="czip"
+      <img class="piece" id="chip" src="neuro-chip.png" alt="czip"
            data-rot="0"
            style="left:6%; top:70%; width:120px;">
 
-      <img class="piece" id="link" src="assets/blue-linker.png" alt="łącznik"
+      <img class="piece" id="link" src="blue-linker.png" alt="łącznik"
            data-rot="0"
            style="left:78%; top:72%; width:70px;">
     </div>
@@ -120,9 +117,8 @@
     const msg = document.getElementById('msg');
     const resetBtn = document.getElementById('reset');
 
-    // Sterowanie
-    const ROT_STEP = 7;   // stopni na "ząbek" scrolla
-    const ROT_TOL  = 12;  // tolerancja dopasowania kąta (+/-)
+    const ROT_STEP = 7;
+    const ROT_TOL  = 12;
 
     const state = { placed: { chip:false, link:false } };
     let activePiece = null;
@@ -218,17 +214,14 @@
       if(posOk && rotOk){
         snapToTarget(pieceEl, targetEl);
         setRotation(pieceEl, Number(targetEl.dataset.targetRot || 0));
-
         state.placed[key] = true;
         pieceEl.classList.add('ok');
         pieceEl.style.cursor = 'default';
-
         if(activePiece === pieceEl) clearActive();
       } else if(posOk && !rotOk){
-        msg.textContent = `Prawie! Pozycja OK, ale obrót nie pasuje (cel: ${targetEl.dataset.targetRot}°).`;
+        msg.textContent = "Prawie! Pozycja dobra, ale obróć element.";
         msg.classList.add('warn');
       }
-
       updateMsg();
     }
 
@@ -239,21 +232,15 @@
       const onDown = (e) => {
         if(state.placed[key]) return;
         dragging = true;
-
-        // wybór do akcji
         setActive(pieceEl);
-
         const p = rect(pieceEl);
         offsetX = e.clientX - p.left;
         offsetY = e.clientY - p.top;
-
         pieceEl.setPointerCapture?.(e.pointerId);
-        e.preventDefault();
       };
 
       const onMove = (e) => {
         if(!dragging || state.placed[key]) return;
-
         const b = rect(board);
         pieceEl.style.left = `${(e.clientX - b.left - offsetX)}px`;
         pieceEl.style.top  = `${(e.clientY - b.top  - offsetY)}px`;
@@ -268,71 +255,32 @@
       pieceEl.addEventListener('pointerdown', onDown);
       window.addEventListener('pointermove', onMove);
       window.addEventListener('pointerup', onUp);
-
-      // klik bez przeciągania też wybiera
-      pieceEl.addEventListener('click', () => {
-        if(state.placed[key]) return;
-        setActive(pieceEl);
-      });
     }
 
-    // Obrót scrollem: tylko gdy element jest aktywny + jego środek jest nad planszą
     board.addEventListener('wheel', (e) => {
-      if(!activePiece) return;                  // nic nie wybrane
-      if(!isPieceCenterInsideBoard(activePiece)) return; // aktywny nie jest "nad mózgiem"
-
+      if(!activePiece) return;
+      if(!isPieceCenterInsideBoard(activePiece)) return;
       const id = activePiece.id;
       if(state.placed[id]) return;
-
-      // dopiero teraz przejmujemy kółko
       e.preventDefault();
-
-      const dir = Math.sign(e.deltaY); // +1 dół, -1 góra
+      const dir = Math.sign(e.deltaY);
       setRotation(activePiece, getRotation(activePiece) + dir * ROT_STEP);
-
-      // auto-check po obrocie (fajne, bo "klik" może wskoczyć po idealnym kącie)
       if(id === 'chip') tryPlace(activePiece, document.getElementById('tChip'), 'chip');
       if(id === 'link') tryPlace(activePiece, document.getElementById('tLink'), 'link');
     }, { passive: false });
 
-    // klik w puste tło planszy usuwa aktywność (opcjonalnie, ale czytelne)
     board.addEventListener('pointerdown', (e) => {
       if(e.target.closest?.('.piece')) return;
       clearActive();
     });
 
-    // init rotacji
     document.querySelectorAll('.piece').forEach(p => setRotation(p, getRotation(p)));
-
-    // podpinamy elementy
     makeDraggable(document.getElementById('chip'), document.getElementById('tChip'), 'chip');
     makeDraggable(document.getElementById('link'), document.getElementById('tLink'), 'link');
 
-    // reset
     resetBtn.addEventListener('click', () => {
-      const chip = document.getElementById('chip');
-      const link = document.getElementById('link');
-
-      chip.style.left = '6%';  chip.style.top = '70%';
-      link.style.left = '78%'; link.style.top = '72%';
-
-      setRotation(chip, 0);
-      setRotation(link, 0);
-
-      chip.classList.remove('ok'); link.classList.remove('ok');
-      chip.style.cursor = ''; link.style.cursor = '';
-
-      state.placed.chip = false;
-      state.placed.link = false;
-
-      clearActive();
-      msg.classList.remove('win','warn');
-      msg.textContent = 'Status: 0/2 poprawnie.';
-      updateMsg();
+      location.reload(); // Najprostszy reset odświeżający stronę
     });
-
-    updateMsg();
   </script>
 </body>
 </html>
-
