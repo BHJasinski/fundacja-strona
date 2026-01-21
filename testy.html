@@ -3,108 +3,180 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Post-Stroke Creators - Zadanie</title>
+  <title>Zadanie: Operacja Neuro-Link</title>
   <style>
-    body { font-family: system-ui, sans-serif; background: #0b0b10; color: #eaeaf2; display: flex; justify-content: center; padding: 24px; margin: 0; }
-    .wrap { width: min(960px, 96vw); }
-    .hud { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
-    .btn { background: #22233a; color: #fff; border: 1px solid #3a3b5b; padding: 8px 16px; border-radius: 10px; cursor: pointer; font-weight: bold; }
-    .btn:hover { background: #2f3152; }
+    /* Inspiracja stylem Post-Stroke Creators */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;600&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0b0b10;
+      color: #eaeaf2;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      margin: 0;
+      overflow-x: hidden;
+    }
+    .wrap { width: min(900px, 95vw); }
     
-    .board { position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden; border: 1px solid #2a2b44; background: #111; touch-action: none; }
-    .board img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; opacity: 0.9; }
+    h1 { 
+      font-family: 'Orbitron', sans-serif; 
+      color: #ff007a; 
+      font-size: 22px; 
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .hud { margin-bottom: 20px; border-left: 4px solid #00f2ff; padding-left: 15px; }
     
-    .piece { position: absolute; height: auto; cursor: grab; user-select: none; touch-action: none; will-change: left, top; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6)); z-index: 5; }
-    .piece:active { cursor: grabbing; }
-    .piece.active { filter: drop-shadow(0 0 20px rgba(140,160,255,0.8)); z-index: 10; }
+    .board { 
+      position: relative; 
+      width: 100%; 
+      aspect-ratio: 1 / 1; 
+      border-radius: 10px; 
+      overflow: hidden; 
+      border: 1px solid #1a1a2e;
+      background: #050508; 
+      touch-action: none;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+    .board img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; pointer-events: none; }
     
-    /* Zablokowany element po dopasowaniu */
-    .piece.ok { outline: 4px solid #7dffb3; border-radius: 8px; cursor: default !important; pointer-events: none; z-index: 4; }
-    
-    /* Widoczne pola docelowe na planszy */
+    /* Neonowe ramki docelowe */
     .target { 
       position: absolute; 
-      border: 3px dashed rgba(255, 255, 255, 0.4); 
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
+      border: 2px dashed #00f2ff; 
+      background: rgba(0, 242, 255, 0.05);
+      border-radius: 8px;
       pointer-events: none;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: 'Orbitron', sans-serif;
       font-size: 10px;
-      color: rgba(255,255,255,0.3);
+      color: #00f2ff;
+    }
+
+    .piece { 
+      position: absolute; 
+      height: auto; 
+      cursor: grab; 
+      user-select: none; 
+      touch-action: none; 
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.8));
+      z-index: 5;
+    }
+    .piece.active { filter: drop-shadow(0 0 15px #00f2ff); z-index: 10; }
+    .piece.ok { outline: 3px solid #39ff14; border-radius: 5px; pointer-events: none; opacity: 0.9; }
+
+    /* Overlay sukcesu */
+    #success-screen {
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 11, 16, 0.95);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 100;
+      border: 2px solid #ff007a;
+      border-radius: 10px;
+      animation: fadeIn 0.5s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .success-title { 
+      font-family: 'Orbitron', sans-serif; 
+      color: #39ff14; 
+      font-size: 32px; 
+      margin-bottom: 10px; 
+    }
+    .success-msg { font-size: 18px; margin-bottom: 30px; color: #eaeaf2; }
+
+    .btn-replay { 
+      background: transparent; 
+      color: #ff007a; 
+      border: 2px solid #ff007a; 
+      padding: 15px 30px; 
+      font-family: 'Orbitron', sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
       text-transform: uppercase;
     }
-    
-    .msg { margin-top: 15px; font-size: 20px; font-weight: bold; color: #8ca0ff; text-align: center; }
-    .win { color: #7dffb3; text-shadow: 0 0 10px rgba(125,255,179,0.4); }
+    .btn-replay:hover { background: #ff007a; color: white; box-shadow: 0 0 20px #ff007a; }
+
+    .status-bar { margin-top: 15px; font-family: 'Orbitron', sans-serif; color: #00f2ff; font-size: 14px; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="hud">
-      <button class="btn" onclick="location.reload()">Zacznij od nowa</button>
-      <div style="font-size: 14px; opacity: 0.8;">Przeciągnij części w zaznaczone pola na schemacie mózgu.</div>
+      <h1>Operacja: Neuro-Link</h1>
+      <div style="opacity: 0.7; font-size: 14px;">Zainstaluj komponenty w wyznaczonych sektorach.</div>
     </div>
 
     <div class="board" id="board">
-      <img class="bg" src="beckbrain1.png" alt="plansza" />
+      <img class="bg" src="beckbrain1.png" alt="mózg" />
 
-      <div class="target" id="tChip" style="left:44%; top:18%; width:12%; height:12%;">CHIP</div>
-      <div class="target" id="tLink" style="left:47%; top:33%; width:7%; height:55%;">LINKER</div>
+      <div class="target" id="tChip" style="left:44%; top:19%; width:12%; height:11%;">SEKTOR A</div>
+      <div class="target" id="tLink" style="left:47%; top:34%; width:7%; height:54%;">SEKTOR B</div>
 
-      <img class="piece" id="chip" src="neuro-chip.png" alt="czip" 
-           style="left:5%; top:70%; width:90px;">
-      
-      <img class="piece" id="link" src="blue-linker.png" alt="łącznik" 
-           style="left:65%; top:40%; width:350px;"> </div>
+      <img class="piece" id="chip" src="neuro-chip.png" alt="chip" style="left:5%; top:75%; width:80px;">
+      <img class="piece" id="link" src="blue-linker.png" alt="link" style="left:60%; top:45%; width:380px;">
 
-    <div class="msg" id="msg">Czekam na Twój ruch...</div>
+      <div id="success-screen">
+        <div class="success-title">SUKCES!</div>
+        <div class="success-msg">Operacja zakończona pomyślnie.<br>Systemy są stabilne.</div>
+        <div style="color: #00f2ff; margin-bottom: 15px; font-size: 14px;">Czy chcesz ponownie przeprowadzić operację?</div>
+        <button class="btn-replay" onclick="location.reload()">TAK, PRZEPROWADŹ PONOWNIE</button>
+      </div>
+    </div>
+
+    <div class="status-bar" id="status">STATUS: OCZEKIWANIE NA INICJALIZACJĘ...</div>
   </div>
 
   <script>
     const board = document.getElementById('board');
-    const msg = document.getElementById('msg');
+    const status = document.getElementById('status');
+    const successScreen = document.getElementById('success-screen');
     const state = { placed: { chip: false, link: false } };
 
     function rect(el) { return el.getBoundingClientRect(); }
     
-    function tryPlace(pieceEl, targetEl, key) {
+    function checkSuccess(pieceEl, targetEl, key) {
       const pR = rect(pieceEl);
       const tR = rect(targetEl);
-      
-      // Punkt centralny elementu
       const pCX = pR.left + pR.width / 2;
       const pCY = pR.top + pR.height / 2;
 
-      // Sprawdzenie czy środek elementu jest w ramce docelowej
       if (pCX >= tR.left && pCX <= tR.right && pCY >= tR.top && pCY <= tR.bottom) {
         state.placed[key] = true;
         pieceEl.classList.add('ok');
-        targetEl.style.display = 'none'; // Ukrywamy ramkę pomocniczą
+        targetEl.style.borderColor = '#39ff14';
+        targetEl.style.color = '#39ff14';
         
-        // Snap (przyklejenie do środka ramki)
+        // Snap
         const bR = rect(board);
         pieceEl.style.left = `${(tR.left + tR.width/2) - bR.left - (pR.width/2)}px`;
-        pieceEl.style.top = `${(tR.top + tRectCenterY(tR, bR) - pR.height/2)}px`; 
-        
-        // Korekta pozycjonowania dla idealnego wyrównania
-        const finalX = (tR.left + tR.width/2) - bR.left - (pR.width/2);
-        const finalY = (tR.top + tR.height/2) - bR.top - (pR.height/2);
-        pieceEl.style.left = finalX + "px";
-        pieceEl.style.top = finalY + "px";
+        pieceEl.style.top = `${(tR.top + tR.height/2) - bR.top - (pR.height/2)}px`;
 
-        msg.innerText = "Doskonale! Element na miejscu.";
-        
+        status.innerText = `STATUS: KOMPONENT ${key.toUpperCase()} ZAINSTALOWANY.`;
+
         if (state.placed.chip && state.placed.link) {
-          msg.innerHTML = '<span class="win">GRATULACJE! System Neuro-Link jest gotowy!</span>';
+          setTimeout(() => {
+            successScreen.style.display = 'flex';
+          }, 500);
         }
       }
     }
 
-    function makeDraggable(pieceEl, targetEl, key) {
+    function initDrag(pieceEl, targetEl, key) {
       let dragging = false;
-      let offX = 0, offY = 0;
+      let offX, offY;
 
       pieceEl.onpointerdown = (e) => {
         if (state.placed[key]) return;
@@ -114,6 +186,7 @@
         offX = e.clientX - r.left;
         offY = e.clientY - r.top;
         pieceEl.setPointerCapture(e.pointerId);
+        status.innerText = `STATUS: PRZEMIESZCZANIE KOMPONENTU...`;
       };
 
       window.addEventListener('pointermove', (e) => {
@@ -127,12 +200,12 @@
         if (!dragging) return;
         dragging = false;
         pieceEl.classList.remove('active');
-        tryPlace(pieceEl, targetEl, key);
+        checkSuccess(pieceEl, targetEl, key);
       });
     }
 
-    makeDraggable(document.getElementById('chip'), document.getElementById('tChip'), 'chip');
-    makeDraggable(document.getElementById('link'), document.getElementById('tLink'), 'link');
+    initDrag(document.getElementById('chip'), document.getElementById('tChip'), 'chip');
+    initDrag(document.getElementById('link'), document.getElementById('tLink'), 'link');
   </script>
 </body>
 </html>
