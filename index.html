@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Post-Stroke Creators | Fundacja dla Twórców</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@300;400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -94,6 +94,24 @@
 
         p { color: var(--text-dim); line-height: 1.8; margin-bottom: 25px; font-size: 1.1rem; }
         strong { color: #fff; }
+
+        /* Przycisk Bio */
+        .btn-bio {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--neon-pink);
+            text-decoration: none;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            border: 1px solid var(--neon-pink);
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .btn-bio:hover {
+            background: rgba(255, 0, 122, 0.1);
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
 
         .game-card {
             text-align: center;
@@ -192,8 +210,9 @@
                     Udar potrafi zaburzyć rzeczy, które wcześniej były codziennością. Ruch dłoni. Precyzję. Skupienie. Rytm pracy. 
                 </p>
                 <p>
-                    Ta strona jest miejscem dla <strong>grafików komputerowych i artystów</strong>, którzy po udarze próbują odnaleźć się w nowej rzeczywistości twórczej. Dla osób, które żyły z pracy dłoni, oka i koncentracji, a teraz muszą budować swój warsztat od nowa.
+                    Ta strona jest miejscem dla <strong>grafików komputerowych i artystów</strong>, którzy po udarze próbują odnaleźć się w nowej rzeczywistości twórczej.
                 </p>
+                <a href="o-nas.html" class="btn-bio">POZNAJ HISTORIĘ ZAŁOŻYCIELA ></a>
             </section>
 
             <section class="glass-panel">
@@ -226,7 +245,6 @@
                     UWAGA: Aby uruchomić symulację, należy ćwiczyć na komputerze wyposażonym w myszkę.
                 </p>
                 <br>
-                
                 <a href="testy.html" class="btn-play">URUCHOM SYMULACJĘ</a>
             </section>
 
