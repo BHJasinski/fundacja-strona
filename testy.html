@@ -3,47 +3,63 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Post-Stroke Creators - Dopasowanie</title>
+  <title>Post-Stroke Creators - Zadanie</title>
   <style>
     body { font-family: system-ui, sans-serif; background: #0b0b10; color: #eaeaf2; display: flex; justify-content: center; padding: 24px; margin: 0; }
     .wrap { width: min(960px, 96vw); }
     .hud { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
-    .btn { background: #22233a; color: #fff; border: 1px solid #3a3b5b; padding: 8px 12px; border-radius: 10px; cursor: pointer; }
+    .btn { background: #22233a; color: #fff; border: 1px solid #3a3b5b; padding: 8px 16px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+    .btn:hover { background: #2f3152; }
+    
     .board { position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden; border: 1px solid #2a2b44; background: #111; touch-action: none; }
-    .board img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .board img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; opacity: 0.9; }
     
-    .piece { position: absolute; height: auto; cursor: grab; user-select: none; touch-action: none; will-change: left, top; filter: drop-shadow(0 10px 18px rgba(0,0,0,.5)); }
+    .piece { position: absolute; height: auto; cursor: grab; user-select: none; touch-action: none; will-change: left, top; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6)); z-index: 5; }
     .piece:active { cursor: grabbing; }
-    .piece.active { filter: drop-shadow(0 0 15px rgba(140,160,255,.6)); z-index: 10; }
+    .piece.active { filter: drop-shadow(0 0 20px rgba(140,160,255,0.8)); z-index: 10; }
     
-    /* Styl po poprawnym dopasowaniu */
-    .piece.ok { outline: 3px solid #7dffb3; border-radius: 5px; cursor: default !important; pointer-events: none; }
+    /* Zablokowany element po dopasowaniu */
+    .piece.ok { outline: 4px solid #7dffb3; border-radius: 8px; cursor: default !important; pointer-events: none; z-index: 4; }
     
-    /* Cele - dopasowane do rysunku na tle */
-    .target { position: absolute; border: 2px dashed rgba(255,255,255,0.1); pointer-events: none; }
+    /* Widoczne pola docelowe na planszy */
+    .target { 
+      position: absolute; 
+      border: 3px dashed rgba(255, 255, 255, 0.4); 
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+    }
     
-    .msg { margin-top: 15px; font-size: 18px; font-weight: bold; color: #8ca0ff; }
-    .win { color: #7dffb3; }
+    .msg { margin-top: 15px; font-size: 20px; font-weight: bold; color: #8ca0ff; text-align: center; }
+    .win { color: #7dffb3; text-shadow: 0 0 10px rgba(125,255,179,0.4); }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="hud">
-      <button class="btn" onclick="location.reload()">Resetuj</button>
-      <div style="font-size: 14px; opacity: 0.7;">Przeciągnij elementy na ich miejsce na rysunku.</div>
+      <button class="btn" onclick="location.reload()">Zacznij od nowa</button>
+      <div style="font-size: 14px; opacity: 0.8;">Przeciągnij części w zaznaczone pola na schemacie mózgu.</div>
     </div>
 
     <div class="board" id="board">
       <img class="bg" src="beckbrain1.png" alt="plansza" />
 
-      <div class="target" id="tChip" style="left:44%; top:19%; width:12%; height:11%;"></div>
-      <div class="target" id="tLink" style="left:47%; top:34%; width:6%; height:54%;"></div>
+      <div class="target" id="tChip" style="left:44%; top:18%; width:12%; height:12%;">CHIP</div>
+      <div class="target" id="tLink" style="left:47%; top:33%; width:7%; height:55%;">LINKER</div>
 
-      <img class="piece" id="chip" src="neuro-chip.png" alt="czip" style="left:5%; top:70%; width:80px;">
-      <img class="piece" id="link" src="blue-linker.png" alt="łącznik" style="left:70%; top:65%; width:230px;">
-    </div>
+      <img class="piece" id="chip" src="neuro-chip.png" alt="czip" 
+           style="left:5%; top:70%; width:90px;">
+      
+      <img class="piece" id="link" src="blue-linker.png" alt="łącznik" 
+           style="left:65%; top:40%; width:350px;"> </div>
 
-    <div class="msg" id="msg">Status: Dopasuj elementy do schematu...</div>
+    <div class="msg" id="msg">Czekam na Twój ruch...</div>
   </div>
 
   <script>
@@ -54,30 +70,34 @@
     function rect(el) { return el.getBoundingClientRect(); }
     
     function tryPlace(pieceEl, targetEl, key) {
-      const pRect = rect(pieceEl);
-      const tRect = rect(targetEl);
+      const pR = rect(pieceEl);
+      const tR = rect(targetEl);
       
-      // Obliczamy środki
-      const pCenterX = pRect.left + pRect.width / 2;
-      const pCenterY = pRect.top + pRect.height / 2;
+      // Punkt centralny elementu
+      const pCX = pR.left + pR.width / 2;
+      const pCY = pR.top + pR.height / 2;
 
-      // Sprawdzamy czy środek elementu jest wewnątrz prostokąta docelowego
-      if (pCenterX >= tRect.left && pCenterX <= tRect.right && 
-          pCenterY >= tRect.top && pCenterY <= tRect.bottom) {
-        
+      // Sprawdzenie czy środek elementu jest w ramce docelowej
+      if (pCX >= tR.left && pCX <= tR.right && pCY >= tR.top && pCY <= tR.bottom) {
         state.placed[key] = true;
         pieceEl.classList.add('ok');
-        pieceEl.classList.remove('active');
+        targetEl.style.display = 'none'; // Ukrywamy ramkę pomocniczą
         
-        // "Zatrzaskiwanie" idealnie w centrum celu
-        const bRect = rect(board);
-        pieceEl.style.left = `${(tRect.left + tRect.width/2) - bRect.left - (pRect.width/2)}px`;
-        pieceEl.style.top = `${(tRect.top + tRect.height/2) - bRect.top - (pRect.height/2)}px`;
+        // Snap (przyklejenie do środka ramki)
+        const bR = rect(board);
+        pieceEl.style.left = `${(tR.left + tR.width/2) - bR.left - (pR.width/2)}px`;
+        pieceEl.style.top = `${(tR.top + tRectCenterY(tR, bR) - pR.height/2)}px`; 
         
-        msg.innerText = "Dobrze! Element dopasowany.";
+        // Korekta pozycjonowania dla idealnego wyrównania
+        const finalX = (tR.left + tR.width/2) - bR.left - (pR.width/2);
+        const finalY = (tR.top + tR.height/2) - bR.top - (pR.height/2);
+        pieceEl.style.left = finalX + "px";
+        pieceEl.style.top = finalY + "px";
+
+        msg.innerText = "Doskonale! Element na miejscu.";
         
         if (state.placed.chip && state.placed.link) {
-          msg.innerHTML = '<span class="win">Znakomicie! Wszystko na swoim miejscu.</span>';
+          msg.innerHTML = '<span class="win">GRATULACJE! System Neuro-Link jest gotowy!</span>';
         }
       }
     }
