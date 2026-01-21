@@ -1,1 +1,259 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Fundacji | Post-Stroke Creators</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --neon-pink: #ff007a;
+            --neon-cyan: #00f2ff;
+            --bg-dark: #050508;
+            --panel-bg: rgba(10, 12, 20, 0.9);
+            --text-main: #e0e6ed;
+            --text-dim: #94a3b8;
+        }
 
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Tło identyczne jak na głównej */
+        #hero-canvas-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            z-index: 1;
+            background: radial-gradient(circle at center, #101020 0%, #050508 100%);
+        }
+        #brain-canvas { width: 100%; height: 100%; display: block; }
+
+        .content-overlay {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            padding: 40px 0;
+        }
+
+        .main-container {
+            max-width: 850px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+        }
+
+        .nav-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+        .nav-back:hover { text-shadow: 0 0 10px var(--neon-cyan); }
+
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 60px 50px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+        }
+
+        /* Sekcja BIO */
+        .bio-header {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 24px;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.2);
+            object-fit: cover;
+            flex-shrink: 0;
+            transform: rotate(-2deg);
+        }
+
+        .bio-title h1 {
+            font-family: 'Roboto Mono', monospace;
+            color: #fff;
+            font-size: 2rem;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .bio-title .role {
+            color: var(--neon-pink);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--neon-cyan);
+            font-size: 1.4rem;
+            margin-top: 50px;
+            margin-bottom: 25px;
+        }
+
+        h2::before { content: "> "; color: var(--neon-pink); }
+
+        p { color: var(--text-dim); line-height: 1.8; margin-bottom: 25px; font-size: 1.1rem; }
+        strong { color: #fff; }
+
+        ul { list-style: none; padding: 0; margin: 25px 0; }
+        ul li { 
+            color: var(--text-dim); 
+            margin-bottom: 15px; 
+            padding-left: 30px; 
+            position: relative; 
+            line-height: 1.6;
+        }
+        ul li::before { 
+            content: "::"; 
+            color: var(--neon-pink); 
+            position: absolute; 
+            left: 0; 
+            font-family: 'Roboto Mono';
+        }
+
+        .highlight-box {
+            border-left: 3px solid var(--neon-pink);
+            padding-left: 20px;
+            margin: 40px 0;
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            font-family: 'Roboto Mono', monospace;
+            color: #444;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .bio-header { flex-direction: column; text-align: center; gap: 20px; }
+            .glass-panel { padding: 40px 25px; }
+            .profile-img { width: 150px; height: 150px; transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hero-canvas-wrapper">
+        <canvas id="brain-canvas"></canvas>
+    </div>
+
+    <div class="content-overlay">
+        <div class="main-container">
+            <a href="index.html" class="nav-back">[ < POWRÓT_DO_SYSTEMU ]</a>
+            
+            <article class="glass-panel">
+                <header class="bio-header">
+                    <img src="Bartek" alt="Bartek Jasiński" class="profile-img">
+                    <div class="bio-title">
+                        <h1>BARTEK_JASIŃSKI</h1>
+                        <span class="role">Prezes i założyciel Fundacji</span>
+                    </div>
+                </header>
+
+                <div class="highlight-box">
+                    <p style="color: #fff; font-size: 1.2rem;">
+                        "10 stycznia 2025 roku przeszedłem udar pnia mózgu. W jednej chwili zatrzymało się nie tylko moje życie prywatne, ale także zawodowe i twórcze."
+                    </p>
+                </div>
+
+                <p>To doświadczenie pozwoliło mi zrozumieć coś, czego nie da się nauczyć z raportów czy statystyk: jak wygląda rzeczywistość osoby, która chce wrócić do aktywności zawodowej i twórczej po ciężkim kryzysie zdrowotnym.</p>
+
+                <p>Dzięki szybkiej pomocy medycznej oraz pracy wybitnych lekarzy i rehabilitantek mogłem przejść drogę od całkowitej zależności do samodzielności i aktywności twórczej. Ich wsparcie pokazało mi, jak ogromną wartość ma dobrze zaprojektowany proces rehabilitacji — i jak często kończy się on zbyt wcześnie, zanim człowiek odzyska realną sprawczość zawodową.</p>
+
+                <h2>MISJA_I_LUKA_SYSTEMOWA</h2>
+                <p>Fundacja Post-Stroke Creators powstała właśnie w tej luce pomiędzy rehabilitacją a rynkiem pracy. Tworzymy rozwiązania wspierające osoby po udarze, które były aktywne zawodowo w sektorach kreatywnych, cyfrowych i technologicznych, a dziś potrzebują narzędzi, struktury i bezpiecznej przestrzeni do odbudowy kompetencji.</p>
+
+                <p>Dla beneficjentów oznacza to praktyczne wsparcie, mentoring i dostęp do środowiska, które rozumie ich sytuację. Dla partnerów i grantodawców — możliwość współtworzenia projektu o realnym i mierzalnym wpływie społecznym.</p>
+
+                <h2>WSPÓŁPRACA_ESG_I_CSR</h2>
+                <p>Fundacja jest naturalnym partnerem dla:</p>
+                <ul>
+                    <li>firm i instytucji realizujących strategie ESG i CSR,</li>
+                    <li>organizacji wspierających innowacje społeczne i inkluzywność,</li>
+                    <li>podmiotów zainteresowanych rozwojem programów aktywizacji zawodowej po kryzysach zdrowotnych,</li>
+                    <li>partnerów technologicznych i edukacyjnych.</li>
+                </ul>
+
+                <p>Naszym celem nie jest jednorazowa pomoc, lecz długofalowe budowanie modeli wsparcia, które można rozwijać, skalować i adaptować do różnych środowisk. Łączymy perspektywę osoby po udarze, twórcy i lidera projektu społecznego — dzięki temu proponowane rozwiązania są praktyczne, a nie deklaratywne.</p>
+
+                <p style="color: #fff; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 30px; font-weight: 700;">
+                    Wierzę, że odpowiedzialny biznes, instytucje publiczne i organizacje społeczne mogą razem tworzyć systemy, które realnie zmieniają życie ludzi. Fundacja Post-Stroke Creators jest gotowa być częścią takiej współpracy.
+                </p>
+            </article>
+
+            <footer>
+                SYSTEM_LOG: O_FUNDACJI // STATUS: ONLINE<br>
+                © 2026 FUNDACJA POST-STROKE CREATORS
+            </footer>
+        </div>
+    </div>
+
+    <script type="importmap">
+        { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        const canvas = document.getElementById('brain-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        const particles = [];
+        const particleGroup = new THREE.Group();
+        scene.add(particleGroup);
+        const colors = [0x00f2ff, 0xff007a, 0x4e4eff];
+        function createParticles() {
+            for (let i = 0; i < 2000; i++) {
+                const mesh = new THREE.Mesh(
+                    new THREE.BoxGeometry(0.08, 0.08, 0.08),
+                    new THREE.MeshBasicMaterial({ color: colors[Math.floor(Math.random() * colors.length)], transparent: true, opacity: 0.6 })
+                );
+                mesh.position.set((Math.random() - 0.5) * 15, (Math.random() - 0.5) * 15, (Math.random() - 0.5) * 15);
+                particleGroup.add(mesh);
+                particles.push(mesh);
+            }
+        }
+        createParticles();
+        camera.position.z = 12;
+        function animate() {
+            requestAnimationFrame(animate);
+            particleGroup.rotation.y += 0.001;
+            particleGroup.rotation.x += 0.0005;
+            renderer.render(scene, camera);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
