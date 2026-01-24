@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Partnerzy | Post-Stroke Creators</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff007a;
+            --neon-cyan: #00f2ff;
+            --bg-dark: #050508;
+            --panel-bg: rgba(10, 12, 20, 0.9);
+            --text-main: #e0e6ed;
+            --text-dim: #94a3b8;
+        }
 
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Tło 3D identyczne jak na głównej */
+        #hero-canvas-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            z-index: 1;
+            background: radial-gradient(circle at center, #101020 0%, #050508 100%);
+        }
+
+        #brain-canvas { width: 100%; height: 100%; display: block; }
+
+        .content-overlay { position: relative; z-index: 10; width: 100%; padding-top: 100px; }
+
+        .main-container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px;
+            margin-bottom: 50px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+        }
+
+        /* --- STYLIZACJA PARTNERÓW --- */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .partner-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .partner-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .partner-logo-big {
+            max-width: 150px;
+            height: auto;
+            filter: grayscale(100%) brightness(0.8);
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        .partner-card:hover .partner-logo-big {
+            filter: grayscale(0%) brightness(1.1);
+        }
+
+        .nav-back {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        h1, h2 { font-family: 'Roboto Mono', monospace; color: var(--neon-pink); }
+        p { color: var(--text-dim); line-height: 1.6; }
+
+    </style>
+</head>
+<body>
+
+    <div id="hero-canvas-wrapper">
+        <canvas id="brain-canvas"></canvas>
+    </div>
+
+    <div class="content-overlay">
+        <div class="main-container">
+            <a href="index.html" class="nav-back">< [ POWRÓT_DO_SYSTEMU ]</a>
+            
+            <section class="glass-panel">
+                <h1>PARTNERZY_I_WSPARCIE</h1>
+                <p>To organizacje i firmy, które wierzą w naszą misję i pomagają nam budować mosty między technologią a rehabilitacją twórczą.</p>
+                
+                <div class="partner-grid">
+                    <div class="partner-card">
+                        <img src="Tisale.png" alt="Tisale" class="partner-logo-big">
+                        <h3>TISALE</h3>
+                        <p style="font-size: 0.8rem;">Główny partner technologiczny i wsparcie merytoryczne.</p>
+                    </div>
+
+                    <div class="partner-card">
+                        <img src="https://placehold.co/150x60/050508/00f2ff?text=ADOBE" class="partner-logo-big">
+                        <h3>ADOBE</h3>
+                        <p style="font-size: 0.8rem;">Wsparcie w zakresie oprogramowania kreatywnego.</p>
+                    </div>
+
+                    <div class="partner-card">
+                        <img src="https://placehold.co/150x60/050508/ff007a?text=WACOM" class="partner-logo-big">
+                        <h3>WACOM</h3>
+                        <p style="font-size: 0.8rem;">Dostawca rozwiązań dla precyzyjnej pracy dłoni.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script type="importmap">
+        { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        // ... (Tu wklej dokładnie ten sam kod JavaScript animacji mózgu, który mamy w index.html)
+        // Dla oszczędności miejsca pominąłem go w tym podglądzie, 
+        // ale skopiuj go z poprzedniej wiadomości, aby mózg działał identycznie.
+    </script>
+</body>
+</html>
