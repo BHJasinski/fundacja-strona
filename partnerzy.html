@@ -10,7 +10,7 @@
             --neon-pink: #ff007a;
             --neon-cyan: #00f2ff;
             --bg-dark: #050508;
-            --panel-bg: rgba(10, 12, 20, 0.9);
+            --panel-bg: rgba(7, 8, 15, 0.85); /* Lekko dopasowane do tła */
             --text-main: #e0e6ed;
             --text-dim: #94a3b8;
         }
@@ -23,13 +23,14 @@
             overflow-x: hidden;
         }
 
-        /* Tło 3D identyczne jak na głównej */
+        /* Tło 3D */
         #hero-canvas-wrapper {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100vh;
             z-index: 1;
-            background: radial-gradient(circle at center, #101020 0%, #050508 100%);
+            /* Gradient tworzący głębię za neuronami */
+            background: radial-gradient(circle at center, #0a0a1a 0%, #050508 100%);
         }
 
         #brain-canvas { width: 100%; height: 100%; display: block; }
@@ -40,16 +41,15 @@
 
         .glass-panel {
             background: var(--panel-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 242, 255, 0.1);
             border-radius: 24px;
             padding: 50px;
             margin-bottom: 50px;
             box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
 
-        /* --- STYLIZACJA PARTNERÓW --- */
         .partner-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -58,26 +58,27 @@
         }
 
         .partner-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(0, 242, 255, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 242, 255, 0.1);
             border-radius: 16px;
             padding: 20px;
             text-align: center;
-            transition: 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .partner-card:hover {
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
-            transform: translateY(-5px);
+            background: rgba(0, 242, 255, 0.05);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
+            transform: translateY(-10px);
         }
 
         .partner-logo-big {
-            max-width: 150px;
+            max-width: 120px;
             height: auto;
-            filter: grayscale(100%) brightness(0.8);
+            filter: grayscale(100%) brightness(0.7);
             margin-bottom: 15px;
-            transition: 0.3s;
+            transition: 0.4s;
         }
 
         .partner-card:hover .partner-logo-big {
@@ -91,9 +92,14 @@
             text-decoration: none;
             font-family: 'Roboto Mono', monospace;
             font-size: 0.9rem;
+            transition: 0.3s;
         }
+        
+        .nav-back:hover { text-shadow: 0 0 10px var(--neon-cyan); }
 
-        h1, h2 { font-family: 'Roboto Mono', monospace; color: var(--neon-pink); }
+        h1, h2, h3 { font-family: 'Roboto Mono', monospace; margin-top: 0; }
+        h1 { color: var(--neon-pink); font-size: 2.5rem; letter-spacing: -1px; }
+        h3 { color: var(--neon-cyan); font-size: 1.1rem; }
         p { color: var(--text-dim); line-height: 1.6; }
 
     </style>
@@ -113,7 +119,7 @@
                 <p>To organizacje i firmy, które wierzą w naszą misję i pomagają nam budować mosty między technologią a rehabilitacją twórczą.</p>
                 
                 <div class="partner-grid">
-                       <div class="partner-card">
+                    <div class="partner-card">
                         <img src="gemini.png" alt="Gemini" class="partner-logo-big">
                         <h3>Gemini</h3>
                         <p style="font-size: 0.8rem;">Wsparcie w zakresie AI.</p>
@@ -146,9 +152,84 @@
     </script>
     <script type="module">
         import * as THREE from 'three';
-        // ... (Tu wklej dokładnie ten sam kod JavaScript animacji mózgu, który mamy w index.html)
-        // Dla oszczędności miejsca pominąłem go w tym podglądzie, 
-        // ale skopiuj go z poprzedniej wiadomości, aby mózg działał identycznie.
+
+        // Inicjalizacja sceny Three.js pod Twoje tło
+        const canvas = document.querySelector('#brain-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        // --- SYSTEM NEURONÓW (CZĄSTECZEK) ---
+        const particlesCount = 150;
+        const positions = new Float32Array(particlesCount * 3);
+        const colors = new Float32Array(particlesCount * 3);
+        
+        const colorChoices = [new THREE.Color(0x00f2ff), new THREE.Color(0xff007a)];
+
+        for (let i = 0; i < particlesCount * 3; i += 3) {
+            // Rozmieszczenie w przestrzeni 3D
+            positions[i] = (Math.random() - 0.5) * 15;
+            positions[i+1] = (Math.random() - 0.5) * 15;
+            positions[i+2] = (Math.random() - 0.5) * 10;
+
+            const col = colorChoices[Math.floor(Math.random() * colorChoices.length)];
+            colors[i] = col.r;
+            colors[i+1] = col.g;
+            colors[i+2] = col.b;
+        }
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.05,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Dodanie delikatnych linii łączących (Neuro-Network)
+        const lineMaterial = new THREE.LineBasicMaterial({ 
+            color: 0x00f2ff, 
+            transparent: true, 
+            opacity: 0.1,
+            blending: THREE.AdditiveBlending 
+        });
+        
+        // Funkcja animacji
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Powolny obrót całego układu
+            particlesMesh.rotation.y += 0.001;
+            particlesMesh.rotation.x += 0.0005;
+
+            // Efekt "oddychania" - pulsowanie skali
+            const time = Date.now() * 0.001;
+            particlesMesh.scale.x = 1 + Math.sin(time * 0.5) * 0.1;
+            particlesMesh.scale.y = 1 + Math.sin(time * 0.5) * 0.1;
+
+            renderer.render(scene, camera);
+        }
+
+        // Obsługa zmiany rozmiaru okna
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        animate();
+
     </script>
 </body>
 </html>
