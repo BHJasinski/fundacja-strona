@@ -1,1 +1,277 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nowe kompetencje cyfrowe po udarze | Post-Stroke Creators</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0b10;
+            --card-bg: #161b22;
+            --accent-pink: #ff007f;
+            --accent-cyan: #00f2ff;
+            --text-white: #ffffff;
+            --text-gray: #b1b1b1;
+            --gradient-main: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-cyan) 100%);
+        }
 
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 40px;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--accent-pink);
+            margin: 0 0 20px 0;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .hero p.lead {
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            max-width: 800px;
+        }
+
+        .divider {
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
+            margin: 40px 0;
+            border-radius: 2px;
+        }
+
+        /* Text Content */
+        .intro-section {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            max-width: 900px;
+            margin-bottom: 60px;
+        }
+
+        .intro-section b {
+            color: var(--text-white);
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            position: relative;
+            transition: transform 0.3s ease;
+            border: 1px solid #30363d;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+        }
+
+        .card::before {
+            content: ">";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--accent-cyan);
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            margin-top: 0;
+            color: var(--text-white);
+        }
+
+        .card h3 {
+            color: var(--accent-cyan);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card ul li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: "•";
+            color: var(--accent-pink);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        /* Highligted Box */
+        .highlight-box {
+            background: var(--gradient-main);
+            padding: 2px; /* Border effect */
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .highlight-inner {
+            background: var(--bg-dark);
+            padding: 50px;
+            border-radius: 18px;
+        }
+
+        .highlight-inner h2 {
+            margin-top: 0;
+            font-size: 2rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* CTA Button */
+        .cta-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-main);
+            color: white;
+            padding: 20px 45px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .highlight-inner { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="hero">
+        <h1>Nowe kompetencje<br>cyfrowe po udarze</h1>
+        <p class="lead">Program wsparcia osób twórczych w powrocie do aktywności zawodowej</p>
+        <div class="divider"></div>
+    </header>
+
+    <section class="intro-section">
+        <p>Program powstał z myślą o osobach, które po udarze mózgu chcą <b>odbudować swoją samodzielność</b>, poczucie sprawczości i odnaleźć się w nowej rzeczywistości zawodowej.</p>
+        <p>Wierzymy, że rehabilitacja to nie tylko powrót do sprawności fizycznej, ale również zdobycie umiejętności, które mają <b>realną wartość na nowoczesnym rynku pracy</b>.</p>
+    </section>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Metodyka</h3>
+            <h2>Na czym polega program?</h2>
+            <p>Praktyczne warsztaty tworzenia profesjonalnych stron internetowych w HTML. Pracujemy:</p>
+            <ul>
+                <li>Krok po kroku, w spokojnym tempie</li>
+                <li>Z jasnymi instrukcjami</li>
+                <li>Z widocznymi efektami po każdym etapie</li>
+                <li>Bez wymaganego doświadczenia IT</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Dlaczego cyfrowo?</h3>
+            <h2>Nowe możliwości</h2>
+            <p>Kompetencje cyfrowe to szansa na dostosowanie pracy do aktualnych możliwości:</p>
+            <ul>
+                <li>Praca projektowa i zdalna</li>
+                <li>Wolontariat kompetencyjny</li>
+                <li>Rozwój w organizacjach społecznych</li>
+                <li>Budowanie własnego portfolio</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <div class="highlight-inner">
+            <h2>Jak uczymy?</h2>
+            <p>Program został zaprojektowany z myślą o neuroplastyczności i komforcie osób po udarze:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 30px;">
+                <div>
+                    <strong style="color: var(--accent-cyan);">Zero presji</strong><br>
+                    Duża ilość powtórzeń i brak limitów czasowych.
+                </div>
+                <div>
+                    <strong style="color: var(--accent-cyan);">Narzędzia AI</strong><br>
+                    Wykorzystujemy sztuczną inteligencję, by ułatwić tworzenie treści.
+                </div>
+                <div>
+                    <strong style="color: var(--accent-cyan);">Praktyka</strong><br>
+                    Każdy kończy program z działającą stroną www.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h2>Dla kogo?</h2>
+            <ul>
+                <li>Osoby po udarze mózgu</li>
+                <li>Twórcy szukający nowej ścieżki</li>
+                <li>Osoby w trakcie rehabilitacji</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>Nasze podejście</h2>
+            <p>Nie traktujemy uczestników jako „uczniów”. Traktujemy ich jako <b>twórców</b>, którzy mają ogromny potencjał do dalszego rozwoju.</p>
+        </div>
+    </div>
+
+    <div class="cta-container">
+        <a href="#" class="btn">Zgłoś swój udział</a>
+        <p style="color: var(--text-gray); margin-top: 20px; font-size: 0.9rem;">Rehabilitacja poprzez tworzenie. Krok w stronę samodzielności.</p>
+    </div>
+</div>
+
+</body>
+</html>
