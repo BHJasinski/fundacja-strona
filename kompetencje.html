@@ -1,238 +1,209 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nowe kompetencje cyfrowe po udarze | Post-Stroke Creators</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0d0f14;
-            --bg-darker: #07080a;
-            --card-bg: rgba(22, 27, 34, 0.6);
+            --bg-dark: #0a0b10;
+            --card-bg: #161b22;
             --accent-pink: #ff007f;
             --accent-cyan: #00f2ff;
             --text-white: #ffffff;
-            --text-gray: #94a3b8;
+            --text-gray: #b1b1b1;
             --gradient-main: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-cyan) 100%);
-            --border-color: rgba(255, 255, 255, 0.1);
         }
-
-        * { box-sizing: border-box; }
 
         body {
             background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 0, 127, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.05) 0%, transparent 20%);
             color: var(--text-white);
             font-family: 'Inter', sans-serif;
-            line-height: 1.7;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 30px;
+            padding: 40px 20px;
         }
 
-        /* --- Header & Hero --- */
+        /* Hero Section */
         .hero {
-            padding: 100px 0 60px;
-            text-align: center;
+            padding: 80px 0 40px;
+            text-align: left;
         }
 
         .hero h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            margin: 0;
-            line-height: 1;
-            font-weight: 800;
-            background: var(--gradient-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--accent-pink);
+            margin: 0 0 20px 0;
+            line-height: 1.1;
             text-transform: uppercase;
-            letter-spacing: -1px;
         }
 
         .hero p.lead {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-size: 1.5rem;
             color: var(--accent-cyan);
-            font-weight: 500;
-            margin: 20px auto;
-            max-width: 700px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-weight: 600;
+            max-width: 800px;
         }
 
-        .divider-center {
-            width: 80px;
+        .divider {
+            width: 100%;
             height: 4px;
             background: var(--gradient-main);
-            margin: 40px auto;
+            margin: 40px 0;
             border-radius: 2px;
         }
 
-        /* --- Sections Layout --- */
-        .section-padding {
-            padding: 60px 0;
-        }
-
-        .intro-text {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 80px;
-            font-size: 1.2rem;
+        /* Text Content */
+        .intro-section {
+            font-size: 1.1rem;
             color: var(--text-gray);
+            max-width: 900px;
+            margin-bottom: 60px;
         }
 
-        .intro-text b { color: var(--text-white); }
+        .intro-section b {
+            color: var(--text-white);
+        }
 
-        /* --- Cards & Grid --- */
-        .grid-main {
+        /* Image Integration Style */
+        .feature-with-image {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .image-wrapper {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+            border: 1px solid #30363d;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
         }
 
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            padding: 50px;
-            border-radius: 24px;
-            border: 1px solid var(--border-color);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
+            padding: 40px;
+            border-radius: 15px;
+            position: relative;
+            transition: transform 0.3s ease;
+            border: 1px solid #30363d;
+            height: 100%;
+            box-sizing: border-box;
         }
 
         .card:hover {
             transform: translateY(-10px);
-            border-color: rgba(0, 242, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-cyan);
         }
 
-        .card h3 {
-            font-size: 0.85rem;
-            color: var(--accent-pink);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+        .card::before {
+            content: ">";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--accent-cyan);
+            font-weight: bold;
+            font-family: monospace;
         }
 
         .card h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            margin: 0 0 20px 0;
+            font-size: 1.6rem;
+            margin-top: 0;
+            color: var(--text-white);
+        }
+
+        .card h3 {
+            color: var(--accent-cyan);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .card ul {
-            padding: 0;
             list-style: none;
-            margin-top: auto;
+            padding: 0;
         }
 
-        .card li {
-            padding: 8px 0 8px 25px;
+        .card ul li {
+            margin-bottom: 12px;
+            padding-left: 20px;
             position: relative;
-            color: var(--text-gray);
         }
 
-        .card li::before {
-            content: "→";
+        .card ul li::before {
+            content: "•";
+            color: var(--accent-pink);
             position: absolute;
             left: 0;
-            color: var(--accent-cyan);
-            font-weight: bold;
+            font-size: 1.5rem;
+            line-height: 1;
         }
 
-        /* --- Image Section --- */
-        .image-content-block {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
-            align-items: center;
-            margin: 80px 0;
-        }
-
-        .image-container {
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            line-height: 0;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: auto;
-            filter: grayscale(20%) contrast(1.1);
-            transition: 0.5s ease;
-        }
-
-        .image-container:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.02);
-        }
-
-        /* --- Highlight Section --- */
-        .highlight-banner {
-            background: var(--bg-darker);
-            border: 1px solid var(--border-color);
-            border-radius: 32px;
-            padding: 60px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .highlight-banner::after {
-            content: "";
-            position: absolute;
-            top: 0; right: 0;
-            width: 200px; height: 200px;
+        /* Highligted Box */
+        .highlight-box {
             background: var(--gradient-main);
-            filter: blur(120px);
-            opacity: 0.1;
+            padding: 2px;
+            border-radius: 20px;
+            margin: 60px 0;
         }
 
-        .highlight-banner h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
-            margin-bottom: 40px;
-            text-align: center;
+        .highlight-inner {
+            background: var(--bg-dark);
+            padding: 50px;
+            border-radius: 18px;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+        .highlight-inner h2 {
+            margin-top: 0;
+            font-size: 2rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .feature-item strong {
-            display: block;
-            color: var(--accent-cyan);
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .feature-item p {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            margin: 0;
-        }
-
-        /* --- Responsive --- */
-        @media (max-width: 992px) {
-            .grid-main, .image-content-block, .features-grid {
+        @media (max-width: 850px) {
+            .feature-with-image {
                 grid-template-columns: 1fr;
             }
-            .hero h1 { font-size: 3rem; }
-            .highlight-banner { padding: 40px 20px; }
+            .image-wrapper {
+                order: -1; /* Obrazek nad tekstem na telefonach */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .highlight-inner { padding: 30px; }
         }
     </style>
 </head>
@@ -240,78 +211,81 @@
 
 <div class="container">
     <header class="hero">
-        <p class="lead">Post-Stroke Creators</p>
         <h1>Nowe kompetencje<br>cyfrowe po udarze</h1>
-        <div class="divider-center"></div>
-        <div class="intro-text">
-            <p>Program powstał z myślą o osobach, które po udarze mózgu chcą <b>odbudować swoją samodzielność</b> i odnaleźć się w nowej rzeczywistości zawodowej. Wierzymy w realną wartość na rynku pracy.</p>
-        </div>
+        <p class="lead">Program wsparcia osób twórczych w powrocie do aktywności zawodowej</p>
+        <div class="divider"></div>
     </header>
 
-    <div class="image-content-block">
+    <section class="intro-section">
+        <p>Program powstał z myślą o osobach, które po udarze mózgu chcą <b>odbudować swoją samodzielność</b>, poczucie sprawczości i odnaleźć się w nowej rzeczywistości zawodowej.</p>
+        <p>Wierzymy, że rehabilitacja to nie tylko powrót do sprawności fizycznej, ale również zdobycie umiejętności, które mają <b>realną wartość na nowoczesnym rynku pracy</b>.</p>
+    </section>
+
+    <div class="feature-with-image">
         <div class="card">
-            <h3>Metodyka pracy</h3>
+            <h3>Metodyka</h3>
             <h2>Na czym polega program?</h2>
-            <p>Praktyczne warsztaty tworzenia profesjonalnych stron internetowych w HTML. Skupiamy się na efektach, nie na teorii.</p>
+            <p>Praktyczne warsztaty tworzenia profesjonalnych stron internetowych w HTML. Pracujemy:</p>
             <ul>
-                <li>Indywidualne tempo pracy</li>
-                <li>Jasne, wizualne instrukcje</li>
-                <li>Realne projekty do portfolio</li>
-                <li>Wsparcie techniczne AI</li>
+                <li>Krok po kroku, w spokojnym tempie</li>
+                <li>Z jasnymi instrukcjami</li>
+                <li>Z widocznymi efektami po każdym etapie</li>
+                <li>Bez wymaganego doświadczenia IT</li>
             </ul>
         </div>
-        <div class="image-container">
-            <img src="kodowanie.png" alt="Warsztaty kodowania">
+        <div class="image-wrapper">
+            <img src="kodowanie.png" alt="Ilustracja kodowania - Post-Stroke Creators">
         </div>
     </div>
 
-    <div class="grid-main">
+    <div class="grid">
         <div class="card">
-            <h3>Rozwój</h3>
-            <h2>Dlaczego cyfrowo?</h2>
-            <p>To szansa na pracę, która dopasowuje się do Ciebie, a nie odwrotnie.</p>
+            <h3>Dlaczego cyfrowo?</h3>
+            <h2>Nowe możliwości</h2>
+            <p>Kompetencje cyfrowe to szansa na dostosowanie pracy do aktualnych możliwości:</p>
             <ul>
-                <li>Praca zdalna i elastyczne godziny</li>
-                <li>Budowanie cyfrowej tożsamości</li>
-                <li>Nowoczesny wolontariat</li>
+                <li>Praca projektowa i zdalna</li>
+                <li>Wolontariat kompetencyjny</li>
+                <li>Rozwój w organizacjach społecznych</li>
+                <li>Budowanie własnego portfolio</li>
             </ul>
         </div>
+        
         <div class="card">
-            <h3>Filozofia</h3>
             <h2>Nasze podejście</h2>
-            <p>Tutaj nie ma pacjentów. Są <b>Twórcy</b>. Wykorzystujemy neuroplastyczność mózgu poprzez naukę nowych, logicznych struktur kodu.</p>
-            <p>Każdy średnik i znacznik to krok w stronę nowej sprawności.</p>
+            <p>Nie traktujemy uczestników jako „uczniów”. Traktujemy ich jako <b>twórców</b>, którzy mają ogromny potencjał do dalszego rozwoju.</p>
+            <p>Każdy projekt to nowa historia i unikalna perspektywa, którą warto pokazać światu.</p>
         </div>
     </div>
 
-    <section class="section-padding">
-        <div class="highlight-banner">
+    <div class="highlight-box">
+        <div class="highlight-inner">
             <h2>Jak uczymy?</h2>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <strong>Zero presji</strong>
-                    <p>Skupiamy się na procesie. Masz tyle czasu, ile potrzebujesz, by opanować dany moduł.</p>
+            <p>Program został zaprojektowany z myślą o neuroplastyczności i komforcie osób po udarze:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 30px;">
+                <div>
+                    <strong style="color: var(--accent-cyan);">Zero presji</strong><br><br>
+                    Duża ilość powtórzeń i brak limitów czasowych.
                 </div>
-                <div class="feature-item">
-                    <strong>Narzędzia AI</strong>
-                    <p>Uczymy, jak używać asystentów AI, aby omijać bariery poznawcze i pisać kod szybciej.</p>
+                <div>
+                    <strong style="color: var(--accent-cyan);">Narzędzia AI</strong><br><br>
+                    Wykorzystujemy sztuczną inteligencję, by ułatwić tworzenie treści.
                 </div>
-                <div class="feature-item">
-                    <strong>Certyfikat Twórcy</strong>
-                    <p>Program kończysz z własną, opublikowaną stroną www, która jest Twoją wizytówką.</p>
+                <div>
+                    <strong style="color: var(--accent-cyan);">Praktyka</strong><br><br>
+                    Każdy kończy program z działającą stroną www.
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <div style="margin-bottom: 100px;">
-        <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+    <div class="grid">
+        <div class="card">
             <h2>Dla kogo?</h2>
-            <p>Dla osób po udarze, które chcą zamienić rehabilitację w nową pasję lub zawód.</p>
-            <ul style="display: inline-block; text-align: left;">
-                <li>Osoby szukające nowej ścieżki</li>
-                <li>Twórcy i pasjonaci technologii</li>
-                <li>Wszyscy, którzy chcą tworzyć</li>
+            <ul>
+                <li>Osoby po udarze mózgu</li>
+                <li>Twórcy szukający nowej ścieżki</li>
+                <li>Osoby w trakcie rehabilitacji</li>
             </ul>
         </div>
     </div>
