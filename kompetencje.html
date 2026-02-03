@@ -73,6 +73,34 @@
             color: var(--text-white);
         }
 
+        /* Image Integration Style */
+        .feature-with-image {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .image-wrapper {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+            border: 1px solid #30363d;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
         /* Cards Grid */
         .grid {
             display: grid;
@@ -88,6 +116,8 @@
             position: relative;
             transition: transform 0.3s ease;
             border: 1px solid #30363d;
+            height: 100%;
+            box-sizing: border-box;
         }
 
         .card:hover {
@@ -142,7 +172,7 @@
         /* Highligted Box */
         .highlight-box {
             background: var(--gradient-main);
-            padding: 2px; /* Border effect */
+            padding: 2px;
             border-radius: 20px;
             margin: 60px 0;
         }
@@ -161,28 +191,13 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* CTA Button */
-        .cta-container {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--gradient-main);
-            color: white;
-            padding: 20px 45px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: opacity 0.3s;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+        @media (max-width: 850px) {
+            .feature-with-image {
+                grid-template-columns: 1fr;
+            }
+            .image-wrapper {
+                order: -1; /* Obrazek nad tekstem na telefonach */
+            }
         }
 
         @media (max-width: 768px) {
@@ -205,7 +220,7 @@
         <p>Wierzymy, że rehabilitacja to nie tylko powrót do sprawności fizycznej, ale również zdobycie umiejętności, które mają <b>realną wartość na nowoczesnym rynku pracy</b>.</p>
     </section>
 
-    <div class="grid">
+    <div class="feature-with-image">
         <div class="card">
             <h3>Metodyka</h3>
             <h2>Na czym polega program?</h2>
@@ -217,7 +232,12 @@
                 <li>Bez wymaganego doświadczenia IT</li>
             </ul>
         </div>
+        <div class="image-wrapper">
+            <img src="kodowanie.png" alt="Ilustracja kodowania - Post-Stroke Creators">
+        </div>
+    </div>
 
+    <div class="grid">
         <div class="card">
             <h3>Dlaczego cyfrowo?</h3>
             <h2>Nowe możliwości</h2>
@@ -229,6 +249,12 @@
                 <li>Budowanie własnego portfolio</li>
             </ul>
         </div>
+        
+        <div class="card">
+            <h2>Nasze podejście</h2>
+            <p>Nie traktujemy uczestników jako „uczniów”. Traktujemy ich jako <b>twórców</b>, którzy mają ogromny potencjał do dalszego rozwoju.</p>
+            <p>Każdy projekt to nowa historia i unikalna perspektywa, którą warto pokazać światu.</p>
+        </div>
     </div>
 
     <div class="highlight-box">
@@ -237,15 +263,15 @@
             <p>Program został zaprojektowany z myślą o neuroplastyczności i komforcie osób po udarze:</p>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 30px;">
                 <div>
-                    <strong style="color: var(--accent-cyan);">Zero presji</strong><br>
+                    <strong style="color: var(--accent-cyan);">Zero presji</strong><br><br>
                     Duża ilość powtórzeń i brak limitów czasowych.
                 </div>
                 <div>
-                    <strong style="color: var(--accent-cyan);">Narzędzia AI</strong><br>
+                    <strong style="color: var(--accent-cyan);">Narzędzia AI</strong><br><br>
                     Wykorzystujemy sztuczną inteligencję, by ułatwić tworzenie treści.
                 </div>
                 <div>
-                    <strong style="color: var(--accent-cyan);">Praktyka</strong><br>
+                    <strong style="color: var(--accent-cyan);">Praktyka</strong><br><br>
                     Każdy kończy program z działającą stroną www.
                 </div>
             </div>
@@ -260,10 +286,6 @@
                 <li>Twórcy szukający nowej ścieżki</li>
                 <li>Osoby w trakcie rehabilitacji</li>
             </ul>
-        </div>
-        <div class="card">
-            <h2>Nasze podejście</h2>
-            <p>Nie traktujemy uczestników jako „uczniów”. Traktujemy ich jako <b>twórców</b>, którzy mają ogromny potencjał do dalszego rozwoju.</p>
         </div>
     </div>
 </div>
