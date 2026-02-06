@@ -17,6 +17,8 @@
             --panel-bg: rgba(10, 12, 20, 0.85);
             --text-main: #e0e6ed;
             --text-dim: #94a3b8;
+            /* Nowa zmienna dla regularnego podświetlenia */
+            --panel-glow: rgba(0, 242, 255, 0.15);
         }
 
         * { box-sizing: border-box; }
@@ -31,7 +33,6 @@
             touch-action: pan-y; 
         }
 
-        /* Efekt linii skanujących (Scanlines) */
         .scanlines {
             position: fixed;
             top: 0; left: 0;
@@ -43,7 +44,6 @@
             opacity: 0.5;
         }
 
-        /* Ręczny przełącznik języka (zamiast widgetu Google) */
         .lang-switcher {
             position: absolute;
             top: 30px;
@@ -106,31 +106,32 @@
             padding: 0 20px;
         }
 
+        /* POPRAWIONE: Regularne podświetlenie okienek */
         .glass-panel {
             background: var(--panel-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 242, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            border-radius: 24px;
+            
+            /* Cienka, regularna ramka */
+            border: 1px solid rgba(0, 242, 255, 0.25);
+            
+            /* Regularny blask na zewnątrz i delikatny wewnątrz */
+            box-shadow: 
+                0 0 20px var(--panel-glow), 
+                inset 0 0 10px rgba(0, 242, 255, 0.05);
+            
+            border-radius: 16px; /* Nieco mniejszy promień dla lepszego balansu */
             padding: 60px 50px;
             margin-bottom: 50px;
             position: relative;
             overflow: hidden;
-        }
-        
-        /* Ozdobny narożnik cyberpunkowy */
-        .glass-panel::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 20px; height: 20px;
-            border-top: 2px solid var(--neon-cyan);
-            border-left: 2px solid var(--neon-cyan);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .glass-panel.accent-border {
-             border-left: 4px solid var(--neon-cyan);
+        /* Opcjonalny efekt po najechaniu - sprawia, że strona żyje */
+        .glass-panel:hover {
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+            border-color: rgba(0, 242, 255, 0.5);
         }
 
         h2 {
@@ -212,7 +213,7 @@
         }
 
         @media (max-width: 768px) {
-            .glass-panel { padding: 30px 20px; }
+            .glass-panel { padding: 40px 25px; }
             header h1 { letter-spacing: 5px; }
             .lang-switcher { top: 15px; right: 15px; font-size: 0.7rem; }
         }
@@ -251,7 +252,7 @@
                 <p>Rehabilitacja medyczna skupia się na zdrowiu. Rynek pracy na wynikach. A pomiędzy nimi zostaje człowiek, który chce wrócić do tworzenia, ale nie wie, jak to zrobić mądrze i bez samozniszczenia.</p>
             </section>
 
-            <section class="glass-panel accent-border">
+            <section class="glass-panel">
                 <h2>PROGRAM: KOMPETENCJE CYFROWE</h2>
                 <p>Uruchomiliśmy specjalny program <strong>„Nowe kompetencje cyfrowe po udarze”</strong>. To praktyczne warsztaty budowania stron internetowych, projektowane z myślą o neuroplastyczności i powrocie do aktywności zawodowej.</p>
                 <a href="kompetencje.html" class="cyber-btn">ZOBACZ SZCZEGÓŁY PROGRAMU ></a>
@@ -285,7 +286,7 @@
             </section>
 
             <footer>
-                STATUS: ENCRYPTED // VER: 3.1.0_NO_GTRANS <br><br>
+                STATUS: ENCRYPTED // VER: 3.2.0_CLEAN_UI <br><br>
                 © 2026 FUNDACJA POST-STROKE CREATORS
             </footer>
         </div>
