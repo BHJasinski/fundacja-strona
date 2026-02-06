@@ -25,7 +25,7 @@
             padding: 0;
         }
 
-        /* STYL DLA PRZYCISKU POWROTU */
+        /* PRZYCISK POWROTU */
         .back-link {
             display: inline-block;
             margin: 20px 0 0 20px;
@@ -82,140 +82,65 @@
             border-radius: 2px;
         }
 
-        .intro-section {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            max-width: 900px;
-            margin-bottom: 60px;
-        }
-
-        .intro-section b {
-            color: var(--text-white);
-        }
-
-        .feature-with-image {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            margin-bottom: 60px;
-        }
-
-        .image-wrapper {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
-            border: 1px solid #30363d;
-        }
-
-        .image-wrapper img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-
-        .card {
+        /* SEKCJA ZAPISÓW (CTA) */
+        .cta-section {
             background: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            position: relative;
-            transition: transform 0.3s ease;
-            border: 1px solid #30363d;
-            height: 100%;
-            box-sizing: border-box;
+            border: 2px solid var(--accent-pink);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 80px 0;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.1);
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-cyan);
-        }
-
-        .card::before {
-            content: ">";
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: var(--accent-cyan);
-            font-weight: bold;
-            font-family: monospace;
-        }
-
-        .card h2 {
+        .cta-section h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.6rem;
-            margin-top: 0;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
             color: var(--text-white);
         }
 
-        .card h3 {
-            color: var(--accent-cyan);
-            font-size: 1rem;
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-main);
+            color: var(--text-white);
+            padding: 22px 45px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px;
+            cursor: pointer;
         }
 
-        .card ul {
-            list-style: none;
-            padding: 0;
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
         }
 
-        .card ul li {
-            margin-bottom: 12px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .card ul li::before {
-            content: "•";
-            color: var(--accent-pink);
-            position: absolute;
-            left: 0;
-            font-size: 1.5rem;
-            line-height: 1;
-        }
-
-        .highlight-box {
-            background: var(--gradient-main);
-            padding: 2px;
-            border-radius: 20px;
-            margin: 60px 0;
-        }
-
-        .highlight-inner {
-            background: var(--bg-dark);
-            padding: 50px;
-            border-radius: 18px;
-        }
-
-        .highlight-inner h2 {
-            margin-top: 0;
-            font-size: 2rem;
-            background: var(--gradient-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        /* RESZTA STYLI */
+        .intro-section { font-size: 1.1rem; color: var(--text-gray); max-width: 900px; margin-bottom: 60px; }
+        .intro-section b { color: var(--text-white); }
+        .feature-with-image { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 60px; }
+        .image-wrapper { position: relative; border-radius: 15px; overflow: hidden; border: 1px solid #30363d; }
+        .image-wrapper img { width: 100%; height: auto; display: block; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 60px; }
+        .card { background: var(--card-bg); padding: 40px; border-radius: 15px; border: 1px solid #30363d; height: 100%; box-sizing: border-box; position: relative; }
+        .card h2 { font-family: 'Montserrat', sans-serif; color: var(--text-white); margin-top: 0; }
+        .card h3 { color: var(--accent-cyan); text-transform: uppercase; font-size: 1rem; }
+        .card ul { list-style: none; padding: 0; }
+        .card ul li { margin-bottom: 12px; padding-left: 20px; position: relative; }
+        .card ul li::before { content: "•"; color: var(--accent-pink); position: absolute; left: 0; font-size: 1.5rem; }
+        .highlight-box { background: var(--gradient-main); padding: 2px; border-radius: 20px; margin: 60px 0; }
+        .highlight-inner { background: var(--bg-dark); padding: 50px; border-radius: 18px; }
 
         @media (max-width: 850px) {
-            .feature-with-image {
-                grid-template-columns: 1fr;
-            }
-            .image-wrapper {
-                order: -1;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .highlight-inner { padding: 30px; }
+            .feature-with-image { grid-template-columns: 1fr; }
+            .image-wrapper { order: -1; }
         }
     </style>
 </head>
@@ -232,7 +157,6 @@
 
     <section class="intro-section">
         <p>Program powstał z myślą o osobach, które po udarze mózgu chcą <b>odbudować swoją samodzielność</b>, poczucie sprawczości i odnaleźć się w nowej rzeczywistości zawodowej.</p>
-        <p>Wierzymy, że rehabilitacja to nie tylko powrót do sprawności fizycznej, ale również zdobycie umiejętności, które mają <b>realną wartość na nowoczesnym rynku pracy</b>.</p>
     </section>
 
     <div class="feature-with-image">
@@ -243,12 +167,11 @@
             <ul>
                 <li>Krok po kroku, w spokojnym tempie</li>
                 <li>Z jasnymi instrukcjami</li>
-                <li>Z widocznymi efektami po każdym etapie</li>
                 <li>Bez wymaganego doświadczenia IT</li>
             </ul>
         </div>
         <div class="image-wrapper">
-            <img src="kodowanie.png" alt="Ilustracja kodowania - Post-Stroke Creators">
+            <img src="kodowanie.png" alt="Kodowanie">
         </div>
     </div>
 
@@ -256,53 +179,39 @@
         <div class="card">
             <h3>Dlaczego cyfrowo?</h3>
             <h2>Nowe możliwości</h2>
-            <p>Kompetencje cyfrowe to szansa na dostosowanie pracy do aktualnych możliwości:</p>
             <ul>
                 <li>Praca projektowa i zdalna</li>
                 <li>Wolontariat kompetencyjny</li>
-                <li>Rozwój w organizacjach społecznych</li>
                 <li>Budowanie własnego portfolio</li>
             </ul>
         </div>
-        
         <div class="card">
             <h2>Nasze podejście</h2>
             <p>Nie traktujemy uczestników jako „uczniów”. Traktujemy ich jako <b>twórców</b>, którzy mają ogromny potencjał do dalszego rozwoju.</p>
-            <p>Każdy projekt to nowa historia i unikalna perspektywa, którą warto pokazać światu.</p>
         </div>
     </div>
 
     <div class="highlight-box">
         <div class="highlight-inner">
-            <h2>Jak uczymy?</h2>
-            <p>Program został zaprojektowany z myślą o neuroplastyczności i komforcie osób po udarze:</p>
+            <h2 style="background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Jak uczymy?</h2>
+            <p>Program zaprojektowany z myślą o neuroplastyczności:</p>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 30px;">
-                <div>
-                    <strong style="color: var(--accent-cyan);">Zero presji</strong><br><br>
-                    Duża ilość powtórzeń i brak limitów czasowych.
-                </div>
-                <div>
-                    <strong style="color: var(--accent-cyan);">Narzędzia AI</strong><br><br>
-                    Wykorzystujemy sztuczną inteligencję, by ułatwić tworzenie treści.
-                </div>
-                <div>
-                    <strong style="color: var(--accent-cyan);">Praktyka</strong><br><br>
-                    Każdy kończy program z działającą stroną www.
-                </div>
+                <div><strong style="color: var(--accent-cyan);">Zero presji</strong><br>Dużo powtórzeń i brak limitów czasowych.</div>
+                <div><strong style="color: var(--accent-cyan);">Narzędzia AI</strong><br>Ułatwiamy tworzenie treści dzięki AI.</div>
+                <div><strong style="color: var(--accent-cyan);">Praktyka</strong><br>Kończysz z działającą stroną www.</div>
             </div>
         </div>
     </div>
 
-    <div class="grid">
-        <div class="card">
-            <h2>Dla kogo?</h2>
-            <ul>
-                <li>Osoby po udarze mózgu</li>
-                <li>Twórcy szukający nowej ścieżki</li>
-                <li>Osoby w trakcie rehabilitacji</li>
-            </ul>
-        </div>
-    </div>
+    <section class="cta-section">
+        <h2>Chcesz dołączyć do projektu?</h2>
+        <p>Kliknij poniższy przycisk, aby wysłać zgłoszenie. Odezwiemy się do Ciebie!</p>
+        
+        <a href="mailto:post.stroke.creators@o2.pl?subject=Zgłoszenie do projektu Post-Stroke Creators" class="cta-button">
+            Wyślij zgłoszenie e-mailem
+        </a>
+    </section>
+
 </div>
 
 </body>
