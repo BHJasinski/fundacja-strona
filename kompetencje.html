@@ -46,9 +46,11 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 0.85rem;
             text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        /* Hero Section */
+        .back-link:hover { background: rgba(0, 242, 255, 0.1); }
+
         .hero h1 {
             font-family: 'Montserrat', sans-serif;
             font-size: clamp(2rem, 5vw, 3.8rem);
@@ -73,7 +75,6 @@
             opacity: 0.4;
         }
 
-        /* Sekcja główna z opisem */
         .feature-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
@@ -86,15 +87,18 @@
             padding: clamp(25px, 5vw, 40px);
             border-radius: 15px;
             border: 1px solid var(--border-color);
+            height: 100%;
         }
 
         .card h2 {
             font-family: 'Montserrat', sans-serif;
-            margin-top: 10px;
+            margin: 10px 0 20px 0;
             font-size: 1.8rem;
+            line-height: 1.2;
         }
 
-        /* Wyraźne i proste bullety */
+        .card p { margin-bottom: 20px; color: var(--text-white); }
+
         .card ul {
             list-style: none;
             padding: 0;
@@ -105,7 +109,7 @@
             margin-bottom: 15px;
             padding-left: 25px;
             position: relative;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
 
         .card ul li::before {
@@ -117,13 +121,21 @@
             line-height: 1.2;
         }
 
-        .image-wrapper { border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); }
+        .image-wrapper { border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); align-self: start; }
         .image-wrapper img { width: 100%; height: auto; display: block; }
 
-        /* Kontakt - Czysty biały mail */
+        /* Sekcja techniczna */
+        .tech-detail {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            border-left: 2px solid var(--accent-cyan);
+            padding-left: 15px;
+            margin-top: 20px;
+        }
+
         .contact-section {
             text-align: center;
-            padding: 60px 20px;
+            padding: clamp(40px, 8vw, 60px) 20px;
             border: 1px solid var(--accent-pink);
             border-radius: 15px;
             margin: 60px 0;
@@ -132,28 +144,30 @@
         .contact-section h2 {
             font-family: 'Montserrat', sans-serif;
             margin-bottom: 10px;
+            font-size: clamp(1.4rem, 4vw, 2rem);
         }
 
-        /* Biały aktywny e-mail bez guzików */
         .active-email {
             color: #ffffff;
             text-decoration: none;
-            font-size: clamp(1.3rem, 5vw, 2.2rem);
+            font-size: clamp(1.2rem, 5vw, 2.2rem);
             font-weight: 800;
             font-family: 'Montserrat', sans-serif;
             display: inline-block;
-            margin-top: 10px;
-            transition: color 0.3s ease;
+            margin-top: 15px;
+            transition: 0.3s;
             word-break: break-all;
+            border-bottom: 2px solid transparent;
         }
 
         .active-email:hover {
             color: var(--accent-cyan);
+            border-bottom: 2px solid var(--accent-cyan);
         }
 
         @media (max-width: 850px) {
             .feature-grid { grid-template-columns: 1fr; }
-            .image-wrapper { order: -1; }
+            .image-wrapper { order: -1; margin-bottom: 20px; }
         }
     </style>
 </head>
@@ -164,45 +178,50 @@
 
     <header class="hero">
         <h1>Nowe kompetencje<br>cyfrowe po udarze</h1>
-        <p class="lead">Program wsparcia osób twórczych w powrocie do aktywności zawodowej</p>
+        <p class="lead">Program budowy nowoczesnych struktur webowych i powrotu do aktywności twórczej</p>
         <div class="divider"></div>
     </header>
 
     <div class="feature-grid">
         <div class="card">
-            <h3 style="color: var(--accent-cyan); text-transform: uppercase; font-size: 0.9rem; margin: 0;">Metodyka</h3>
-            <h2>Na czym polega program?</h2>
-            <p>Praktyczne warsztaty tworzenia profesjonalnych stron internetowych w HTML. Pracujemy:</p>
+            <h3 style="color: var(--accent-cyan); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin: 0;">Zakres Techniczny</h3>
+            <h2>Budowanie nowoczesnych stron www</h2>
+            <p>Uczestnicy nabywają kompetencje w zakresie tworzenia profesjonalnych witryn internetowych opartych na standardzie HTML5. Program obejmuje:</p>
             <ul>
-                <li>Krok po kroku, w spokojnym tempie</li>
-                <li>Z jasnymi instrukcjami</li>
-                <li>Bez wymaganego doświadczenia IT</li>
+                <li><strong>Semantyczna struktura kodu:</strong> Wykorzystanie znaczników HTML do budowy przejrzystych i czytelnych dla wyszukiwarek dokumentów.</li>
+                <li><strong>Responsive Web Design (RWD):</strong> Tworzenie układów, które automatycznie adaptują się do ekranów smartfonów, tabletów i komputerów.</li>
+                <li><strong>Dostępność (Accessibility):</strong> Implementacja dobrych praktyk pozwalających na swobodne korzystanie ze stron osobom z różnymi potrzebami.</li>
+                <li><strong>Optymalizacja i wydajność:</strong> Nauka czystego pisania kodu, co przekłada się na szybkie ładowanie i stabilność witryny.</li>
             </ul>
+            <div class="tech-detail">
+                Pracujemy w spokojnym tempie, kładąc nacisk na logiczne łączenie elementów struktury HTML z nowoczesnym podejściem do projektowania UI.
+            </div>
         </div>
         <div class="image-wrapper">
-            <img src="kodowanie.png" alt="Kodowanie strony">
+            <img src="kodowanie.png" alt="Struktura kodu HTML">
         </div>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
         <div class="card">
-            <h3 style="color: var(--accent-cyan); text-transform: uppercase; font-size: 0.9rem; margin: 0;">Dlaczego cyfrowo?</h3>
-            <h2>Nowe możliwości</h2>
+            <h3 style="color: var(--accent-cyan); text-transform: uppercase; font-size: 0.8rem; margin: 0;">Możliwości zawodowe</h3>
+            <h2>Nowe perspektywy</h2>
             <ul>
-                <li>Praca projektowa i zdalna</li>
-                <li>Wolontariat kompetencyjny</li>
-                <li>Budowanie własnego portfolio</li>
+                <li>Samodzielne tworzenie i edycja serwisów www</li>
+                <li>Praca projektowa w trybie zdalnym</li>
+                <li>Budowanie cyfrowego portfolio projektanta</li>
             </ul>
         </div>
         <div class="card">
-            <h2>Nasze podejście</h2>
-            <p>Nie traktujemy uczestników jako „uczniów”. Traktujemy ich jako <b>twórców</b>, którzy mają ogromny potencjał do dalszego rozwoju.</p>
+            <h3 style="color: var(--accent-cyan); text-transform: uppercase; font-size: 0.8rem; margin: 0;">Nasze podejście</h3>
+            <h2>Twórca, nie uczeń</h2>
+            <p>Koncentrujemy się na neuroplastyczności mózgu poprzez naukę nowych języków programowania. Traktujemy uczestników jako <b>twórców</b> z ogromnym potencjałem adaptacyjnym.</p>
         </div>
     </div>
 
     <section class="contact-section">
-        <h2>Chcesz dołączyć? Kliknij i napisz:</h2>
-        <a href="mailto:post.stroke.creators@o2.pl?subject=Zgłoszenie do projektu" class="active-email">
+        <h2>Chcesz dołączyć do projektu? Napisz:</h2>
+        <a href="mailto:post.stroke.creators@o2.pl?subject=Zgłoszenie do projektu HTML" class="active-email">
             post.stroke.creators@o2.pl
         </a>
     </section>
