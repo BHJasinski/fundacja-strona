@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -28,22 +29,6 @@
             scroll-behavior: smooth;
             touch-action: pan-y; 
         }
-
-        /* STYLIZACJA WIDGETU TŁUMACZA */
-        #google_translate_element {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 5px;
-            border-radius: 8px;
-            border: 1px solid var(--neon-cyan);
-        }
-
-        /* Ukrycie paska Google na górze po tłumaczeniu */
-        .goog-te-banner-frame.skiptranslate { display: none !important; }
-        body { top: 0px !important; }
 
         /* Kontener na tło 3D */
         #hero-canvas-wrapper {
@@ -175,24 +160,10 @@
         @media (max-width: 768px) {
             .glass-panel { padding: 30px 20px; }
             h2 { font-size: 1.4rem; }
-            #google_translate_element { top: 10px; right: 10px; scale: 0.8; }
         }
     </style>
 </head>
 <body>
-
-    <div id="google_translate_element"></div>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'pl',
-                includedLanguages: 'en,de,fr,es,it',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <div id="hero-canvas-wrapper">
         <canvas id="brain-canvas"></canvas>
@@ -247,7 +218,7 @@
             <section class="glass-panel" style="text-align: center; padding: 40px 20px;">
                 <h2>WSPÓŁPRACA</h2>
                 <p>Naszą misję wspierają organizacje i firmy, które dostarczają technologię oraz wiedzę niezbędną do budowy cyfrowych mostów w rehabilitacji.</p>
-                <br>
+                <br><br>
                 <a href="partnerzy.html" class="social-btn" style="display: inline-block; margin-top: 10px; border-color: var(--neon-cyan); color: var(--neon-cyan); padding: 15px 30px;">
                     SPRAWDŹ_PARTNERÓW_PROJEKTU
                 </a>
@@ -256,13 +227,14 @@
             <section class="glass-panel" id="kontakt">
                 <h2>KONTAKT_&_SOCIAL</h2>
                 <p>Jeśli myślisz o powrocie do tworzenia – odezwij się. Wystarczy kilka słów. Nie musisz pisać „ładnie”.</p>
-                <br>
+                <br><br>
                 <div class="contact-box">
                     <div class="contact-item">
                         <span class="contact-label">EMAIL_LINK</span>
                         <a href="mailto:post.stroke.creators@o2.pl" class="contact-value">post.stroke.creators@o2.pl</a>
                     </div>
                 </div>
+
                 <div class="social-links">
                     <a href="https://www.instagram.com/post_stroke_creators_org/" class="social-btn">INSTAGRAM</a>
                     <a href="https://www.linkedin.com/company/111113181/" class="social-btn">LINKEDIN</a>
@@ -270,7 +242,7 @@
             </section>
 
             <footer>
-                SYSTEM_STATUS: ACTIVE // VERSION_2.1.6 <br><br>
+                SYSTEM_STATUS: ACTIVE // VERSION_2.1.6 <br><br><br>
                 © 2026 FUNDACJA POST-STROKE CREATORS
             </footer>
         </div>
