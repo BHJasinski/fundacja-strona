@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gra - Refleks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff;
+            margin-top: 50px;
+            user-select: none;
+        }
+
+        #ui-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .stat-box {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px;
+            color: #333;
+        }
+
+        #game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 600px;
+        }
+
+        .circle {
+            width: 120px;
+            height: 120px;
+            border: 10px solid #e0e0e0;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: transparent;
+        }
+
+        /* Styl niebieski neonowy - Twoja grafika nr 2 */
+        .circle.active {
+            border-color: #55eef3;
+            box-shadow: 0 0 20px #55eef3, inset 0 0 20px #55eef3;
+        }
+
+        /* Styl zielony (sukces) - Twoja grafika nr 3 */
+        .circle.success {
+            background-color: #00c853;
+            border-color: #00c853;
+            box-shadow: 0 0 20px #00c853;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ui-container">
+        <div class="stat-box">Punkty: <span id="score">0</span></div>
+        <div class="stat-box">Czas: <span id="timer">60</span>s</div>
+        <button id="start-btn">Zacznij Grę</button>
+    </div>
+
+    <div id="game-grid">
+        <div class="circle" id="c0"></div>
+        <div class="circle" id="c1"></div>
+        <div class="circle" id="c2"></div>
+        <div class="circle" id="c3"></div>
+        <div class="circle" id="c4"></div>
+        <div class="circle" id="c5"></div>
+    </div>
+
+    <script>
+        const circles = document.querySelectorAll('.circle');
+        const scoreDisplay = document.getElementById('score');
+        const timerDisplay = document.getElementById('timer');
+        const startBtn = document.getElementById('start-btn');
+
+        let score = 0;
+        let timeLeft = 60;
+        let gameActive = false;
+        let activeIndex = -1;
+        let gameTimer;
+        let circleTimer;
+
+        function startGame() {
+            // Reset parametrów
+            score = 0;
+            timeLeft = 60;
+            gameActive = true;
+            scoreDisplay.textContent = score;
+            timerDisplay.textContent = timeLeft;
+            startBtn.style.display = 'none';
+
+            // Główny licznik czasu gry (60s)
+            gameTimer = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = timeLeft;
+                if (timeLeft <= 0) endGame();
+            }, 1000);
+
+            showNewCircle();
+        }
+
+        function showNewCircle() {
+            if (!gameActive) return;
+
+            // Wyczyść wszystkie okręgi
+            circles.forEach(c => c.classList.remove('active', 'success'));
+
+            // Wylosuj nowy okrąg (inny niż poprzedni)
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * 6);
+            } while (nextIndex === activeIndex);
+            
+            activeIndex = nextIndex;
+            circles[activeIndex].classList.add('active');
+
+            // Ustaw czas 5 sekund na kliknięcie
+            clearTimeout(circleTimer);
+            circleTimer = setTimeout(() => {
+                if (gameActive) showNewCircle(); // Jeśli nie kliknięto, zmień po 5s
+            }, 5000);
+        }
+
+        circles.forEach((circle, index) => {
+            circle.addEventListener('click', () => {
+                if (gameActive && index === activeIndex) {
+                    // Trafienie!
+                    score++;
+                    scoreDisplay.textContent = score;
+                    
+                    // Zmień na zielony
+                    circle.classList.remove('active');
+                    circle.classList.add('success');
+
+                    // Zatrzymaj licznik 5s i po krótkiej chwili (500ms) daj nowy okrąg
+                    clearTimeout(circleTimer);
+                    setTimeout(() => {
+                        if (gameActive) showNewCircle();
+                    }, 500);
+                }
+            });
+        });
+
+        function endGame() {
+            gameActive = false;
+            clearInterval(gameTimer);
+            clearTimeout(circleTimer);
+            alert("Koniec czasu! Twój wynik to: " + score);
+            startBtn.style.display = 'block';
+            circles.forEach(c => c.classList.remove('active', 'success'));
+        }
+
+        startBtn.addEventListener('click', startGame);
+    </script>
+</body>
+</html>
