@@ -2,10 +2,9 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trening Refleksu i Motoryki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Trening Refleksu - Post-Stroke Creators</title>
     <style>
-        /* Stylizacja tła i ogólnego układu */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #000000;
@@ -14,65 +13,91 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Zapobiega przewijaniu strony */
+            overflow: hidden;
             user-select: none;
+            touch-action: manipulation; /* Optymalizacja pod dotyk */
         }
 
-        /* Górny panel z wynikami */
+        /* Panel górny */
         #ui-panel {
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             background-color: #1a1a1a;
             border-bottom: 2px solid #333;
             z-index: 10;
         }
 
         .stat-item {
-            font-size: 32px;
+            font-size: clamp(18px, 4vw, 32px); /* Elastyczna czcionka */
             font-weight: bold;
         }
 
-        #score { color: #55eef3; } /* Kolor punktów jak neon */
+        #score { color: #55eef3; }
         #timer { color: #ff4444; }
+
+        /* Przycisk powrotu */
+        .back-link {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            border: 1px solid #444;
+            padding: 8px 15px;
+            border-radius: 5px;
+            z-index: 20;
+        }
+
+        .back-link:hover {
+            color: #fff;
+            border-color: #55eef3;
+        }
 
         /* Przycisk Start */
         #start-btn {
-            padding: 15px 40px;
-            font-size: 24px;
+            padding: 12px 30px;
+            font-size: clamp(16px, 3vw, 24px);
             font-weight: bold;
             cursor: pointer;
             background-color: #55eef3;
             color: #000;
             border: none;
             border-radius: 50px;
-            transition: transform 0.2s;
         }
 
-        #start-btn:hover {
-            transform: scale(1.1);
-            background-color: #ffffff;
-        }
-
-        /* Kontener na okręgi - rozłożony na cały ekran */
+        /* Kontener gry */
         #game-area {
             flex-grow: 1;
-            position: relative;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        /* Siatka okręgów - szeroko rozstawiona */
+        /* Siatka okręgów - adaptacyjna */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 100px; /* Duże odstępy między okręgami */
-            width: 90%;
-            height: 80%;
+            grid-template-columns: repeat(3, 1fr); /* 3 kolumny na komputerze */
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+            height: 100%;
+            max-height: 600px;
+        }
+
+        /* Zmiana układu dla telefonów (ekran pionowy) */
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 kolumny na telefonie */
+                grid-template-rows: repeat(3, 1fr);
+                gap: 15px;
+            }
         }
 
         .circle-wrapper {
@@ -82,31 +107,25 @@
         }
 
         .circle {
-            width: 180px; /* Bardzo duże okręgi */
-            height: 180px;
-            border: 12px solid #333; /* Ciemny szary, gdy nieaktywne */
+            width: clamp(80px, 20vw, 180px); /* Skaluje się zależnie od ekranu */
+            height: clamp(80px, 20vw, 180px);
+            border: 8px solid #333;
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.2s ease;
             background-color: transparent;
+            -webkit-tap-highlight-color: transparent; /* Usuwa niebieskie tło po kliknięciu na iPhone */
         }
 
-        /* Niebieski neon (do kliknięcia) */
         .circle.active {
             border-color: #55eef3;
             box-shadow: 0 0 30px #55eef3, inset 0 0 20px #55eef3;
         }
 
-        /* Zielony neon (po kliknięciu) */
         .circle.success {
             background-color: #00c853;
             border-color: #00c853;
             box-shadow: 0 0 40px #00c853;
-        }
-
-        /* Efekt błędu (opcjonalnie, gdybyś chciał widzieć kliknięcie w złe miejsce) */
-        .circle:active:not(.active) {
-            border-color: #444;
         }
     </style>
 </head>
@@ -129,6 +148,8 @@
         </div>
     </div>
 
+    <a href="https://poststrokecreators.pl" class="back-link">← Powrót do Post-Stroke Creators</a>
+
     <script>
         const circles = document.querySelectorAll('.circle');
         const scoreDisplay = document.getElementById('score');
@@ -148,7 +169,7 @@
             gameActive = true;
             scoreDisplay.textContent = score;
             timerDisplay.textContent = timeLeft;
-            startBtn.style.visibility = 'hidden'; // Ukryj przycisk w trakcie gry
+            startBtn.style.visibility = 'hidden';
 
             gameTimer = setInterval(() => {
                 timeLeft--;
@@ -162,12 +183,8 @@
         function showNextTarget() {
             if (!gameActive) return;
 
-            // Czyścimy poprzednie podświetlenia
-            circles.forEach(c => {
-                c.classList.remove('active', 'success');
-            });
+            circles.forEach(c => c.classList.remove('active', 'success'));
 
-            // Losujemy nowy okrąg
             let nextIndex;
             do {
                 nextIndex = Math.floor(Math.random() * 6);
@@ -176,36 +193,39 @@
             activeIndex = nextIndex;
             circles[activeIndex].classList.add('active');
 
-            // Resetujemy czas 5 sekund na ruch
             clearTimeout(circleTimer);
             circleTimer = setTimeout(() => {
                 if (gameActive) showNextTarget();
             }, 5000);
         }
 
-        circles.forEach((circle, index) => {
-            circle.addEventListener('mousedown', (e) => { // 'mousedown' reaguje szybciej niż 'click'
-                if (gameActive && index === activeIndex) {
-                    score++;
-                    scoreDisplay.textContent = score;
-                    
-                    circle.classList.remove('active');
-                    circle.classList.add('success');
+        // Obsługa kliknięcia i dotyku
+        function handleInteraction(e, index) {
+            e.preventDefault(); // Zapobiega podwójnemu kliknięciu na mobile
+            if (gameActive && index === activeIndex) {
+                score++;
+                scoreDisplay.textContent = score;
+                
+                circles[index].classList.remove('active');
+                circles[index].classList.add('success');
 
-                    clearTimeout(circleTimer);
-                    // Krótka pauza (400ms) aby oko zarejestrowało zielony kolor
-                    setTimeout(() => {
-                        if (gameActive) showNextTarget();
-                    }, 400);
-                }
-            });
+                clearTimeout(circleTimer);
+                setTimeout(() => {
+                    if (gameActive) showNextTarget();
+                }, 400);
+            }
+        }
+
+        circles.forEach((circle, index) => {
+            circle.addEventListener('touchstart', (e) => handleInteraction(e, index));
+            circle.addEventListener('mousedown', (e) => handleInteraction(e, index));
         });
 
         function endGame() {
             gameActive = false;
             clearInterval(gameTimer);
             clearTimeout(circleTimer);
-            alert("Trening zakończony!\nTwój wynik: " + score + " punktów.");
+            alert("Trening zakończony!\nTwój wynik: " + score);
             startBtn.style.visibility = 'visible';
             startBtn.textContent = "ZAGRAJ PONOWNIE";
             circles.forEach(c => c.classList.remove('active', 'success'));
