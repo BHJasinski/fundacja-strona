@@ -19,13 +19,13 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
-            overflow: hidden; /* Blokujemy scroll, by gra była stabilna */
+            overflow: hidden;
         }
 
-        /* Panel sterowania */
+        /* Górny panel */
         #ui-panel {
             background-color: #111;
-            padding: clamp(10px, 2vh, 20px);
+            padding: 15px;
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -35,7 +35,7 @@
 
         .stat-box { text-align: center; flex: 1; }
         .label { display: block; font-size: 12px; color: #888; text-transform: uppercase; }
-        .value { font-size: clamp(20px, 4vw, 30px); font-weight: bold; }
+        .value { font-size: 24px; font-weight: bold; }
         #score-val { color: #55eef3; }
         #timer-val { color: #ff4444; }
 
@@ -46,77 +46,83 @@
             padding: 12px 25px;
             border-radius: 10px;
             font-weight: bold;
-            font-size: clamp(14px, 2vw, 18px);
+            font-size: 16px;
             cursor: pointer;
-            transition: 0.2s;
-            min-width: 150px;
+            min-width: 140px;
         }
 
-        #start-btn:active { transform: scale(0.95); }
-
-        /* OBSZAR GRY - to tutaj dzieje się magia rozstawienia */
+        /* Obszar gry */
         #game-container {
             flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px;
+            padding: 20px;
         }
 
         .grid {
             display: grid;
-            /* Na komputerze: 3 kolumny, bardzo szeroko */
             grid-template-columns: repeat(3, 1fr);
-            gap: 150px; /* Maksymalny dystans na monitorze */
-            width: 95%; /* Wykorzystanie prawie całego monitora */
-            max-width: 1400px;
+            gap: 120px; /* Szeroki rozstaw na PC */
+            width: 90%;
+            max-width: 1200px;
         }
 
-        /* Na telefonach: powrót do ciasnego i bezpiecznego układu */
+        /* Układ mobilny */
         @media (max-width: 800px) {
-            #game-container { padding: 15px; }
             .grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-                width: 100%;
+                gap: 25px;
             }
         }
 
         .circle {
             aspect-ratio: 1 / 1;
             width: 100%;
-            max-width: 200px; /* Nieco większe na monitorze */
+            max-width: 180px;
             margin: 0 auto;
             border: 8px solid #222;
             border-radius: 50%;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
         }
 
+        /* Niebieski neon - Twoja grafika nr 2 */
         .circle.active {
             border-color: #55eef3;
-            box-shadow: 0 0 40px #55eef3, inset 0 0 20px #55eef3;
+            box-shadow: 0 0 30px #55eef3, inset 0 0 15px #55eef3;
         }
 
+        /* Zielony neon - Twoja grafika nr 3 */
         .circle.success {
             background-color: #00c853;
             border-color: #00c853;
-            box-shadow: 0 0 50px #00c853;
+            box-shadow: 0 0 40px #00c853;
         }
 
+        /* STOPKA Z PRZYCISKIEM POWROTU */
         footer {
             padding: 20px;
             text-align: center;
+            background-color: #080808;
+            border-top: 1px solid #222;
         }
 
         .back-link {
             display: inline-block;
-            color: #666;
+            color: #55eef3; /* Kolor neonowy dla widoczności */
             text-decoration: none;
-            border: 1px solid #333;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 13px;
+            border: 2px solid #55eef3;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #55eef3;
+            color: #000;
         }
     </style>
 </head>
@@ -128,7 +134,7 @@
             <span id="score-val" class="value">0</span>
         </div>
         
-        <button id="start-btn">ZAGRAJ TERAZ</button>
+        <button id="start-btn">START</button>
 
         <div class="stat-box">
             <span class="label">Czas</span>
@@ -148,7 +154,9 @@
     </main>
 
     <footer>
-        <a href="https://poststrokecreators.pl" class="back-link">← Post-Stroke Creators</a>
+        <a href="https://post-strokecreators.org/" class="back-link">
+            ← POWRÓT DO POST-STROKE CREATORS
+        </a>
     </footer>
 
     <script>
@@ -171,8 +179,7 @@
             gameActive = true;
             scoreDisplay.textContent = score;
             timerDisplay.textContent = timeLeft;
-            startBtn.style.opacity = "0.3";
-            startBtn.textContent = "ĆWICZ!";
+            startBtn.style.visibility = "hidden";
             nextRound();
             gameInterval = setInterval(() => {
                 timeLeft--;
@@ -212,8 +219,8 @@
             gameActive = false;
             clearInterval(gameInterval);
             clearTimeout(roundTimeout);
-            alert("Koniec treningu!\nTwój wynik to " + score + " punktów.");
-            startBtn.style.opacity = "1";
+            alert("Koniec treningu! Twój wynik: " + score);
+            startBtn.style.visibility = "visible";
             startBtn.textContent = "ZAGRAJ PONOWNIE";
             circles.forEach(c => c.classList.remove('active', 'success'));
         }
