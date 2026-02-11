@@ -3,56 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Trening Refleksu - PSC</title>
+    <title>Trening Motoryki - PSC</title>
     <style>
-        /* Fundamenty - brak przesuwania się tła */
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background-color: #000000;
             color: #ffffff;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Zajmuje całą wysokość */
-            overflow-x: hidden;
+            height: 100vh;
+            overflow: hidden; /* Blokujemy scroll, by gra była stabilna */
         }
 
-        /* Panel górny - usztywniony */
+        /* Panel sterowania */
         #ui-panel {
             background-color: #111;
-            padding: 15px;
+            padding: clamp(10px, 2vh, 20px);
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
             border-bottom: 2px solid #333;
-            position: sticky;
-            top: 0;
             z-index: 100;
         }
 
-        .stat-box {
-            text-align: center;
-            flex: 1;
-        }
-
-        .label {
-            display: block;
-            font-size: 12px;
-            color: #888;
-            text-transform: uppercase;
-        }
-
-        .value {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
+        .stat-box { text-align: center; flex: 1; }
+        .label { display: block; font-size: 12px; color: #888; text-transform: uppercase; }
+        .value { font-size: clamp(20px, 4vw, 30px); font-weight: bold; }
         #score-val { color: #55eef3; }
         #timer-val { color: #ff4444; }
 
@@ -60,85 +43,80 @@
             background-color: #55eef3;
             color: #000;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 25px;
+            border-radius: 10px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: clamp(14px, 2vw, 18px);
             cursor: pointer;
-            margin: 0 10px;
-            flex: 1.5;
+            transition: 0.2s;
+            min-width: 150px;
         }
 
-        /* Główny obszar gry - elastyczny, ale z marginesami */
+        #start-btn:active { transform: scale(0.95); }
+
+        /* OBSZAR GRY - to tutaj dzieje się magia rozstawienia */
         #game-container {
             flex-grow: 1;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            gap: 20px;
+            padding: 40px;
         }
 
-        /* Siatka okręgów - inteligentne dopasowanie */
         .grid {
             display: grid;
+            /* Na komputerze: 3 kolumny, bardzo szeroko */
             grid-template-columns: repeat(3, 1fr);
-            gap: clamp(15px, 4vw, 40px);
-            width: 100%;
-            max-width: 800px;
+            gap: 150px; /* Maksymalny dystans na monitorze */
+            width: 95%; /* Wykorzystanie prawie całego monitora */
+            max-width: 1400px;
         }
 
-        /* Na telefonach w pionie: 2 kolumny, 3 rzędy */
-        @media (max-width: 500px) {
+        /* Na telefonach: powrót do ciasnego i bezpiecznego układu */
+        @media (max-width: 800px) {
+            #game-container { padding: 15px; }
             .grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                width: 100%;
             }
         }
 
         .circle {
             aspect-ratio: 1 / 1;
             width: 100%;
-            max-width: 160px;
+            max-width: 200px; /* Nieco większe na monitorze */
             margin: 0 auto;
-            border: 6px solid #222;
+            border: 8px solid #222;
             border-radius: 50%;
-            transition: all 0.2s ease;
             cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .circle.active {
             border-color: #55eef3;
-            box-shadow: 0 0 25px #55eef3, inset 0 0 15px #55eef3;
+            box-shadow: 0 0 40px #55eef3, inset 0 0 20px #55eef3;
         }
 
         .circle.success {
             background-color: #00c853;
             border-color: #00c853;
-            box-shadow: 0 0 35px #00c853;
+            box-shadow: 0 0 50px #00c853;
         }
 
-        /* Stopka z przyciskiem powrotu - oddzielona od gry */
         footer {
-            padding: 30px 20px;
+            padding: 20px;
             text-align: center;
-            background: linear-gradient(transparent, #111);
         }
 
         .back-link {
             display: inline-block;
-            color: #888;
+            color: #666;
             text-decoration: none;
-            border: 1px solid #444;
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .back-link:hover {
-            color: #55eef3;
-            border-color: #55eef3;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -150,7 +128,7 @@
             <span id="score-val" class="value">0</span>
         </div>
         
-        <button id="start-btn">ZAGRAJ</button>
+        <button id="start-btn">ZAGRAJ TERAZ</button>
 
         <div class="stat-box">
             <span class="label">Czas</span>
@@ -170,7 +148,7 @@
     </main>
 
     <footer>
-        <a href="https://post-strokecreators.org" class="back-link">← Powrót do Post-Stroke Creators</a>
+        <a href="https://poststrokecreators.pl" class="back-link">← Post-Stroke Creators</a>
     </footer>
 
     <script>
@@ -188,56 +166,40 @@
 
         function startGame() {
             if (gameActive) return;
-            
             score = 0;
             timeLeft = 60;
             gameActive = true;
-            
             scoreDisplay.textContent = score;
             timerDisplay.textContent = timeLeft;
             startBtn.style.opacity = "0.3";
-            startBtn.textContent = "W TRAKCIE";
-
+            startBtn.textContent = "ĆWICZ!";
+            nextRound();
             gameInterval = setInterval(() => {
                 timeLeft--;
                 timerDisplay.textContent = timeLeft;
                 if (timeLeft <= 0) endGame();
             }, 1000);
-
-            nextRound();
         }
 
         function nextRound() {
             if (!gameActive) return;
-
             circles.forEach(c => c.classList.remove('active', 'success'));
-
             let next;
-            do {
-                next = Math.floor(Math.random() * 6);
-            } while (next === activeIndex);
-            
+            do { next = Math.floor(Math.random() * 6); } while (next === activeIndex);
             activeIndex = next;
             circles[activeIndex].classList.add('active');
-
             clearTimeout(roundTimeout);
-            roundTimeout = setTimeout(() => {
-                if (gameActive) nextRound();
-            }, 5000);
+            roundTimeout = setTimeout(() => { if (gameActive) nextRound(); }, 5000);
         }
 
         function handleHit(index) {
             if (gameActive && index === activeIndex) {
                 score++;
                 scoreDisplay.textContent = score;
-                
                 circles[index].classList.remove('active');
                 circles[index].classList.add('success');
-
                 clearTimeout(roundTimeout);
-                setTimeout(() => {
-                    if (gameActive) nextRound();
-                }, 400);
+                setTimeout(() => { if (gameActive) nextRound(); }, 400);
             }
         }
 
@@ -250,9 +212,7 @@
             gameActive = false;
             clearInterval(gameInterval);
             clearTimeout(roundTimeout);
-            
-            alert("Koniec! Twój wynik: " + score);
-            
+            alert("Koniec treningu!\nTwój wynik to " + score + " punktów.");
             startBtn.style.opacity = "1";
             startBtn.textContent = "ZAGRAJ PONOWNIE";
             circles.forEach(c => c.classList.remove('active', 'success'));
