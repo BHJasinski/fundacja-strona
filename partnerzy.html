@@ -23,7 +23,6 @@
             overflow-x: hidden;
         }
 
-        /* Tło 3D - Bez zmian */
         #hero-canvas-wrapper {
             position: fixed;
             top: 0; left: 0;
@@ -36,7 +35,7 @@
 
         .content-overlay { position: relative; z-index: 10; width: 100%; padding-top: 60px; padding-bottom: 60px; }
 
-        .main-container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .main-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
         .glass-panel {
             background: var(--panel-bg);
@@ -49,11 +48,11 @@
             box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
 
-        /* Usprawniona siatka dla lepszej responsywności */
+        /* SIATKA: 3 kolumny na komputerze */
         .partner-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
             margin-top: 40px;
         }
 
@@ -61,7 +60,7 @@
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(0, 242, 255, 0.1);
             border-radius: 16px;
-            padding: 25px 15px;
+            padding: 40px 20px;
             text-align: center;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
@@ -77,33 +76,35 @@
             transform: translateY(-8px);
         }
 
-        /* KLUCZOWA ZMIANA: Widoczność logotypów */
+        /* LOGOTYPY: Zwiększona czytelność i rozmiar */
         .partner-logo-big {
-            max-width: 110px;
-            height: 50px; /* Stała wysokość pomaga wyrównać karty */
+            max-width: 160px; /* Zwiększono z 110px */
+            height: 70px;  /* Zwiększono z 50px */
             object-fit: contain;
-            /* Invert(1) zamienia czarne loga na białe */
-            filter: brightness(0) invert(1) opacity(0.7);
-            margin-bottom: 15px;
+            filter: brightness(0) invert(1) opacity(0.8); /* Zwiększono startowe opacity */
+            margin-bottom: 20px;
             transition: 0.4s ease;
         }
 
         .partner-card:hover .partner-logo-big {
-            filter: brightness(0) invert(1) opacity(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
-            transform: scale(1.05);
+            filter: brightness(0) invert(1) opacity(1) drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+            transform: scale(1.1);
         }
 
-        /* Poprawki dla urządzeń mobilnych */
-        @media (max-width: 600px) {
-            .glass-panel { padding: 30px 20px; }
-            h1 { font-size: 1.8rem; }
+        /* RESPONSYWNOŚĆ: 2 kolumny na komórce */
+        @media (max-width: 800px) {
             .partner-grid { 
-                grid-template-columns: repeat(2, 1fr); /* Dwie kolumny na małych ekranach */
-                gap: 15px; 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 20px; 
             }
-            .partner-card { padding: 15px 10px; }
-            .partner-logo-big { max-width: 80px; height: 40px; }
-            h3 { font-size: 0.9rem; }
+            .glass-panel { padding: 30px 15px; }
+            .partner-logo-big { max-width: 120px; height: 60px; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            .partner-card { padding: 25px 10px; }
+            .partner-logo-big { max-width: 100px; height: 50px; }
         }
 
         .nav-back {
@@ -120,7 +121,7 @@
 
         h1, h2, h3 { font-family: 'Roboto Mono', monospace; margin-top: 0; }
         h1 { color: var(--neon-pink); font-size: 2.5rem; letter-spacing: -1px; }
-        h3 { color: var(--neon-cyan); font-size: 1.1rem; margin-bottom: 10px; }
+        h3 { color: var(--neon-cyan); font-size: 1.2rem; margin-bottom: 12px; }
         p { color: var(--text-dim); line-height: 1.6; margin-bottom: 0; }
 
     </style>
@@ -143,37 +144,37 @@
                     <div class="partner-card">
                         <img src="gemini.png" alt="Gemini" class="partner-logo-big">
                         <h3>Gemini</h3>
-                        <p style="font-size: 0.75rem;">Wsparcie w zakresie AI.</p>
+                        <p style="font-size: 0.8rem;">Wsparcie w zakresie AI.</p>
                     </div>
                     
                     <div class="partner-card">
                         <img src="Tisale.png" alt="Tisale" class="partner-logo-big">
                         <h3>Tisale</h3>
-                        <p style="font-size: 0.75rem;">Partner technologiczny.</p>
+                        <p style="font-size: 0.8rem;">Partner technologiczny.</p>
                     </div>
 
                     <div class="partner-card">
                         <img src="dobraterapia.png" alt="dobra terapia" class="partner-logo-big">
                         <h3>Dobra terapia</h3>
-                        <p style="font-size: 0.75rem;">Specjalistyczna wiedza.</p>
+                        <p style="font-size: 0.8rem;">Specjalistyczna wiedza.</p>
                     </div>
                     
                     <div class="partner-card">
                         <img src="googlelabs.png" alt="Google labs" class="partner-logo-big">
                         <h3>Google labs</h3>
-                        <p style="font-size: 0.75rem;">Wsparcie AI.</p>
+                        <p style="font-size: 0.8rem;">Wsparcie AI.</p>
                     </div>
                     
                     <div class="partner-card">
                         <img src="adobe.png" alt="Adobe" class="partner-logo-big">
                         <h3>Adobe</h3>
-                        <p style="font-size: 0.75rem;">Oprogramowanie kreatywne.</p>
+                        <p style="font-size: 0.8rem;">Oprogramowanie kreatywne.</p>
                     </div>
 
                     <div class="partner-card">
                         <img src="wacom.png" alt="Wacom" class="partner-logo-big">
                         <h3>Wacom</h3>
-                        <p style="font-size: 0.75rem;">Precyzyjna praca dłoni.</p>
+                        <p style="font-size: 0.8rem;">Precyzyjna praca dłoni.</p>
                     </div>
                 </div>
             </section>
@@ -188,7 +189,7 @@
 
         const canvas = document.querySelector('#brain-canvas');
         const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Optymalizacja wydajności
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
