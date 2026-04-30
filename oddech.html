@@ -1,0 +1,311 @@
+import google.ds_python_interpreter as ds_python_interpreter
+
+code = """
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technika Oddechowa 4-6-8 | Post Stroke Creators</title>
+    <style>
+        :root {
+            --bg-color: #0b0d17;
+            --card-bg: #161b22;
+            --accent-pink: #ff007f;
+            --accent-cyan: #00f2ff;
+            --text-white: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            color: var(--accent-pink);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: var(--accent-cyan);
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Sekcja instrukcji */
+        .info-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid #30363d;
+        }
+
+        .info-section h2 {
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+            margin-top: 0;
+        }
+
+        .instruction-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .instruction-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .instruction-list li::before {
+            content: "•";
+            color: var(--accent-pink);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        /* Interaktywny Trener Oddechu */
+        .exercise-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 50px 20px;
+            text-align: center;
+            border: 2px solid #30363d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .visualizer-container {
+            width: 250px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            background: transparent;
+            border: 8px solid var(--accent-pink);
+            border-radius: 50%;
+            transition: all 0.5s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px var(--accent-pink);
+        }
+
+        .circle.inhale {
+            width: 220px;
+            height: 220px;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 40px var(--accent-cyan);
+        }
+
+        .circle.hold {
+            width: 220px;
+            height: 220px;
+            border-color: #fff;
+            box-shadow: 0 0 30px #fff;
+        }
+
+        .circle.exhale {
+            width: 100px;
+            height: 100px;
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 20px var(--accent-pink);
+        }
+
+        #timer-text {
+            font-size: 3rem;
+            font-weight: bold;
+            position: absolute;
+        }
+
+        #status-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+            height: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .controls {
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: transparent;
+            border: 2px solid var(--accent-pink);
+            color: var(--accent-pink);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: var(--accent-pink);
+            color: white;
+        }
+
+        .btn:disabled {
+            border-color: #444;
+            color: #444;
+            cursor: not-allowed;
+        }
+
+        .btn-stop {
+            border-color: #ff4444;
+            color: #ff4444;
+            margin-left: 10px;
+            display: none;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Technika Oddechowa 4-6-8</h1>
+        <p class="subtitle">Program budowy spokoju i regeneracji układu nerwowego</p>
+
+        <div class="info-section">
+            <h2>Jak się przygotować?</h2>
+            <ul class="instruction-list">
+                <li>Usiądź wygodnie z prostym kręgosłupem lub połóż się na plecach.</li>
+                <li>Oddychaj do brzucha – połóż dłoń na brzuchu i poczuj, jak się unosi.</li>
+                <li>Jeśli nos jest zatkany, przepłucz go wcześniej solą fizjologiczną.</li>
+                <li>Ta technika aktywuje układ przywspółczulny, co redukuje stres i poprawia sen.</li>
+            </ul>
+        </div>
+
+        <div class="exercise-card">
+            <div id="status-text">Gotowy?</div>
+            
+            <div class="visualizer-container">
+                <div class="circle" id="breathing-circle"></div>
+                <div id="timer-text">--</div>
+            </div>
+
+            <div class="controls">
+                <button class="btn" id="start-btn">Uruchom program</button>
+                <button class="btn btn-stop" id="stop-btn">Zatrzymaj</button>
+            </div>
+        </div>
+
+        <p class="footer-note">Zalecany czas trwania: 5-10 minut codziennie rano lub wieczorem.</p>
+    </div>
+
+    <script>
+        const circle = document.getElementById('breathing-circle');
+        const timerText = document.getElementById('timer-text');
+        const statusText = document.getElementById('status-text');
+        const startBtn = document.getElementById('start-btn');
+        const stopBtn = document.getElementById('stop-btn');
+
+        let isRunning = false;
+        let countdown;
+
+        async function startExercise() {
+            isRunning = true;
+            startBtn.style.display = 'none';
+            stopBtn.style.display = 'inline-block';
+
+            while (isRunning) {
+                // 1. WDECH (4s)
+                statusText.innerText = "Wdech przez nos";
+                statusText.style.color = "var(--accent-cyan)";
+                circle.className = "circle inhale";
+                await runTimer(4);
+                if (!isRunning) break;
+
+                // 2. ZATRZYMAJ (6s)
+                statusText.innerText = "Zatrzymaj oddech";
+                statusText.style.color = "#ffffff";
+                circle.className = "circle hold";
+                await runTimer(6);
+                if (!isRunning) break;
+
+                // 3. WYDECH (8s)
+                statusText.innerText = "Spokojny wydech";
+                statusText.style.color = "var(--accent-pink)";
+                circle.className = "circle exhale";
+                await runTimer(8);
+                if (!isRunning) break;
+            }
+        }
+
+        function runTimer(seconds) {
+            return new Promise((resolve) => {
+                let timeLeft = seconds;
+                timerText.innerText = timeLeft;
+                
+                countdown = setInterval(() => {
+                    timeLeft--;
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        resolve();
+                    } else {
+                        timerText.innerText = timeLeft;
+                    }
+                }, 1000);
+            });
+        }
+
+        function stopExercise() {
+            isRunning = false;
+            clearInterval(countdown);
+            startBtn.style.display = 'inline-block';
+            stopBtn.style.display = 'none';
+            statusText.innerText = "Gotowy?";
+            statusText.style.color = "var(--accent-cyan)";
+            timerText.innerText = "--";
+            circle.className = "circle";
+        }
+
+        startBtn.addEventListener('click', startExercise);
+        stopBtn.addEventListener('click', stopExercise);
+    </script>
+</body>
+</html>
+"""
+
+ds_python_interpreter.ds_python_interpreter(code=f"with open('oddech_4_6_8.html', 'w', encoding='utf-8') as f: f.write({repr(code)})")
