@@ -65,6 +65,148 @@
             color: #fff;
         }
 
+        /* GŁÓWNE MENU */
+        .main-nav {
+            position: fixed;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 110;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            max-width: calc(100vw - 220px);
+            padding: 7px;
+            border: 1px solid rgba(0, 242, 255, 0.22);
+            border-radius: 9px;
+            background: rgba(5, 5, 8, 0.82);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.10);
+        }
+
+        .main-nav a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 36px;
+            padding: 0 12px;
+            border-radius: 5px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+            white-space: nowrap;
+            transition: all 0.25s ease;
+        }
+
+        .main-nav a:hover {
+            color: #fff;
+            background: rgba(0, 242, 255, 0.08);
+        }
+
+        .main-nav a.nav-service {
+            color: #fff;
+            border: 1px solid rgba(255, 0, 122, 0.75);
+            background: rgba(255, 0, 122, 0.12);
+            box-shadow: 0 0 15px rgba(255, 0, 122, 0.12);
+        }
+
+        .main-nav a.nav-service:hover {
+            color: #fff;
+            background: rgba(255, 0, 122, 0.22);
+            box-shadow: 0 0 22px rgba(255, 0, 122, 0.35);
+        }
+
+        /* MOCNO WYRÓŻNIONA SEKCJA USŁUGI WWW */
+        .service-highlight {
+            border: 1px solid rgba(255, 0, 122, 0.65);
+            background:
+                radial-gradient(circle at 100% 0%, rgba(255, 0, 122, 0.12), transparent 28rem),
+                radial-gradient(circle at 0% 100%, rgba(0, 242, 255, 0.08), transparent 26rem),
+                var(--panel-bg);
+            box-shadow:
+                0 0 34px rgba(255, 0, 122, 0.16),
+                0 0 22px rgba(0, 242, 255, 0.08),
+                inset 0 0 18px rgba(255, 255, 255, 0.02);
+        }
+
+        .service-highlight:hover {
+            border-color: var(--neon-pink);
+            box-shadow:
+                0 0 42px rgba(255, 0, 122, 0.25),
+                0 0 26px rgba(0, 242, 255, 0.12);
+        }
+
+        .service-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            padding: 8px 12px;
+            border: 1px solid rgba(0, 242, 255, 0.45);
+            border-radius: 999px;
+            color: var(--neon-cyan);
+            background: rgba(0, 242, 255, 0.06);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+        }
+
+        .service-highlight h2 {
+            margin-top: 0;
+            margin-bottom: 18px;
+            font-size: clamp(1.9rem, 5vw, 3rem);
+            line-height: 1.05;
+        }
+
+        .service-highlight .service-lead {
+            max-width: 680px;
+            color: #fff;
+            font-size: clamp(1.15rem, 2.6vw, 1.38rem);
+            line-height: 1.55;
+            font-weight: 600;
+        }
+
+        .service-points {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin: 24px 0 28px;
+        }
+
+        .service-points span {
+            padding: 8px 10px;
+            border: 1px solid rgba(0, 242, 255, 0.20);
+            border-radius: 999px;
+            color: #bffbff;
+            background: rgba(0, 242, 255, 0.05);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.70rem;
+            font-weight: 700;
+        }
+
+        .service-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .service-cta .cyber-btn {
+            padding: 15px 22px;
+            font-weight: 700;
+        }
+
+        .service-cta-note {
+            color: var(--text-dim);
+            font-size: 0.86rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+
         #hero-canvas-wrapper {
             position: fixed;
             top: 0; left: 0;
@@ -215,11 +357,64 @@
         @media (max-width: 768px) {
             .glass-panel { padding: 40px 25px; }
             header h1 { letter-spacing: 5px; }
-            .lang-switcher { top: 15px; right: 15px; font-size: 0.7rem; }
+
+            .lang-switcher {
+                top: 14px;
+                right: 12px;
+                font-size: 0.62rem;
+                padding: 5px 9px;
+            }
+
+            .main-nav {
+                left: 12px;
+                right: 98px;
+                top: 12px;
+                transform: none;
+                max-width: none;
+                overflow-x: auto;
+                justify-content: flex-start;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .main-nav::-webkit-scrollbar { display: none; }
+
+            .main-nav a {
+                flex: 0 0 auto;
+                min-height: 34px;
+                padding: 0 10px;
+                font-size: 0.62rem;
+            }
+
+            .service-highlight {
+                padding: 42px 24px;
+            }
+
+            .service-cta {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .service-cta .cyber-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .service-cta-note {
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+
+    <nav class="main-nav" aria-label="Główne menu">
+        <a href="#start">START</a>
+        <a href="strony-www-z-misja.html" class="nav-service">STRONY WWW Z MISJĄ</a>
+        <a href="kompetencje.html">KOMPETENCJE</a>
+        <a href="partnerzy.html">PARTNERZY</a>
+        <a href="#kontakt">KONTAKT</a>
+    </nav>
 
     <a href="#" class="lang-switcher">[ SELECT_LANG: EN ]</a>
 
@@ -230,7 +425,7 @@
     <div class="scanlines"></div>
 
     <div class="content-overlay">
-        <header>
+        <header id="start">
             <h1>POST_STROKE_CREATORS</h1>
             <p style="color: var(--neon-cyan); font-family: 'Roboto Mono'; margin-top: 15px; opacity: 0.6;">[ SCROLL_TO_ACCESS_INTERFACE ]</p>
         </header>
@@ -244,6 +439,41 @@
                     Ta strona jest miejscem dla <strong>grafików komputerowych i artystów</strong>, którzy po udarze próbują odnaleźć się w nowej rzeczywistości twórczej.
                 </p>
                 <a href="o-nas.html" class="cyber-btn">POZNAJ HISTORIĘ ZAŁOŻYCIELA ></a>
+            </section>
+
+            <section class="glass-panel service-highlight" id="strony-www">
+                <div class="service-badge">NEW_SERVICE // WWW_FOR_BUSINESS</div>
+
+                <h2>STRONY WWW Z MISJĄ</h2>
+
+                <p class="service-lead">
+                    <strong>Potrzebujesz nowoczesnej strony internetowej dla swojej firmy?</strong>
+                    Tworzymy szybkie, bezpieczne i responsywne strony WWW dla nowych firm, lokalnych biznesów
+                    oraz organizacji, które chcą wejść do internetu profesjonalnie.
+                </p>
+
+                <p>
+                    Projekty powstają w oparciu o <strong>HTML5, CSS3 i nowoczesne standardy webowe</strong>.
+                    Dbamy o czytelność, szybkość, wersję mobilną, dostępność i logiczną strukturę strony.
+                    To realna usługa biznesowa tworzona przez osoby, które po udarze odbudowały swoje kompetencje
+                    i rozwinęły je w kierunku technologii cyfrowych.
+                </p>
+
+                <div class="service-points" aria-label="Najważniejsze cechy usługi">
+                    <span>HTML5</span>
+                    <span>MOBILE_FIRST</span>
+                    <span>RESPONSIVE</span>
+                    <span>FAST</span>
+                    <span>ACCESSIBLE</span>
+                    <span>SEO_READY</span>
+                </div>
+
+                <div class="service-cta">
+                    <a href="strony-www-z-misja.html" class="cyber-btn pink">
+                        ZOBACZ USŁUGĘ I ZBUDUJ Z NAMI STRONĘ >
+                    </a>
+                    <span class="service-cta-note">Kliknij, aby przejść do pełnej oferty</span>
+                </div>
             </section>
 
             <section class="glass-panel">
