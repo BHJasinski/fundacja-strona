@@ -527,6 +527,67 @@
 
     .email:hover { color: var(--cyan); }
 
+    .direct-contact {
+      display: grid;
+      gap: 10px;
+      max-width: 620px;
+      margin: 28px auto 0;
+      padding: 22px;
+      border: 1px solid rgba(36, 231, 239, .28);
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(36,231,239,.045), transparent),
+        rgba(8,10,16,.72);
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    }
+
+    .direct-contact .contact-label {
+      color: var(--cyan);
+      font-size: .76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .direct-contact .contact-title {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(1.08rem, 2.4vw, 1.35rem);
+      font-weight: 900;
+    }
+
+    .direct-contact .contact-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .phone-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 54px;
+      margin-top: 4px;
+      padding: 0 18px;
+      border: 1px solid rgba(36, 231, 239, .5);
+      border-radius: 10px;
+      color: var(--cyan);
+      background: rgba(36, 231, 239, .06);
+      text-decoration: none;
+      font-size: clamp(1.12rem, 3vw, 1.45rem);
+      font-weight: 900;
+      letter-spacing: .035em;
+      transition: .2s ease;
+    }
+
+    .phone-link:hover,
+    .phone-link:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--cyan);
+      box-shadow: 0 0 26px rgba(36, 231, 239, .16);
+      outline: none;
+    }
+
     footer {
       padding: 42px 0 58px;
       color: #4f5867;
@@ -592,7 +653,8 @@
       "@type": "Organization",
       "name": "Fundacja Post-Stroke Creators",
       "url": "https://post-strokecreators.org/",
-      "email": "post.stroke.creators@o2.pl"
+      "email": "post.stroke.creators@o2.pl",
+      "telephone": "+48 530 143 500"
     },
     "areaServed": "PL",
     "serviceType": "Projektowanie i tworzenie stron internetowych",
@@ -635,6 +697,7 @@
 
           <div class="cta-row">
             <a class="btn primary mono" href="mailto:post.stroke.creators@o2.pl?subject=Zapytanie%20o%20stron%C4%99%20internetow%C4%85&body=Dzie%C5%84%20dobry%2C%0A%0AChc%C4%99%20porozmawia%C4%87%20o%20stronie%20internetowej%20dla%20mojej%20firmy.%0A%0ANazwa%20firmy%3A%20%0ABran%C5%BCa%3A%20%0ACzego%20potrzebuj%C4%99%3A%20%0A%0APozdrawiam">CHCĘ NOWĄ STRONĘ →</a>
+            <a class="btn secondary mono" href="tel:+48530143500">ZADZWOŃ: 530 143 500</a>
             <a class="btn secondary mono" href="#o-nas">POZNAJ NASZE PODEJŚCIE</a>
           </div>
         </div>
@@ -877,6 +940,18 @@
           </p>
           <a class="btn primary mono" href="mailto:post.stroke.creators@o2.pl?subject=Zapytanie%20o%20stron%C4%99%20internetow%C4%85&body=Dzie%C5%84%20dobry%2C%0A%0AChc%C4%99%20porozmawia%C4%87%20o%20stronie%20internetowej.%0A%0ANazwa%20firmy%3A%20%0ABran%C5%BCa%3A%20%0ACzy%20mam%20ju%C5%BC%20stron%C4%99%3A%20%0ANajwa%C5%BCniejszy%20cel%20nowej%20strony%3A%20%0A%0APozdrawiam">OPISZ NAM SWOJĄ FIRMĘ →</a><br />
           <a class="email" href="mailto:post.stroke.creators@o2.pl">post.stroke.creators@o2.pl</a>
+
+          <div class="direct-contact" aria-label="Bezpośredni kontakt telefoniczny">
+            <div class="contact-label mono">FASTEST_CONTACT // DIRECT_LINE</div>
+            <p class="contact-title">Bezpośrednio do fachowca z naszej Fundacji</p>
+            <p class="contact-copy">
+              Masz konkretny pomysł, chcesz szybko omówić stronę albo po prostu zapytać, od czego zacząć?
+              Zadzwoń bezpośrednio. To najszybsza droga kontaktu z nami w sprawie wykonania strony internetowej.
+            </p>
+            <a class="phone-link mono" href="tel:+48530143500" aria-label="Zadzwoń do Fundacji Post-Stroke Creators pod numer 530 143 500">
+              ☎ 530 143 500
+            </a>
+          </div>
         </div>
       </div>
     </section>
