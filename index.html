@@ -120,6 +120,106 @@
             box-shadow: 0 0 22px rgba(255, 0, 122, 0.35);
         }
 
+        /* MENU MOBILNE - domyślnie ukryte na komputerach */
+        .mobile-menu-toggle,
+        .mobile-nav {
+            display: none;
+        }
+
+        .mobile-menu-toggle {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 130;
+            width: 46px;
+            height: 46px;
+            padding: 0;
+            border: 1px solid rgba(0, 242, 255, 0.45);
+            border-radius: 8px;
+            background: rgba(5, 5, 8, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 0 18px rgba(0, 242, 255, 0.12);
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            position: absolute;
+            left: 11px;
+            width: 22px;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 8px rgba(0, 242, 255, 0.7);
+            transition: transform 0.25s ease, top 0.25s ease, opacity 0.2s ease;
+        }
+
+        .mobile-menu-toggle span:nth-child(1) { top: 14px; }
+        .mobile-menu-toggle span:nth-child(2) { top: 21px; }
+        .mobile-menu-toggle span:nth-child(3) { top: 28px; }
+
+        .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) {
+            top: 21px;
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) {
+            top: 21px;
+            transform: rotate(-45deg);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 66px;
+            left: 12px;
+            right: 12px;
+            z-index: 125;
+            flex-direction: column;
+            gap: 6px;
+            padding: 10px;
+            border: 1px solid rgba(0, 242, 255, 0.28);
+            border-radius: 10px;
+            background: rgba(5, 5, 8, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 0 24px rgba(0, 242, 255, 0.14);
+        }
+
+        .mobile-nav.is-open {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            display: flex;
+            align-items: center;
+            min-height: 46px;
+            padding: 0 14px;
+            border-radius: 6px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a:focus-visible {
+            color: #fff;
+            background: rgba(0, 242, 255, 0.08);
+            outline: none;
+        }
+
+        .mobile-nav a.nav-service {
+            color: #fff;
+            border: 1px solid rgba(255, 0, 122, 0.75);
+            background: rgba(255, 0, 122, 0.12);
+        }
+
         /* MOCNO WYRÓŻNIONA SEKCJA USŁUGI WWW */
         .service-highlight {
             border: 1px solid rgba(255, 0, 122, 0.65);
@@ -365,25 +465,14 @@
                 padding: 5px 9px;
             }
 
+            /* Na telefonach desktopowe menu znika całkowicie */
             .main-nav {
-                left: 12px;
-                right: 98px;
-                top: 12px;
-                transform: none;
-                max-width: none;
-                overflow-x: auto;
-                justify-content: flex-start;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
+                display: none;
             }
 
-            .main-nav::-webkit-scrollbar { display: none; }
-
-            .main-nav a {
-                flex: 0 0 auto;
-                min-height: 34px;
-                padding: 0 10px;
-                font-size: 0.62rem;
+            /* Pojawia się klasyczny przycisk hamburger */
+            .mobile-menu-toggle {
+                display: block;
             }
 
             .service-highlight {
@@ -409,6 +498,20 @@
 <body>
 
     <nav class="main-nav" aria-label="Główne menu">
+        <a href="#start">START</a>
+        <a href="strony-www-z-misja.html" class="nav-service">STRONY WWW Z MISJĄ</a>
+        <a href="kompetencje.html">KOMPETENCJE</a>
+        <a href="partnerzy.html">PARTNERZY</a>
+        <a href="#kontakt">KONTAKT</a>
+    </nav>
+
+    <button class="mobile-menu-toggle" type="button" aria-label="Otwórz menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobilne">
         <a href="#start">START</a>
         <a href="strony-www-z-misja.html" class="nav-service">STRONY WWW Z MISJĄ</a>
         <a href="kompetencje.html">KOMPETENCJE</a>
@@ -542,6 +645,37 @@
             </footer>
         </div>
     </div>
+
+    <script>
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        if (mobileMenuToggle && mobileNav) {
+            const closeMobileMenu = () => {
+                mobileNav.classList.remove('is-open');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                mobileMenuToggle.setAttribute('aria-label', 'Otwórz menu');
+            };
+
+            mobileMenuToggle.addEventListener('click', () => {
+                const isOpen = mobileNav.classList.toggle('is-open');
+                mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+                mobileMenuToggle.setAttribute('aria-label', isOpen ? 'Zamknij menu' : 'Otwórz menu');
+            });
+
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') closeMobileMenu();
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) closeMobileMenu();
+            });
+        }
+    </script>
 
     <script type="module">
         import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
