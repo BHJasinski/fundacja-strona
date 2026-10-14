@@ -642,6 +642,77 @@
       *, *::before, *::after { transition: none !important; animation: none !important; }
       .reveal { opacity: 1; transform: none; }
     }
+  
+    /* Oferta: czytelna i wygodna na telefonie */
+    :root { --pink-readable: #ff5caa; }
+    section[id], article[id] { scroll-margin-top: 24px; }
+    :focus-visible { outline: 3px solid var(--cyan) !important; outline-offset: 5px; }
+    .reveal { opacity: 1; transform: none; }
+    .btn.primary { background: #c90059; border-color: #ff5caa; }
+    .section h2, .story-panel h3 { color: var(--pink-readable); }
+    .skip-link { position: absolute; top: -100px; left: 16px; z-index: 100; padding: 14px; background: var(--cyan); color: #05060a; }
+    .skip-link:focus { top: 10px; }
+    .hero-price { color: var(--text); margin: 0 0 18px; font-size: 1.1rem; }
+    .hero-price strong { color: var(--cyan); }
+    .offer-jumps { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0; }
+    .offer-jumps a { padding: 11px 15px; min-height: 46px; border: 1px solid var(--line); border-radius: 9px; text-decoration: none; color: var(--cyan); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; align-items: stretch; }
+    .price-card { display: flex; flex-direction: column; padding: 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--panel); min-width: 0; }
+    .price-card.featured { border: 2px solid var(--pink-readable); background: linear-gradient(150deg,rgba(255,15,122,.09),transparent 60%),var(--panel); box-shadow: 0 0 30px rgba(255,15,122,.07); }
+    .plan-label { align-self: flex-start; color: var(--cyan); font: 800 .76rem/1.5 Consolas,monospace; letter-spacing: .06em; margin: 0 0 20px; }
+    .featured .plan-label { color: #ffb7d6; }
+    .price-card h3 { font-size: 1.65rem; margin-bottom: 8px; }
+    .plan-for { color: #b5bfce; margin-bottom: 20px; }
+    .price { font-size: clamp(2.4rem,4vw,3.2rem); line-height: 1.15; font-weight: 900; letter-spacing: -.04em; margin: 0; white-space: nowrap; }
+    .price small { font-size: 1rem; letter-spacing: 0; }
+    .price-meta { color: var(--muted); margin: 8px 0 0; font-size: .9rem; }
+    .plan-list { padding: 22px 0; margin: 20px 0; border-top: 1px solid var(--line); list-style: none; }
+    .plan-list li { position: relative; padding-left: 23px; margin-bottom: 12px; color: #d7deea; }
+    .plan-list li:last-child { margin-bottom: 0; }
+    .plan-list li::before { content: '✓'; color: var(--cyan); position: absolute; left: 0; }
+    .price-card .btn { margin-top: auto; text-transform: none; font-size: 1rem; letter-spacing: 0; text-align: center; padding: 12px; }
+    .offer-note { padding: 20px; border-left: 3px solid var(--cyan); background: var(--cyan-soft); border-radius: 0 10px 10px 0; color: #d7e5ee; margin-top: 24px; }
+    .offer-note p:last-child { margin-bottom: 0; }
+    .fineprint { color: #b5bfce; font-size: .93rem; margin: 18px 0 26px; }
+    .care-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+    .care-price { display: block; font-size: 1.7rem; color: var(--cyan); margin: 16px 0; font-weight: 800; }
+    .care-price small { font-size: .95rem; }
+    .faq { border: 1px solid var(--line); border-radius: 14px; background: var(--panel); margin-bottom: 12px; overflow: hidden; }
+    .faq summary { cursor: pointer; padding: 20px; font-weight: 750; min-height: 58px; }
+    .faq summary::marker { color: var(--cyan); }
+    .faq[open] summary { border-bottom: 1px solid var(--line); color: var(--cyan); }
+    .faq-body { padding: 20px; color: #c8d0dd; }
+    .faq-body p:last-child { margin-bottom: 0; }
+    .extras { margin: 0; }
+    .extras > div { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .extras > div:first-child { padding-top: 0; }
+    .extras > div:last-child { border: 0; }
+    .extras dt { color: #d7deea; }
+    .extras dd { margin: 0; color: var(--cyan); font-weight: 800; }
+    .mobile-actions { display: none; }
+    footer { color: #98a3b5; }
+    @media(max-width: 880px) {
+      .pricing-grid, .care-grid { grid-template-columns: 1fr; }
+      .price-card { padding: 24px; }
+      .hero .browser { display: none; }
+      .hero { padding: 40px 0; gap: 0; }
+      .hero .eyebrow { font-size: .73rem; overflow-wrap: anywhere; }
+      .hero-points { gap: 7px; margin-bottom: 24px; }
+      .hero-points li { font-size: .7rem; }
+      .mini-nav { display: flex; }
+      .mini-nav a { display: none; }
+      .mini-nav a[href="#cennik"] { display: inline-flex; }
+      body { padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)); }
+      .mobile-actions { position: fixed; display: grid; grid-template-columns: 1fr 1.2fr; gap: 10px; bottom: 0; left: 0; right: 0; z-index: 30; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: rgba(5,6,10,.97); border-top: 1px solid var(--line); }
+      .mobile-actions a { min-height: 50px; font-size: .9rem; text-transform: none; letter-spacing: 0; }
+      .section { padding: 44px 0; }
+      .section h2 { font-size: clamp(1.85rem,8vw,2.7rem); }
+      .cta-box { padding: 28px 18px; }
+      .direct-contact { padding: 16px; }
+      .mono { overflow-wrap: anywhere; }
+      .extras > div { grid-template-columns: 1fr; gap: 5px; }
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -664,11 +735,14 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#cennik">Przejdź do cennika</a>
   <main>
     <div class="page">
       <nav class="topbar" aria-label="Nawigacja strony">
         <a class="back mono" href="./" aria-label="Powrót do strony głównej">← POWRÓT</a>
         <div class="mini-nav mono" aria-label="Skróty">
+          <a href="#cennik">CENNIK</a>
+          <a href="#opieka">OPIEKA</a>
           <a href="#usluga">USŁUGA</a>
           <a href="#proces">PROCES</a>
           <a href="#kontakt">KONTAKT</a>
@@ -687,18 +761,15 @@
           </p>
 
           <ul class="hero-points mono" aria-label="Najważniejsze cechy usługi">
-            <li>HTML5</li>
-            <li>MOBILE_FIRST</li>
-            <li>RESPONSIVE</li>
-            <li>FAST</li>
-            <li>ACCESSIBLE</li>
-            <li>SEO_READY</li>
+            <li>Wygodna na telefonie</li>
+            <li>Szybka i czytelna</li>
+            <li>Z misją społeczną</li>
           </ul>
 
+          <p class="hero-price">Twoja firmowa strona <strong>od 1 490 zł netto</strong></p>
           <div class="cta-row">
-            <a class="btn primary mono" href="mailto:post.stroke.creators@o2.pl?subject=Zapytanie%20o%20stron%C4%99%20internetow%C4%85&body=Dzie%C5%84%20dobry%2C%0A%0AChc%C4%99%20porozmawia%C4%87%20o%20stronie%20internetowej%20dla%20mojej%20firmy.%0A%0ANazwa%20firmy%3A%20%0ABran%C5%BCa%3A%20%0ACzego%20potrzebuj%C4%99%3A%20%0A%0APozdrawiam">CHCĘ NOWĄ STRONĘ →</a>
-            <a class="btn secondary mono" href="tel:+48530143500">ZADZWOŃ: 530 143 500</a>
-            <a class="btn secondary mono" href="#o-nas">POZNAJ NASZE PODEJŚCIE</a>
+            <a class="btn primary" href="#cennik">Zobacz pakiety i ceny ↓</a>
+            <a class="btn secondary" href="tel:+48530143500">Porozmawiajmy: 530 143 500</a>
           </div>
         </div>
 
@@ -725,6 +796,41 @@
         </div>
       </section>
     </div>
+
+
+    <section class="section" id="cennik" aria-labelledby="pricing-title">
+      <div class="page">
+        <div class="section-head"><div><p class="section-kicker mono">PAKIETY // TWÓJ DOBRY START</p><h2 id="pricing-title">Dobra strona.<br>Jasna cena.</h2></div><p class="section-intro">Wybierz zakres dopasowany do swojej firmy. Każdy pakiet łączy profesjonalną stronę z realnym projektem zawodowym twórców po udarze.</p></div>
+        <nav class="offer-jumps" aria-label="Skróty w ofercie"><a href="#opieka">Opieka po wdrożeniu</a><a href="#dodatki">Dodatki i pytania</a></nav>
+        <p class="fineprint">Ceny netto. Końcową kwotę do zapłaty, wraz z ewentualnym VAT, potwierdzimy w indywidualnej ofercie przed rozpoczęciem prac. Abonament za opiekę jest opcjonalny.</p>
+        <div class="pricing-grid"><article class="price-card "><p class="plan-label">Na dobry początek</p><h3>START</h3><p class="plan-for">Pierwsza strona dla małej firmy i jednej konkretnej oferty.</p><p class="price">1 490 <small>zł</small></p><p class="price-meta">netto · jednorazowo</p><ul class="plan-list"><li>Jedna strona do <strong>5 sekcji</strong></li><li>Teksty i zdjęcia dostarczasz Ty</li><li>Wygląd dopasowany do Twojej marki</li><li>Klikany telefon, e-mail i link do mapy</li><li>Wersja mobilna i uruchomienie strony</li><li><strong>1 runda poprawek</strong></li></ul><a class="btn secondary" href="mailto:post.stroke.creators@o2.pl?subject=Zapytanie%20o%20pakiet%20START&amp;body=Dzie%C5%84%20dobry%2C%0A%0AInteresuje%20mnie%20pakiet%20START.%20Prosz%C4%99%20o%20kontakt%20i%20potwierdzenie%20wyceny.%0A%0ANazwa%20firmy%3A%20%0ABran%C5%BCa%3A%20%0ATelefon%20%28opcjonalnie%29%3A%20%0ACzego%20potrzebuj%C4%99%3A%20%0A%0APozdrawiam">Zapytaj o START →</a></article><article class="price-card featured"><p class="plan-label">POLECAMY</p><h3>BIZNES</h3><p class="plan-for">Rozbudowana wizytówka, która pokazuje ofertę i ułatwia kontakt.</p><p class="price">2 490 <small>zł</small></p><p class="price-meta">netto · jednorazowo</p><ul class="plan-list"><li>Jedna strona do <strong>8 sekcji</strong></li><li>Indywidualny projekt graficzny</li><li>Pomoc w redakcji do 5 000 znaków treści</li><li>Galeria i działający formularz kontaktowy</li><li>Podstawowe SEO: tytuły, opisy i nagłówki</li><li><strong>2 rundy poprawek</strong></li></ul><a class="btn primary" href="mailto:post.stroke.creators@o2.pl?subject=Zapytanie%20o%20pakiet%20BIZNES&amp;body=Dzie%C5%84%20dobry%2C%0A%0AInteresuje%20mnie%20pakiet%20BIZNES.%20Prosz%C4%99%20o%20kontakt%20i%20potwierdzenie%20wyceny.%0A%0ANazwa%20firmy%3A%20%0ABran%C5%BCa%3A%20%0ATelefon%20%28opcjonalnie%29%3A%20%0ACzego%20potrzebuj%C4%99%3A%20%0A%0APozdrawiam">Zapytaj o BIZNES →</a></article><article class="price-card "><p class="plan-label">Więcej miejsca na ofertę</p><h3>FIRMA PLUS</h3><p class="plan-for">Dla firmy, która potrzebuje osobnych stron usług i realizacji.</p><p class="price"><small>od</small> 3 990 <small>zł</small></p><p class="price-meta">netto · jednorazowo</p><ul class="plan-list"><li><strong>Do 5 stron</strong>, łącznie ze stroną główną</li><li>Indywidualny projekt graficzny</li><li>Pomoc w redakcji do 10 000 znaków treści</li><li>Galeria i działający formularz kontaktowy</li><li>Podstawowe SEO każdej strony</li><li><strong>2 rundy poprawek</strong></li></ul><a class="btn secondary" href="mailto:post.stroke.creators@o2.pl?subject=Zapytanie%20o%20pakiet%20FIRMA%20PLUS&amp;body=Dzie%C5%84%20dobry%2C%0A%0AInteresuje%20mnie%20pakiet%20FIRMA%20PLUS.%20Prosz%C4%99%20o%20kontakt%20i%20potwierdzenie%20wyceny.%0A%0ANazwa%20firmy%3A%20%0ABran%C5%BCa%3A%20%0ATelefon%20%28opcjonalnie%29%3A%20%0ACzego%20potrzebuj%C4%99%3A%20%0A%0APozdrawiam">Zapytaj o FIRMA PLUS →</a></article></div>
+        <div class="offer-note"><p><strong>W każdym pakiecie:</strong> wersja na telefon, testy działania, sprawdzenie czytelności, kontrastu i obsługi klawiaturą oraz uruchomienie pod Twoją domeną.</p><p>Domena, hosting i płatne usługi zewnętrzne są rozliczane osobno. Formularz może wymagać zewnętrznej usługi — jej ewentualny koszt ustalamy przed realizacją.</p></div>
+        <p class="fineprint">Nie wiesz, co wybrać? <a href="tel:+48530143500">Zadzwoń: 530 143 500</a>. Pomożemy dopasować zakres. Kliknięcie „Zapytaj” otwiera aplikację pocztową i nie składa zamówienia.</p>
+      </div>
+    </section>
+    <section class="section" id="opieka" aria-labelledby="care-title"><div class="page">
+      <div class="section-head"><div><p class="section-kicker mono">OPIEKA // PO URUCHOMIENIU</p><h2 id="care-title">Strona gotowa.<br>Co dalej?</h2></div><p class="section-intro">Możesz zamawiać zmiany pojedynczo albo wybrać miesięczne wsparcie. Ty prowadzisz firmę, my pomagamy utrzymać aktualną ofertę.</p></div>
+      <div class="care-grid">
+        <article class="card"><h3>Opieka podstawowa</h3><span class="care-price">149 zł <small>netto / mies.</small></span><p>Kontrola działania, kopia plików po zmianach i do <strong>30 minut aktualizacji miesięcznie</strong>. Na przykład zmiana godzin otwarcia lub danych kontaktowych.</p></article>
+        <article class="card pink-line"><h3>Opieka aktywna</h3><span class="care-price">349 zł <small>netto / mies.</small></span><p>Kontrola działania, kopia plików po zmianach i łącznie do <strong>2 godzin aktualizacji miesięcznie</strong>: treści, zdjęć, menu lub oferty.</p></article>
+        <article class="card"><h3>Zmiany na życzenie</h3><span class="care-price">180 zł <small>netto / godz.</small></span><p>Bez miesięcznego abonamentu. Rozliczenie od <strong>1 godziny</strong>. Zakres i szacowany koszt uzgadniamy przed pracą.</p></article>
+      </div><p class="fineprint">Większą rozbudowę i prace przekraczające limit wyceniamy osobno, do Twojej akceptacji. Warunki oraz okres opieki ustalamy przed jej rozpoczęciem.</p>
+    </div></section>
+    <section class="section" id="dodatki" aria-labelledby="details-title"><div class="page">
+      <div class="section-head"><div><p class="section-kicker mono">SZCZEGÓŁY // BEZ NIEDOMÓWIEŃ</p><h2 id="details-title">Warto wiedzieć.</h2></div><p class="section-intro">Sprawdź dodatki, zasady płatności i to, co przygotować. Dotknij pytania, aby rozwinąć odpowiedź.</p></div>
+      <details class="faq"><summary>Ile kosztują dodatkowe usługi?</summary><div class="faq-body"><dl class="extras">
+        <div><dt>Kolejna podstrona na istniejącym układzie, z Twoimi materiałami</dt><dd>350–500 zł netto</dd></div>
+        <div><dt>Drugi język — dostarczasz tłumaczenie</dt><dd>+40% ceny strony</dd></div>
+        <div><dt>Podłączenie gotowego systemu rezerwacji</dt><dd>od 350 zł netto</dd></div>
+        <div><dt>Dodatkowa runda poprawek</dt><dd>180 zł netto / godz.</dd></div>
+        <div><dt>Tryb ekspresowy — po potwierdzeniu dostępności</dt><dd>+30% ceny projektu</dd></div>
+      </dl><p>Abonament zewnętrznego systemu rezerwacji jest dodatkowym kosztem. Dokładną cenę integracji ustalamy po sprawdzeniu wybranego narzędzia.</p></div></details>
+      <details class="faq"><summary>Jak wygląda płatność i rozpoczęcie współpracy?</summary><div class="faq-body"><p>Najpierw ustalamy zakres, końcową cenę i termin. Płatność: <strong>50% przed rozpoczęciem prac, 50% po akceptacji strony, przed jej uruchomieniem</strong>. Samo zapytanie o pakiet nie zobowiązuje do zakupu.</p></div></details>
+      <details class="faq"><summary>Co oznaczają sekcje, podstrony i rundy poprawek?</summary><div class="faq-body"><p><strong>Sekcja</strong> to część jednej przewijanej strony, np. oferta, galeria lub kontakt. <strong>Podstrona</strong> ma osobny adres i jest dostępna z menu.</p><p><strong>Runda poprawek</strong> to jedna zbiorcza lista uwag w ustalonym zakresie projektu. Nowe funkcje i rozszerzenie zakresu wyceniamy dodatkowo.</p></div></details>
+      <details class="faq"><summary>Co przygotować i kiedy strona będzie gotowa?</summary><div class="faq-body"><p>Przygotuj nazwę firmy, opis oferty, dane kontaktowe, logo i zdjęcia, jeśli je masz. W pakiecie START dostarczasz gotowe treści; w BIZNES i FIRMA PLUS pomagamy je zredagować w podanych limitach znaków ze spacjami.</p><p>Termin ustalamy po poznaniu zakresu i dostępności materiałów. Jeśli zależy Ci na konkretnej dacie, podaj ją w zapytaniu.</p></div></details>
+      <details class="faq"><summary>Czy mogę samodzielnie edytować stronę? Co jest poza pakietem?</summary><div class="faq-body"><p>Pakiety obejmują strony HTML bez panelu samodzielnej edycji. Zmiany możesz zlecić nam. Panel edycji, sklep internetowy i własny system rezerwacji wyceniamy indywidualnie.</p><p>Domena, hosting, płatne zdjęcia oraz abonamenty zewnętrznych narzędzi nie są wliczone w cenę wykonania. Przed realizacją uzgadniamy, czego potrzebuje Twoja strona.</p></div></details>
+      <details class="faq"><summary>Co obejmuje SEO i dostępność?</summary><div class="faq-body"><p>W BIZNES i FIRMA PLUS przygotowujemy podstawy SEO: tytuły, opisy i logiczne nagłówki. Stałe pozycjonowanie nie jest częścią pakietu; nie obiecujemy konkretnej pozycji w Google.</p><p>W każdym pakiecie sprawdzamy czytelność, kontrast i obsługę klawiaturą. Pełny audyt zgodności z WCAG oraz dodatkowe prace wynikające z audytu wymagają osobnej wyceny.</p></div></details>
+    </div></section>
 
     <section class="section" id="usluga">
       <div class="page">
@@ -960,6 +1066,7 @@
       © 2026 FUNDACJA POST-STROKE CREATORS // TWORZYMY INTERNET. ODBUDOWUJEMY MOŻLIWOŚCI.
     </footer>
   </main>
+  <nav class="mobile-actions" aria-label="Szybki kontakt i ceny"><a class="btn secondary" href="#cennik">Pakiety i ceny</a><a class="btn primary" href="tel:+48530143500">☎ Zadzwoń</a></nav>
 
   <script>
     (function () {
