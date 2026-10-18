@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Reklama w ChatGPT i przygotowanie firm do obecności w świecie AI. Post-Stroke Creators tworzy kampanie, treści i strony, które pomagają klientom znaleźć Twoją ofertę.">
+  <meta name="theme-color" content="#07090d">
+  <title>Reklama w AI i ChatGPT | Post-Stroke Creators</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07090d;
+      --panel: #10131b;
+      --panel-2: #0c1017;
+      --line: rgba(190, 205, 222, .12);
+      --text: #f5f7fb;
+      --muted: #aab3c2;
+      --pink: #ff1683;
+      --pink-soft: #ff6eae;
+      --cyan: #28e6df;
+      --green: #87f2d0;
+      --radius: 22px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, .34);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 88% 10%, rgba(255, 22, 131, .12), transparent 29rem),
+        radial-gradient(ellipse at 5% 32%, rgba(40, 230, 223, .08), transparent 30rem),
+        var(--bg);
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--cyan); outline-offset: 4px; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .topbar { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-size: .83rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    .brand-mark { width: 35px; height: 35px; display: grid; place-items: center; border: 1px solid rgba(40,230,223,.5); border-radius: 11px; color: var(--cyan); box-shadow: inset 0 0 24px rgba(40,230,223,.11); font-size: .72rem; }
+    .nav-links { display: flex; align-items: center; gap: 25px; color: #c2c9d3; font-size: .82rem; }
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { color: var(--cyan); }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 47px; padding: 12px 19px; border: 1px solid transparent; border-radius: 999px; background: linear-gradient(100deg, #ff1683, #e51c76); color: white; font-weight: 800; font-size: .88rem; text-decoration: none; box-shadow: 0 10px 32px rgba(255,22,131,.18); transition: transform .2s ease, box-shadow .2s ease; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(255,22,131,.28); }
+    .button.secondary { background: rgba(255,255,255,.035); border-color: rgba(40,230,223,.42); box-shadow: none; color: var(--cyan); }
+    .button.small { min-height: 39px; padding: 9px 15px; font-size: .78rem; }
+    .hero { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 58px; padding: 86px 0 78px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--cyan); font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .15em; }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--cyan); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 680px; margin: 18px 0 20px; font-size: clamp(2.7rem, 6.3vw, 5.35rem); line-height: .98; letter-spacing: -.065em; }
+    .gradient { color: var(--pink); background: linear-gradient(90deg, #ff1683 7%, #ff65a8 61%, #28e6df 110%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .lead { max-width: 600px; color: #c0c8d5; font-size: clamp(1rem, 1.55vw, 1.17rem); line-height: 1.8; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+    .micro { margin-top: 18px; color: #858f9f; font-size: .78rem; }
+    .visual { min-height: 385px; position: relative; display: grid; place-items: center; isolation: isolate; }
+    .visual::before { content: ""; position: absolute; z-index: -1; width: min(90%, 390px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(40,230,223,.2), rgba(255,22,131,.1) 48%, transparent 72%); filter: blur(15px); }
+    .chat-card { width: min(100%, 420px); padding: 23px; border: 1px solid rgba(180,198,218,.18); border-radius: 25px; background: linear-gradient(145deg, rgba(18,23,33,.96), rgba(9,12,18,.94)); box-shadow: var(--shadow); transform: rotate(1deg); }
+    .chat-top { display: flex; align-items: center; gap: 8px; padding-bottom: 17px; border-bottom: 1px solid var(--line); color: #aab4c2; font-size: .72rem; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+    .bubble { width: 87%; margin: 19px 0 16px auto; padding: 12px 14px; border-radius: 14px 14px 4px 14px; background: #1b2430; color: #e1e7ef; font-size: .82rem; }
+    .answer { padding: 0 3px 18px; color: #c4ccd7; font-size: .81rem; }
+    .answer strong { color: white; }
+    .ad { display: grid; grid-template-columns: 48px 1fr; gap: 12px; align-items: center; padding: 13px; border: 1px solid rgba(40,230,223,.24); border-radius: 15px; background: linear-gradient(120deg, rgba(40,230,223,.07), rgba(255,22,131,.08)); }
+    .ad-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(145deg, #30cfc5, #178f99); color: #041417; font-size: 1.15rem; font-weight: 900; }
+    .ad-label { color: var(--cyan); font-size: .61rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .ad strong { display: block; margin: 2px 0; font-size: .82rem; }
+    .ad p { margin: 0; color: #aeb7c4; font-size: .7rem; line-height: 1.45; }
+    .visual-caption { position: absolute; right: 0; bottom: 5px; color: #818b9a; font-size: .72rem; }
+    .ticker { border-block: 1px solid rgba(40,230,223,.13); background: rgba(10,16,22,.8); }
+    .ticker-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .ticker-item { display: flex; align-items: center; gap: 12px; padding: 21px 23px; color: #d8e0e9; font-size: .83rem; }
+    .ticker-item + .ticker-item { border-left: 1px solid var(--line); }
+    .ticker-item b { color: var(--cyan); font-size: 1.1rem; }
+    section { padding: 78px 0; border-bottom: 1px solid rgba(255,255,255,.055); }
+    .section-head { display: grid; grid-template-columns: .9fr 1.1fr; align-items: end; gap: 40px; margin-bottom: 30px; }
+    h2 { max-width: 610px; margin: 12px 0 0; font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.03; letter-spacing: -.055em; text-transform: uppercase; }
+    .section-head p { margin: 0; max-width: 540px; color: var(--muted); }
+    .note { margin-top: 24px; padding: 17px 20px; border-left: 3px solid var(--cyan); border-radius: 0 12px 12px 0; background: rgba(40,230,223,.055); color: #c0c9d5; font-size: .89rem; }
+    .note strong { color: white; }
+    .service-grid, .benefit-grid, .fit-grid, .steps, .values { display: grid; gap: 14px; }
+    .service-grid { grid-template-columns: repeat(2, 1fr); }
+    .card { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(17,21,30,.94), rgba(12,15,22,.92)); }
+    .card:hover { border-color: rgba(40,230,223,.3); }
+    .card-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 17px; border: 1px solid rgba(40,230,223,.25); border-radius: 13px; color: var(--cyan); background: rgba(40,230,223,.06); font-size: 1.15rem; }
+    .card h3 { margin-bottom: 9px; font-size: 1.14rem; line-height: 1.25; }
+    .card p { margin-bottom: 0; color: var(--muted); font-size: .91rem; }
+    .card ul { margin: 16px 0 0; padding-left: 19px; color: #c6cfdb; font-size: .86rem; }
+    .card li + li { margin-top: 6px; }
+    .label { display: inline-block; margin: 0 0 12px; color: var(--pink-soft); font-size: .67rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .benefit-grid { grid-template-columns: repeat(3, 1fr); }
+    .benefit-grid .card { min-height: 196px; }
+    .benefit-grid .card-icon { color: var(--pink-soft); border-color: rgba(255,22,131,.26); background: rgba(255,22,131,.06); }
+    .steps { grid-template-columns: repeat(4, 1fr); counter-reset: step; }
+    .step { position: relative; min-height: 195px; padding: 23px; border-top: 1px solid rgba(40,230,223,.42); border-radius: 0 0 18px 18px; background: linear-gradient(180deg, rgba(40,230,223,.045), rgba(16,19,27,.5)); counter-increment: step; }
+    .step::before { content: "0" counter(step); display: block; margin-bottom: 25px; color: var(--cyan); font-size: .76rem; font-weight: 800; letter-spacing: .12em; }
+    .step h3 { margin-bottom: 8px; font-size: 1rem; }
+    .step p { margin: 0; color: var(--muted); font-size: .83rem; }
+    .fit-grid { grid-template-columns: repeat(3, 1fr); }
+    .fit-grid .card { display: flex; align-items: flex-start; gap: 14px; }
+    .fit-grid .card-icon { flex: 0 0 auto; margin: 0; }
+    .fit-grid p { margin: 0; }
+    .manifesto { position: relative; overflow: hidden; padding: 38px; border: 1px solid rgba(255,22,131,.27); border-radius: 26px; background: radial-gradient(ellipse at 15% 20%, rgba(40,230,223,.1), transparent 35%), radial-gradient(ellipse at 90% 90%, rgba(255,22,131,.12), transparent 42%), #0c1018; }
+    .manifesto h3 { max-width: 750px; margin: 10px 0 15px; font-size: clamp(1.8rem, 3.8vw, 3rem); line-height: 1.06; letter-spacing: -.045em; text-transform: uppercase; }
+    .manifesto p { max-width: 760px; color: #bdc6d2; }
+    .faq { display: grid; gap: 9px; }
+    details { border: 1px solid var(--line); border-radius: 13px; background: rgba(15,19,27,.85); }
+    summary { position: relative; padding: 17px 48px 17px 19px; cursor: pointer; font-weight: 750; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; position: absolute; top: 12px; right: 19px; color: var(--cyan); font-size: 1.35rem; }
+    details[open] summary::after { content: "−"; }
+    details p { margin: 0; padding: 0 19px 18px; color: var(--muted); font-size: .9rem; }
+    .cta { padding: 82px 0 74px; }
+    .cta-box { padding: clamp(26px, 5vw, 55px); text-align: center; border: 1px solid rgba(255,22,131,.3); border-radius: 28px; background: radial-gradient(ellipse at 50% 0%, rgba(255,22,131,.13), transparent 48%), linear-gradient(140deg, #10131b, #0b0e14); box-shadow: var(--shadow); }
+    .cta-box h2 { margin: 13px auto 15px; max-width: 760px; }
+    .cta-box p { max-width: 680px; margin: 0 auto 23px; color: var(--muted); }
+    footer { padding: 25px 0 35px; color: #7f8997; font-size: .76rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 18px; }
+    .footer-row a { color: var(--cyan); text-decoration: none; }
+    @media (max-width: 800px) {
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 20px; padding: 65px 0 48px; }
+      .visual { min-height: 340px; }
+      .section-head { grid-template-columns: 1fr; gap: 16px; }
+      .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .fit-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 28px, 1120px); }
+      .topbar { padding: 14px 0; }
+      .brand { font-size: .68rem; gap: 8px; }
+      .brand-mark { width: 32px; height: 32px; }
+      .nav .button { min-height: 38px; padding: 9px 12px; font-size: .72rem; }
+      .hero { padding-top: 48px; }
+      h1 { font-size: clamp(2.55rem, 13vw, 4rem); }
+      .hero-actions { display: grid; }
+      .hero-actions .button { width: 100%; }
+      .visual { min-height: 300px; }
+      .chat-card { padding: 17px; }
+      .ticker-grid { grid-template-columns: 1fr; padding: 7px 0; }
+      .ticker-item { padding: 12px 4px; }
+      .ticker-item + .ticker-item { border-left: 0; border-top: 1px solid var(--line); }
+      section { padding: 58px 0; }
+      .service-grid, .benefit-grid, .steps, .fit-grid { grid-template-columns: 1fr; }
+      .card { padding: 20px; }
+      .benefit-grid .card { min-height: unset; }
+      .step { min-height: unset; }
+      .step::before { margin-bottom: 12px; }
+      .manifesto { padding: 25px 21px; }
+      .footer-row { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Nawigacja główna">
+      <a class="brand" href="https://post-strokecreators.org/" aria-label="Post-Stroke Creators — strona główna">
+        <span class="brand-mark" aria-hidden="true">PSC</span><span>Post-Stroke Creators</span>
+      </a>
+      <div class="nav-links">
+        <a href="#usluga">Usługa</a><a href="#korzysci">Korzyści</a><a href="#proces">Jak działamy</a><a href="#pytania">Pytania</a>
+      </div>
+      <a class="button small" href="#kontakt">Zapytaj o kampanię <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <span class="eyebrow">Nowa gałąź usług Post-Stroke Creators</span>
+        <h1>Twoja firma<br><span class="gradient">w świecie AI.</span></h1>
+        <p class="lead">Klienci coraz częściej pytają sztuczną inteligencję, co wybrać, gdzie kupić i komu zaufać. Pomagamy firmom promować ofertę w ChatGPT i przygotować ją na nowy sposób wyszukiwania.</p>
+        <div class="hero-actions">
+          <a class="button" href="#kontakt">Porozmawiajmy o Twojej ofercie <span aria-hidden="true">→</span></a>
+          <a class="button secondary" href="#usluga">Poznaj usługę</a>
+        </div>
+        <p class="micro">Kampanie reklamowe w ChatGPT • przygotowanie treści i strony • jasne raportowanie</p>
+      </div>
+      <div class="visual" aria-label="Przykładowa wizualizacja oznaczonej reklamy pod odpowiedzią AI">
+        <div class="chat-card">
+          <div class="chat-top"><span class="dot"></span><span>Rozmowa z asystentem AI</span></div>
+          <div class="bubble">Szukam sprawdzonej usługi dla mojej firmy. Na co zwrócić uwagę?</div>
+          <div class="answer"><strong>Warto porównać zakres, doświadczenie i opinie.</strong><br>Sprawdź też, czy wykonawca jasno opisuje proces oraz kolejne kroki.</div>
+          <div class="ad">
+            <div class="ad-icon" aria-hidden="true">✦</div>
+            <div><span class="ad-label">Przykładowa reklama</span><strong>Usługa dopasowana do Twoich potrzeb</strong><p>Zobacz ofertę, poznaj zakres i skontaktuj się z firmą.</p></div>
+          </div>
+        </div>
+        <span class="visual-caption">Przykład poglądowy. Reklamy są wyraźnie oznaczane.</span>
+      </div>
+    </div>
+
+    <div class="ticker">
+      <div class="wrap ticker-grid">
+        <div class="ticker-item"><b>01</b><span>Docieraj do osób szukających rozwiązania</span></div>
+        <div class="ticker-item"><b>02</b><span>Pokaż ofertę w odpowiednim kontekście</span></div>
+        <div class="ticker-item"><b>03</b><span>Mierz kliknięcia i efekty kampanii</span></div>
+      </div>
+    </div>
+
+    <section id="usluga">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">Co oferujemy</span><h2>Reklama w AI.<br><span class="gradient">Dwa konkretne kierunki.</span></h2></div>
+          <p>Pomagamy firmie wejść do nowego kanału reklamowego i zadbać o to, co klient zobaczy po kliknięciu. Zaczynamy od zrozumienia oferty, odbiorców i celu — potem dobieramy działania.</p>
+        </div>
+        <div class="service-grid">
+          <article class="card">
+            <span class="label">01 / Płatna kampania</span>
+            <div class="card-icon" aria-hidden="true">✦</div>
+            <h3>Reklamy w ChatGPT</h3>
+            <p>Przygotowujemy i pomagamy prowadzić kampanię reklamową w oficjalnym Menedżerze reklam OpenAI. Reklama może pojawić się przy rozmowie związanej z tematem oferty, jako osobny, oznaczony materiał.</p>
+            <ul>
+              <li>ustalenie celu i odbiorców kampanii,</li>
+              <li>opracowanie nagłówka, opisu i grafiki,</li>
+              <li>dobór tematów i kontekstów dla oferty,</li>
+              <li>konfiguracja, obserwacja wyników i raport.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="label">02 / Przygotowanie marki</span>
+            <div class="card-icon" aria-hidden="true">⌘</div>
+            <h3>Oferta czytelna dla narzędzi AI</h3>
+            <p>Porządkujemy stronę i treści, by zarówno ludzie, jak i systemy AI łatwiej rozumiały, co firma oferuje, komu pomaga i jak można skorzystać z usługi.</p>
+            <ul>
+              <li>jasne opisy usług i produktów,</li>
+              <li>odpowiedzi na typowe pytania klientów,</li>
+              <li>czytelna, mobilna strona docelowa,</li>
+              <li>spójne dane kontaktowe i wezwania do działania.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="note"><strong>Ważne rozróżnienie:</strong> płatna reklama w ChatGPT to konkretne miejsce reklamowe. Przygotowanie treści pod AI pomaga lepiej przedstawić firmę, ale nie daje gwarancji, że ChatGPT wymieni ją w każdej odpowiedzi ani poleci ją użytkownikowi.</div>
+      </div>
+    </section>
+
+    <section id="korzysci">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">Dlaczego warto</span><h2>Klient szuka.<br><span class="gradient">Twoja oferta może być bliżej.</span></h2></div>
+          <p>ChatGPT zmienia sposób szukania informacji: użytkownik opisuje potrzebę własnymi słowami, dopytuje i porównuje możliwości. Dla firmy to szansa na obecność w nowym momencie podejmowania decyzji.</p>
+        </div>
+        <div class="benefit-grid">
+          <article class="card"><div class="card-icon" aria-hidden="true">◎</div><h3>Kontakt z intencją</h3><p>Reklama może dotrzeć do osoby, która właśnie rozważa zakup, porównuje rozwiązania albo szuka konkretnej usługi.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">⌕</div><h3>Więcej niż kilka słów</h3><p>Rozmowa zawiera kontekst i potrzeby. System dopasowuje reklamy na podstawie wielu sygnałów, nie wyłącznie pojedynczego hasła.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">↗</div><h3>Nowy kanał dotarcia</h3><p>Rozszerzasz działania poza tradycyjną wyszukiwarkę, media społecznościowe i polecenia — z myślą o użytkownikach korzystających z AI.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">▤</div><h3>Jasny przekaz</h3><p>Dopracowujemy opis tak, by odbiorca szybko rozumiał, co oferujesz, dla kogo jest usługa i jaki ma zrobić następny krok.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">◷</div><h3>Możliwość mierzenia</h3><p>W panelu można analizować m.in. wyświetlenia, kliknięcia i koszty; po właściwej konfiguracji również wybrane konwersje.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">♡</div><h3>Technologia z misją</h3><p>Usługę rozwija fundacja, która tworzy kompetencje cyfrowe i miejsca do działania dla osób po udarze mózgu.</p></article>
+        </div>
+        <div class="note"><strong>AI to nowa warstwa wyszukiwania.</strong> Dla wielu osób ChatGPT zaczyna pełnić rolę rozmownego przewodnika po informacjach i ofertach — obok Google i innych kanałów. Warto przygotować firmę na tę zmianę już teraz.</div>
+      </div>
+    </section>
+
+    <section id="proces">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">Prosty proces</span><h2>Od pomysłu<br><span class="gradient">do kampanii.</span></h2></div>
+          <p>Każda firma ma inny produkt, klienta i budżet. Dlatego najpierw sprawdzamy, czy reklama w ChatGPT ma sens dla konkretnej oferty.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><h3>Poznajemy ofertę</h3><p>Ustalamy, co chcesz promować, komu sprzedajesz i jaki efekt ma przynieść kampania.</p></article>
+          <article class="step"><h3>Sprawdzamy gotowość</h3><p>Oceniamy stronę docelową, opis oferty i możliwość mierzenia efektów.</p></article>
+          <article class="step"><h3>Przygotowujemy reklamę</h3><p>Tworzymy treść i grafikę, dobieramy cel, budżet oraz konteksty pasujące do oferty.</p></article>
+          <article class="step"><h3>Uruchamiamy i omawiamy</h3><p>Obserwujemy wyniki, proponujemy poprawki i przekazujemy zrozumiały raport.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">Dla kogo</span><h2>Gdy oferta<br><span class="gradient">rozwiązuje potrzebę.</span></h2></div>
+          <p>Najlepszym punktem wyjścia jest produkt lub usługa, którą da się jasno opisać i do której można skierować odbiorcę po więcej informacji.</p>
+        </div>
+        <div class="fit-grid">
+          <article class="card"><div class="card-icon" aria-hidden="true">▣</div><p><strong>Sklepy i marki</strong><br>Produkty, które klienci porównują przed zakupem.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">⌂</div><p><strong>Usługi lokalne</strong><br>Firmy, do których klient chce szybko dotrzeć lub zadzwonić.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">◈</div><p><strong>Eksperci i specjaliści</strong><br>Usługi, które wymagają wyjaśnienia zakresu i zbudowania zaufania.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">▦</div><p><strong>Gastronomia i miejsca</strong><br>Lokale, atrakcje, rezerwacje i wydarzenia.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">✚</div><p><strong>Nowe firmy</strong><br>Marki, które chcą od początku zadbać o dobrą stronę i czytelną ofertę.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">↗</div><p><strong>Organizacje i inicjatywy</strong><br>Projekty, którym zależy na dotarciu do właściwych odbiorców.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap manifesto">
+        <span class="eyebrow">Technologia, która otwiera nowe możliwości</span>
+        <h3>Nowe narzędzia.<br><span class="gradient">Więcej sprawczości.</span></h3>
+        <p>Post-Stroke Creators rozwija usługi cyfrowe, przy których osoby po udarze mogą wykorzystywać i rozwijać swoje umiejętności. Współpracując z nami, wspierasz profesjonalną usługę i społeczną misję: większy udział osób z niepełnosprawnościami w świecie pracy i nowych technologii.</p>
+      </div>
+    </section>
+
+    <section id="pytania">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">Warto wiedzieć</span><h2>Masz pytania?<br><span class="gradient">Wyjaśniamy.</span></h2></div>
+          <p>Przed startem omawiamy koszty, zakres i warunki. Budżet reklamowy oraz obsługa kampanii to osobne pozycje.</p>
+        </div>
+        <div class="faq">
+          <details><summary>Czy reklama sprawi, że ChatGPT poleci moją firmę?</summary><p>Nie możemy tego obiecać. Reklama jest płatnym, wyraźnie oznaczonym materiałem wyświetlanym oddzielnie od odpowiedzi ChatGPT. Sam system decyduje, czy i kiedy ją dopasować. Nie kupujemy wpływu na odpowiedzi AI.</p></details>
+          <details><summary>Czy ChatGPT Ads to to samo co pozycjonowanie w Google?</summary><p>Nie. To oddzielny kanał reklamowy wewnątrz ChatGPT. Nie zastępuje SEO ani Google Ads. Możemy natomiast zadbać o stronę i treści, które jasno przedstawiają Twoją ofertę użytkownikom oraz narzędziom AI.</p></details>
+          <details><summary>Kto płaci za budżet kampanii?</summary><p>Budżet reklamowy jest rozliczany przez platformę reklamową. Wynagrodzenie Post-Stroke Creators za przygotowanie i obsługę kampanii ustalamy oddzielnie przed rozpoczęciem prac. Dzięki temu znasz obie kwoty z góry.</p></details>
+          <details><summary>Czy muszę mieć stronę internetową?</summary><p>Najlepiej, gdy reklama prowadzi do aktualnej strony z jasnym opisem, kontaktem i konkretnym następnym krokiem. Jeśli strona wymaga poprawek albo jeszcze jej nie masz, możemy omówić przygotowanie strony docelowej.</p></details>
+          <details><summary>Jak sprawdzimy, czy kampania działa?</summary><p>Przed startem ustalamy cel oraz dostępne metody pomiaru. Zależnie od konfiguracji możemy analizować wyświetlenia, kliknięcia, wydatki i wybrane działania po przejściu na stronę. Wyniki zależą m.in. od oferty, budżetu i konkurencji.</p></details>
+          <details><summary>Czy usługa jest dostępna dla każdej branży?</summary><p>Nie każda oferta i kategoria reklamowa będzie odpowiednia. Najpierw sprawdzimy zasady platformy, stronę docelową i dopasowanie kampanii do Twojego celu, a dopiero potem zaproponujemy zakres.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="kontakt">
+      <div class="wrap cta-box">
+        <span class="eyebrow">Zrób pierwszy krok</span>
+        <h2>Sprawdźmy, czy Twoja oferta <span class="gradient">pasuje do AI.</span></h2>
+        <p>Opowiedz nam, co chcesz promować. Wspólnie ocenimy, czy lepszym rozwiązaniem będzie kampania w ChatGPT, przygotowanie strony i treści, czy połączenie tych działań.</p>
+        <a class="button" href="https://post-strokecreators.org/">Skontaktuj się z Post-Stroke Creators <span aria-hidden="true">→</span></a>
+        <p class="micro">Najpierw krótka rozmowa i konkretna propozycja. Bez obietnic gwarantowanych pozycji w odpowiedziach AI.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>© Post-Stroke Creators — technologia z misją.</span>
+      <a href="https://post-strokecreators.org/">Powrót na stronę fundacji ↗</a>
+    </div>
+  </footer>
+</body>
+</html>
